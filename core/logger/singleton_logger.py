@@ -31,7 +31,7 @@ class SingletonLogger(object, metaclass=SingletonType):
         dir_name = "{}/log".format(current_dir)
         if not os.path.isdir(dir_name):
             os.mkdir(dir_name)
-        file_handler = logging.FileHandler(dir_name + "/todo.ly_" + now.strftime("%Y-%m-%d") + ".log")
+        file_handler = logging.FileHandler(dir_name + "/pivotaltracker.com_" + now.strftime("%Y-%m-%d") + ".log")
 
         stream_handler = logging.StreamHandler()
 
