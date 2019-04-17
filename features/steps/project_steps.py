@@ -22,7 +22,8 @@ def step_impl(context, method, endpoint):
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
     logger.info("Validation Status Code")
-    JsonHelper.print_pretty_json(context.response.json())
+    if context.response.status_code is not 204:
+        JsonHelper.print_pretty_json(context.response.json())
     expect(int(status_code)).to_equal(context.response.status_code)
 
 
