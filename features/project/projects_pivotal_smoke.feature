@@ -7,7 +7,7 @@ Feature: Create, Read, Update and Delete Projects
 
   @get_id_account
   Scenario: Access a user's projects with the same account_id
-    Given I set up a "GET" request with id to "/projects?account_ids=" endpoint
+    Given I set up a "GET" request to "/projects?account_ids={proj_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 
@@ -25,13 +25,13 @@ Feature: Create, Read, Update and Delete Projects
 
   @create_project @delete_project
   Scenario: Access the content of a specific project
-    Given I set up a "GET" request with id to "/projects/" endpoint
+    Given I set up a "GET" request to "/projects/{proj_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 
   @create_project @delete_project
   Scenario: Update the specific project
-    Given I set up a "PUT" request with id to "/projects/" endpoint
+    Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
       {
@@ -43,6 +43,6 @@ Feature: Create, Read, Update and Delete Projects
 
   @create_project
   Scenario: Delete a specific project
-    Given I set up a "DELETE" request with id to "/projects/" endpoint
+    Given I set up a "DELETE" request to "/projects/{proj_id}" endpoint
     When I send the request
     Then I get a "204" status code as response

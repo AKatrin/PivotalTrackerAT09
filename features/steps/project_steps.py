@@ -15,7 +15,11 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    client.set_endpoint(endpoint)
+    if "{proj_id}" in endpoint:
+        final_endpoint = endpoint.format(proj_id=context.id)
+    else:
+        final_endpoint = endpoint
+    client.set_endpoint(final_endpoint)
     context.client = client
 
 
