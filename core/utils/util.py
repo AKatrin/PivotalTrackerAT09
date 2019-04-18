@@ -16,5 +16,5 @@ class Utils:
         return endpoint
 
 a = Utils
-a = a.check_endpoint("/projects/{id}/stories/{id2}", [12345, 324])
+a = a.check_endpoint("/projects", [])
 print(a)
