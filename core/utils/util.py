@@ -14,7 +14,3 @@ class Utils:
             endpoint = Utils.change_endpoint(string, ids[i], endpoint)
             i += 1
         return endpoint
-
-a = Utils
-a = a.check_endpoint("/projects", [])
-print(a)

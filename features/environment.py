@@ -1,5 +1,6 @@
 
 from core.utils.project_helper import *
+
 logger = SingletonLogger().get_logger()
 
 
@@ -11,6 +12,9 @@ def before_scenario(context, scenario):
     elif 'create_project' in scenario.tags:
         logger.info("Create a project and get the id of the project")
         context.id = Project_Helper.create_project()["id"]
+    elif ("get" and "stories" in scenario.tags):
+        logger.info("Get all project and get the id of the project")
+        context.id = [Project_Helper.get_all_projects()[0]['id']]
 
 
 def after_scenario(context, scenario):
