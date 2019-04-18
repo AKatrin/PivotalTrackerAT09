@@ -13,12 +13,16 @@ def before_scenario(context, scenario):
         context.id = Project_Helper.create_project()["id"]
     elif "create_account" in scenario.tags:
         context.id = Account_helper.create_account()
+    elif "create_account_memberships" in scenario.tags:
+        context.id = Account_helper.create_account()
+        Account_helper.create_account_membership(context.id)
 
 
 def after_scenario(context, scenario):
     if 'delete_project' in scenario.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.response.json())
+
 
 def before_feature(context, feature):
     if 'epic' in feature.tags:
