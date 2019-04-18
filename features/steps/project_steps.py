@@ -17,6 +17,8 @@ def step_impl(context, method, endpoint):
     client.set_method(method)
     if "{id}" in endpoint:
         client.set_endpoint(endpoint.format(id=context.id))
+    elif "{proj_id}" in endpoint:
+        client.set_endpoint(endpoint.format(proj_id=context.id))
     else:
         client.set_endpoint(endpoint)
     context.client = client
@@ -25,7 +27,8 @@ def step_impl(context, method, endpoint):
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
     logger.info("Validation Status Code")
-    JsonHelper.print_pretty_json(context.response.json())
+    if context.response.status_code is not 204:
+        JsonHelper.print_pretty_json(context.response.json())
     expect(int(status_code)).to_equal(context.response.status_code)
 
 
