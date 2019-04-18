@@ -6,6 +6,8 @@ import json
 from core.logger.singleton_logger import SingletonLogger
 from core.rest_client.request_manager import *
 from core.utils.json_helper import JsonHelper
+from core.utils.endpoint_helper import EndpointHelper
+from core.utils.repository import Repository
 
 logger = SingletonLogger().get_logger()
 
@@ -15,14 +17,14 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    client.set_endpoint(endpoint)
+    client.set_endpoint(EndpointHelper.translate_endpoint(endpoint))
     context.client = client
 
 
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
     logger.info("Validation Status Code")
-    JsonHelper.print_pretty_json(context.response.json())
+    #JsonHelper.print_pretty_json(context.response.json())
     expect(int(status_code)).to_equal(context.response.status_code)
 
 
@@ -53,3 +55,9 @@ def step_impl(context):
     logger.info("Add Data to request")
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
+
+
+@step(u'I get the Epic Id created')
+def step_imp(context):
+    logger.info('Get Epic Id created')
+    Repository.get_instance().epic_id = context.response.json()['id']
