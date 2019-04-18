@@ -6,6 +6,8 @@ import json
 from core.logger.singleton_logger import SingletonLogger
 from core.rest_client.request_manager import *
 from core.utils.json_helper import JsonHelper
+from core.utils.endpoint_helper import EndpointHelper
+from core.utils.repository import Repository
 
 logger = SingletonLogger().get_logger()
 
@@ -19,6 +21,8 @@ def step_impl(context, method, endpoint):
         client.set_endpoint(endpoint.format(id=context.id))
     elif "{proj_id}" in endpoint:
         client.set_endpoint(endpoint.format(proj_id=context.id))
+    elif "{epic_id}" in endpoint:
+        client.set_endpoint(EndpointHelper.translate_endpoint(endpoint))
     else:
         client.set_endpoint(endpoint)
     context.client = client
@@ -59,3 +63,9 @@ def step_impl(context):
     logger.info("Add Data to request")
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
+
+
+@step(u'I get the Epic Id created')
+def step_imp(context):
+    logger.info('Get Epic Id created')
+    Repository.get_instance().epic_id = context.response.json()['id']
