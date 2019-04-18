@@ -15,8 +15,14 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    endpoint = Utils.check_endpoint(endpoint, context.id)
-    client.set_endpoint(endpoint)
+    # endpoint = Utils.check_endpoint(endpoint, context.id)
+    # client.set_endpoint(endpoint)
+    if "{id}" in endpoint:
+        client.set_endpoint(endpoint.format(id=context.id))
+    elif "{proj_id}" in endpoint:
+        client.set_endpoint(endpoint.format(proj_id=context.id))
+    else:
+        client.set_endpoint(endpoint)
     context.client = client
 
 @then(u'I get a "{status_code}" status code as response')
