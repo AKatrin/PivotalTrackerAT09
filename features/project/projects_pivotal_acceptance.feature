@@ -1,10 +1,12 @@
-@smoke
+@acceptance
 Feature: Create, Read, Update and Delete Projects
 
   Scenario: Access a user's projects
     Given I set up a "GET" request to "/projects" endpoint
     When I send the request
     Then I get a "200" status code as response
+    And Verify the new project schema
+    And Sent Data should contain the same info
 
   @get_id_account
   Scenario: Access a user's projects with the same account_id

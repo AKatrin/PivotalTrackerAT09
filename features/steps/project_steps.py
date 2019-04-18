@@ -59,3 +59,13 @@ def step_impl(context):
     logger.info("Add Data to request")
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
+
+
+@step("Verify the new project schema")
+def step_impl(context):
+    pass
+
+
+@step("Sent Data should contain the same info")
+def step_impl(context):
+    pass

@@ -1,0 +1,219 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The Root Schema",
+    "required": [
+        "id",
+        "kind",
+        "name",
+        "version",
+        "iteration_length",
+        "week_start_day",
+        "point_scale",
+        "point_scale_is_custom",
+        "bugs_and_chores_are_estimatable",
+        "automatic_planning",
+        "enable_tasks",
+        "time_zone",
+        "velocity_averaged_over",
+        "number_of_done_iterations_to_show",
+        "has_google_domain",
+        "enable_incoming_emails",
+        "initial_velocity",
+        "public",
+        "atom_enabled",
+        "project_type",
+        "start_time",
+        "created_at",
+        "updated_at",
+        "account_id",
+        "current_iteration_number",
+        "enable_following"
+    ],
+    "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "integer",
+            "title": "The Id Schema"
+        },
+        "kind": {
+            "$id": "#/properties/kind",
+            "type": "string",
+            "title": "The Kind Schema",
+            "pattern": "^(.*)$"
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The Name Schema",
+            "pattern": "^(.*)$"
+        },
+        "version": {
+            "$id": "#/properties/version",
+            "type": "integer",
+            "title": "The Version Schema"
+        },
+        "iteration_length": {
+            "$id": "#/properties/iteration_length",
+            "type": "integer",
+            "title": "The Iteration_length Schema"
+        },
+        "week_start_day": {
+            "$id": "#/properties/week_start_day",
+            "type": "string",
+            "title": "The Week_start_day Schema",
+            "pattern": "^(.*)$"
+        },
+        "point_scale": {
+            "$id": "#/properties/point_scale",
+            "type": "string",
+            "title": "The Point_scale Schema",
+            "pattern": "^(.*)$"
+        },
+        "point_scale_is_custom": {
+            "$id": "#/properties/point_scale_is_custom",
+            "type": "boolean",
+            "title": "The Point_scale_is_custom Schema"
+        },
+        "bugs_and_chores_are_estimatable": {
+            "$id": "#/properties/bugs_and_chores_are_estimatable",
+            "type": "boolean",
+            "title": "The Bugs_and_chores_are_estimatable Schema"
+        },
+        "automatic_planning": {
+            "$id": "#/properties/automatic_planning",
+            "type": "boolean",
+            "title": "The Automatic_planning Schema"
+        },
+        "enable_tasks": {
+            "$id": "#/properties/enable_tasks",
+            "type": "boolean",
+            "title": "The Enable_tasks Schema"
+        },
+        "time_zone": {
+            "$id": "#/properties/time_zone",
+            "type": "object",
+            "title": "The Time_zone Schema",
+            "required": [
+                "kind",
+                "olson_name",
+                "offset"
+            ],
+            "properties": {
+                "kind": {
+                    "$id": "#/properties/time_zone/properties/kind",
+                    "type": "string",
+                    "title": "The Kind Schema",
+                    "pattern": "^(.*)$"
+                },
+                "olson_name": {
+                    "$id": "#/properties/time_zone/properties/olson_name",
+                    "type": "string",
+                    "title": "The Olson_name Schema",
+                    "pattern": "^(.*)$"
+                },
+                "offset": {
+                    "$id": "#/properties/time_zone/properties/offset",
+                    "type": "string",
+                    "title": "The Offset Schema",
+                    "pattern": "^(.*)$"
+                }
+            }
+        },
+        "velocity_averaged_over": {
+            "$id": "#/properties/velocity_averaged_over",
+            "type": "integer",
+            "title": "The Velocity_averaged_over Schema"
+        },
+        "number_of_done_iterations_to_show": {
+            "$id": "#/properties/number_of_done_iterations_to_show",
+            "type": "integer",
+            "title": "The Number_of_done_iterations_to_show Schema"
+        },
+        "has_google_domain": {
+            "$id": "#/properties/has_google_domain",
+            "type": "boolean",
+            "title": "The Has_google_domain Schema"
+        },
+        "description": {
+            "$id": "#/properties/description",
+            "type": "string",
+            "title": "The Description Schema",
+            "pattern": "^(.*)$"
+        },
+        "profile_content": {
+            "$id": "#/properties/profile_content",
+            "type": "string",
+            "title": "The Profile_content Schema",
+            "pattern": "^(.*)$"
+        },
+        "enable_incoming_emails": {
+            "$id": "#/properties/enable_incoming_emails",
+            "type": "boolean",
+            "title": "The Enable_incoming_emails Schema"
+        },
+        "initial_velocity": {
+            "$id": "#/properties/initial_velocity",
+            "type": "integer",
+            "title": "The Initial_velocity Schema"
+        },
+        "public": {
+            "$id": "#/properties/public",
+            "type": "boolean",
+            "title": "The Public Schema"
+        },
+        "atom_enabled": {
+            "$id": "#/properties/atom_enabled",
+            "type": "boolean",
+            "title": "The Atom_enabled Schema"
+        },
+        "project_type": {
+            "$id": "#/properties/project_type",
+            "type": "string",
+            "title": "The Project_type Schema",
+            "pattern": "^(.*)$"
+        },
+        "start_date": {
+            "$id": "#/properties/start_date",
+            "type": "string",
+            "title": "The Start_date Schema",
+            "pattern": "^(.*)$"
+        },
+        "start_time": {
+            "$id": "#/properties/start_time",
+            "type": "string",
+            "title": "The Start_time Schema",
+            "pattern": "^(.*)$"
+        },
+        "created_at": {
+            "$id": "#/properties/created_at",
+            "type": "string",
+            "title": "The Created_at Schema",
+            "pattern": "^(.*)$"
+        },
+        "updated_at": {
+            "$id": "#/properties/updated_at",
+            "type": "string",
+            "title": "The Updated_at Schema",
+            "pattern": "^(.*)$"
+        },
+        "account_id": {
+            "$id": "#/properties/account_id",
+            "type": "integer",
+            "title": "The Account_id Schema"
+        },
+        "current_iteration_number": {
+            "$id": "#/properties/current_iteration_number",
+            "type": "integer",
+            "title": "The Current_iteration_number Schema"
+        },
+        "enable_following": {
+            "$id": "#/properties/enable_following",
+            "type": "boolean",
+            "title": "The Enable_following Schema"
+        }
+    },
+    "additionalProperties": false
+}
