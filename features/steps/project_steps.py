@@ -51,5 +51,6 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
-    body = json.loads(context.text)
+    data = JsonHelper.get_project_id(context, "{project_id}", context.text)
+    body = json.loads(data)
     context.client.set_body(json.dumps(body))
