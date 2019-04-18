@@ -1,7 +1,6 @@
 class Utils:
     @staticmethod
     def change_endpoint(label_id, id, endpoint):
-
         endpoint = endpoint.replace(label_id, str(id))
         return endpoint
 
