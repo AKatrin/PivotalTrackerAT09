@@ -6,6 +6,7 @@ import json
 from core.logger.singleton_logger import SingletonLogger
 from core.rest_client.request_manager import *
 from core.utils.json_helper import JsonHelper
+from core.utils.util import *
 from core.utils.endpoint_helper import EndpointHelper
 from core.utils.repository import Repository
 
@@ -17,17 +18,12 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    if "{epic_id}" in endpoint:
-        print("CEPIC REplca: ",Repository.get_instance().epic_id)
-        endpoint = EndpointHelper.translate_endpoint(endpoint)
-    if "{id}" in endpoint:
-        client.set_endpoint(endpoint.format(id=context.id))
-    elif "{proj_id}" in endpoint:
-        client.set_endpoint(endpoint.format(proj_id=context.id))
-    else:
-        client.set_endpoint(endpoint)
-    context.client = client
 
+    if "{epic_id}" in endpoint:
+        endpoint = EndpointHelper.translate_endpoint(endpoint)
+    endpoint = Utils.check_endpoint(endpoint, context.ids)
+    client.set_endpoint(endpoint)
+    context.client = client
 
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
