@@ -55,5 +55,5 @@ class Project_Helper:
         client = RequestManager()
         client.set_method('DELETE')
         id_project = response['id']
-        client.set_endpoint('/projects/' + str(id_project))
+        client.set_endpoint('/projects/{proj_id}'.format(proj_id=id_project))
         client.execute_request()

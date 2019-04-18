@@ -18,11 +18,8 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-
-    if "{epic_id}" in endpoint:
-        endpoint = EndpointHelper.translate_endpoint(endpoint)
-    endpoint = Utils.check_endpoint(endpoint, context.ids)
-    client.set_endpoint(endpoint)
+    final_endpoint = Utils.check_endpoint(endpoint, context.ids)
+    client.set_endpoint(final_endpoint)
     context.client = client
 
 @then(u'I get a "{status_code}" status code as response')
