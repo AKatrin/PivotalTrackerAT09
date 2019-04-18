@@ -6,7 +6,7 @@ import json
 from core.logger.singleton_logger import SingletonLogger
 from core.rest_client.request_manager import *
 from core.utils.json_helper import JsonHelper
-
+from core.utils.util import *
 logger = SingletonLogger().get_logger()
 
 
@@ -15,9 +15,12 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    client.set_endpoint(endpoint)
+    # if ("{id}" in endpoint):
+    #     client.set_endpoint(Utils.change_endpoint("{id}", context.id, endpoint))
+    # else:
+    #     client.set_endpoint(endpoint)
+    endpoint = check(endpoint, context.ids)
     context.client = client
-
 
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
