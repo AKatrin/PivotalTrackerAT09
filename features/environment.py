@@ -20,3 +20,15 @@ def after_scenario(context, scenario):
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.response.json())
 
+def before_feature(context, feature):
+    if 'epic' in feature.tags:
+        logger.info("Create a project and get the id of the project")
+        context.project = Project_Helper.create_project()
+        context.id = context.project['id']
+
+
+def after_feature(context, feature):
+    if 'epic' in feature.tags:
+        logger.info("Delete the project that was created")
+        Project_Helper.delete_project(context.project)
+

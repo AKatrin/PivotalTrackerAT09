@@ -17,12 +17,13 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
+    if "{epic_id}" in endpoint:
+        print("CEPIC REplca: ",Repository.get_instance().epic_id)
+        endpoint = EndpointHelper.translate_endpoint(endpoint)
     if "{id}" in endpoint:
         client.set_endpoint(endpoint.format(id=context.id))
     elif "{proj_id}" in endpoint:
         client.set_endpoint(endpoint.format(proj_id=context.id))
-    elif "{epic_id}" in endpoint:
-        client.set_endpoint(EndpointHelper.translate_endpoint(endpoint))
     else:
         client.set_endpoint(endpoint)
     context.client = client
@@ -68,4 +69,5 @@ def step_impl(context):
 @step(u'I get the Epic Id created')
 def step_imp(context):
     logger.info('Get Epic Id created')
+    print("REsponse iD epic: ",context.response.json()['id'])
     Repository.get_instance().epic_id = context.response.json()['id']

@@ -1,7 +1,7 @@
 @smoke @epic
 Feature: Epics
   Scenario: Create a new Epic
-    Given I set up a "POST" request to "/projects/2327961/epics" endpoint
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
     {
@@ -13,7 +13,7 @@ Feature: Epics
     Then I get a "200" status code as response
 
   Scenario: Get Epic from project
-    Given I set up a "GET" request to "/projects/2327961/epics/{epic_id}" endpoint
+    Given I set up a "GET" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 
@@ -23,7 +23,7 @@ Feature: Epics
     Then I get a "200" status code as response
 
   Scenario: Update Epic
-    Given I set up a "PUT" request to "/projects/2327961/epics/{epic_id}" endpoint
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
     And I set up the data
     """
     {
@@ -34,11 +34,11 @@ Feature: Epics
     Then I get a "200" status code as response
 
   Scenario: Get all Epics
-    Given I set up a "GET" request to "/projects/2327961/epics" endpoint
+    Given I set up a "GET" request to "/projects/{proj_id}/epics" endpoint
     When I send the request
     Then I get a "200" status code as response
 
   Scenario: Delete epic
-    Given I set up a "DELETE" request to "/projects/2327961/epics/{epic_id}/" endpoint
+    Given I set up a "DELETE" request to "/projects/{proj_id}/epics/{epic_id}/" endpoint
     When I send the request
     Then I get a "204" status code as response
