@@ -1,5 +1,6 @@
 @smoke @epic
 Feature: Epics
+  @create_project_epic @delete_project_epic
   Scenario: Create a new Epic
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
@@ -12,16 +13,19 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
 
+  @create_epic  @delete_project_epic
   Scenario: Get Epic from project
     Given I set up a "GET" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 
+  @create_epic @delete_project_epic
   Scenario: Get Epic
     Given I set up a "GET" request to "/epics/{epic_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 
+  @create_epic  @delete_project_epic
   Scenario: Update Epic
     Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
     And I set up the data
@@ -33,11 +37,13 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
 
+  @create_epic  @delete_project_epic
   Scenario: Get all Epics
     Given I set up a "GET" request to "/projects/{proj_id}/epics" endpoint
     When I send the request
     Then I get a "200" status code as response
 
+  @create_epic  @delete_project_epic
   Scenario: Delete epic
     Given I set up a "DELETE" request to "/projects/{proj_id}/epics/{epic_id}/" endpoint
     When I send the request
