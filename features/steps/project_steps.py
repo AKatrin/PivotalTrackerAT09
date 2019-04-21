@@ -60,6 +60,8 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
+    if "{epic_id}" in context.text:
+        context.text = EndpointHelper.translate_endpoint(context.text)
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
 
