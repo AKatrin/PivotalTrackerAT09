@@ -2,6 +2,9 @@ from behave import *
 from compare import *
 
 from core.utils.json_helper import JsonHelper
+from core.utils.util import *
+from core.utils.endpoint_helper import EndpointHelper
+from core.utils.repository import Repository
 from core.utils.project_helper import *
 
 logger = SingletonLogger().get_logger()
@@ -12,12 +15,11 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    if "{id}" in endpoint:
-        client.set_endpoint(endpoint.format(id=context.id))
-    elif "{proj_id}" in endpoint:
-        client.set_endpoint(endpoint.format(proj_id=context.id))
-    else:
-        client.set_endpoint(endpoint)
+
+    if "{epic_id}" in endpoint:
+        endpoint = EndpointHelper.translate_endpoint(endpoint)
+    endpoint = Utils.check_endpoint(endpoint, context.ids)
+    client.set_endpoint(endpoint)
     context.client = client
 
 
@@ -83,3 +85,9 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     raise NotImplementedError(u'STEP: Given I count all the projects which exist in a account')
+
+@step(u'I get the Epic Id created')
+def step_imp(context):
+    logger.info('Get Epic Id created')
+    print("REsponse iD epic: ",context.response.json()['id'])
+    Repository.get_instance().epic_id = context.response.json()['id']
