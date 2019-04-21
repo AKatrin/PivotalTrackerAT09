@@ -1,11 +1,8 @@
 from behave import *
 from compare import *
 
-import json
-
-from core.logger.singleton_logger import SingletonLogger
-from core.rest_client.request_manager import *
 from core.utils.json_helper import JsonHelper
+from core.utils.project_helper import *
 
 logger = SingletonLogger().get_logger()
 
@@ -61,11 +58,28 @@ def step_impl(context):
     context.client.set_body(json.dumps(body))
 
 
-@step("Verify the new project schema")
+@step("I verify all projects schema")
 def step_impl(context):
-    pass
+    logger.info("Verify all the projects with schema")
+    errors = Project_Helper.compare_all_schema(context.response.json())
+    expect([]).to_equal(errors)
+
+@step("Sent Data should contain the same info, name:'{name}'")
+def step_impl(context, name):
+    logger.info("Sent Data should contain the same info")
+    expect(name).to_equal(context.response.json()["name"])
 
 
-@step("Sent Data should contain the same info")
+@step("I verify the schema of project")
 def step_impl(context):
-    pass
+    logger.info("Verify the schema of project")
+    errors = Project_Helper.compare_schema(context.response.json())
+    expect([]).to_equal(errors)
+
+
+@given("I count all the projects which exist in a account")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    raise NotImplementedError(u'STEP: Given I count all the projects which exist in a account')
