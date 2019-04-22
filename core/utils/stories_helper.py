@@ -14,7 +14,7 @@ class Stories_helper:
     def create_stories(id):
         client = RequestManager()
         client.set_method('POST')
-        client.set_endpoint('/projects/{id}/stories'.format(id = id))
+        client.set_endpoint('/projects/{id}/stories'.format(id = str(id)))
         client.set_body(
             """
             {"name": "Exhaust ports are ray shielded 👹"}
