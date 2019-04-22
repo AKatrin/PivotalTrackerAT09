@@ -8,7 +8,7 @@ Feature: Create, Read, Update and Delete Projects
 
   @get_id_account
   Scenario: Access a user's projects with the same account_id
-    Given I set up a "GET" request to "/projects?account_ids={proj_id}" endpoint
+    Given I set up a "GET" request to "/projects?account_ids={account_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 

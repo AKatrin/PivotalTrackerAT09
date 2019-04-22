@@ -15,9 +15,6 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-
-    if "{epic_id}" in endpoint:
-        endpoint = EndpointHelper.translate_endpoint(endpoint)
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
@@ -66,6 +63,7 @@ def step_impl(context):
     errors = Project_Helper.compare_all_schema(context.response.json())
     expect([]).to_equal(errors)
 
+
 @step("Sent Data should contain the same info, name:'{name}'")
 def step_impl(context, name):
     logger.info("Sent Data should contain the same info")
@@ -79,15 +77,19 @@ def step_impl(context):
     expect([]).to_equal(errors)
 
 
-@given("I count all the projects which exist in a account")
-def step_impl(context):
-    """
-    :type context: behave.runner.Context
-    """
-    raise NotImplementedError(u'STEP: Given I count all the projects which exist in a account')
-
 @step(u'I get the Epic Id created')
 def step_imp(context):
     logger.info('Get Epic Id created')
-    print("REsponse iD epic: ",context.response.json()['id'])
     Repository.get_instance().epic_id = context.response.json()['id']
+    context.ids["{epic_id}"] = context.response.json()['id']
+
+
+@given("I count all the projects which exist in a account")
+def step_impl(context):
+    context.length_project = len(Project_Helper.get_all_projects())
+
+
+@step("The length of projects is reduced by one")
+def step_impl(context):
+    actual = len(Project_Helper.get_all_projects())
+    expect(context.length_project - 1).to_equal(actual)
