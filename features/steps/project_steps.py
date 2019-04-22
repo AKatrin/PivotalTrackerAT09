@@ -19,13 +19,8 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    for key_name in Repository.get_instance().dict_ids.keys():
-        if key_name in endpoint:
-            endpoint = EndpointHelper.translate_endpoint(endpoint)
-            break
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
-
     context.client = client
 
 @then(u'I get a "{status_code}" status code as response')

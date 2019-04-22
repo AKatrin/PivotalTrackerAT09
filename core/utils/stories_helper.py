@@ -8,7 +8,7 @@ class Stories_helper:
         client.set_method('GET')
         client.set_endpoint('/projects/' + str(proj_id) + '/stories')
         response = client.execute_request()
-        return response.json()
+        return response.json()['id']
 
     @staticmethod
     def create_stories(proj_id):
@@ -17,7 +17,7 @@ class Stories_helper:
         client.set_endpoint('/projects/' + str(proj_id) + '/stories')
         client.set_body(
             """
-            {"name": "Test_01"}
+            {"name": "Test_001"}
             """
         )
         return client.execute_request().json()['id']

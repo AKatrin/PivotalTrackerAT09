@@ -20,6 +20,6 @@ Feature: Stories Smoke Tests
 
 
   Scenario: Get Stories by Id for bullk
-    Given I set up a "GET" request to "/projects/{proj_id}/stories/bulk?ids={id_story}" endpoint
+    Given I set up a "GET" request to "/projects/{proj_id}/stories/bulk?ids={story_id}" endpoint
     When I send the request
     Then I get a "200" status code as response

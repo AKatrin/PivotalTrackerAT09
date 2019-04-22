@@ -35,11 +35,8 @@ def before_scenario(context, scenario):
         Account_helper.create_account_membership(context.id)
     elif "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
-        my_proj_id = context.ids.get("{proj_id}")
-        context.id = Stories_helper.create_stories(my_proj_id)
-        print(context.id)
+        context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
         print(context.ids)
-
 
 
 def after_scenario(context, scenario):
