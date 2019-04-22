@@ -63,3 +63,8 @@ def step_imp(context):
     logger.info('Get Epic Id created')
     print("REsponse iD epic: ",context.response.json()['id'])
     Repository.get_instance().epic_id = context.response.json()['id']
+
+
+@given("hola")
+def step_impl(context):
+    pass
