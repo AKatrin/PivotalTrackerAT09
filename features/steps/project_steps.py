@@ -2,6 +2,7 @@ from behave import *
 from compare import *
 
 import json
+import jsonschema
 
 from core.logger.singleton_logger import SingletonLogger
 from core.rest_client.request_manager import *
@@ -9,6 +10,7 @@ from core.utils.json_helper import JsonHelper
 from core.utils.util import *
 from core.utils.endpoint_helper import EndpointHelper
 from core.utils.repository import Repository
+
 
 logger = SingletonLogger().get_logger()
 
@@ -18,9 +20,10 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-
-    if "{epic_id}" in endpoint:
-        endpoint = EndpointHelper.translate_endpoint(endpoint)
+    for key_name in Repository.get_instance().dict_ids.keys():
+        if key_name in endpoint:
+            endpoint = EndpointHelper.translate_endpoint(endpoint)
+            break
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
@@ -58,6 +61,8 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
+    if "{epic_id}" in context.text:
+        context.text = EndpointHelper.translate_endpoint(context.text)
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
 
@@ -65,5 +70,15 @@ def step_impl(context):
 @step(u'I get the Epic Id created')
 def step_imp(context):
     logger.info('Get Epic Id created')
-    print("REsponse iD epic: ",context.response.json()['id'])
-    Repository.get_instance().epic_id = context.response.json()['id']
+    print("Response id epic: ", context.response.json()['id'])
+    Repository.get_instance().add_id('epic_id', context.response.json()['id'])
+
+
+@step(u'I validated the epic schema')
+def step_impl(context):
+    logger.info("Validate the epic schema")
+    with open(Repository.get_instance().EPIC_SCHEMA, "r") as read_file:
+        data = json.load(read_file)
+    jsonschema.validate(context.response.json(), data)
+
+
