@@ -27,8 +27,13 @@ Feature: Stories Acceptance Test
     Then I get a "200" status code as response
 
   @create_stories
-  Scenario: Get Stories by Id
+  Scenario: Get Stories by Id with after
     Given I set up a "GET" request to "/projects/{proj_id}/stories?after_story_id={story_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 
+  @create_stories
+  Scenario: Get Stories by Id with before
+    Given I set up a "GET" request to "/projects/{proj_id}/stories?before_story_id={story_id}" endpoint
+    When I send the request
+    Then I get a "200" status code as response

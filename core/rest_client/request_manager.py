@@ -72,3 +72,5 @@ class RequestManager:
         elif self.method == 'DELETE':
             result_request = requests.delete(uri, headers=self.headers, auth=self.authentication)
         return result_request
+
+

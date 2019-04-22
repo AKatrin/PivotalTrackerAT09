@@ -3,7 +3,7 @@ from core.rest_client.request_manager import RequestManager
 class Stories_helper:
 
     @staticmethod
-    def get_all_story_by_id_stories(proj_id):
+    def get_story_by_id(proj_id):
         client = RequestManager()
         client.set_method('GET')
         client.set_endpoint('/projects/' + str(proj_id) + '/stories')
