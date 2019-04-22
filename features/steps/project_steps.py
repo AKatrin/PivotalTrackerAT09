@@ -12,7 +12,6 @@ from core.utils.repository import Repository
 
 logger = SingletonLogger().get_logger()
 
-
 @step(u'I set up a "{method}" request to "{endpoint}" endpoint')
 def step_impl(context, method, endpoint):
     logger.info("Make the call")
