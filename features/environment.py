@@ -21,12 +21,11 @@ def before_scenario(context, scenario):
         context.id = Account_helper.create_account()
         context.ids.append(context.id)
         Account_helper.create_account_membership(context.id)
-    elif "get_stories" in scenario.tags:
+    elif "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
-        context.ids = [Project_Helper.get_all_projects()['id']]
-        context.ids.append(Stories_helper.create_stories(id))
+        context.id = [Project_Helper.get_all_projects()["id"]]
+        context.ids.append(Stories_helper.create_stories(context.id))
         # context.ids.append(Stories_helper.get_all_Story_by_Id(context.ids[0])[0]['id'])
-        print(context.ids)
 
 def after_scenario(context, scenario):
     if 'delete_project' in scenario.tags:
