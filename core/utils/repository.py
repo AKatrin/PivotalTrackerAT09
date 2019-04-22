@@ -3,9 +3,18 @@ import os
 
 class Repository:
     __instance = None
+    dict_ids = {}
 
-    epic_id = 0
-    project_id = 0
+    @staticmethod
+    def add_id(name, id_value):
+        if name in Repository.get_instance().dict_ids.keys():
+            Repository.get_instance().dict_ids[name] = id_value
+        else:
+            Repository.get_instance().dict_ids.update({name: id_value})
+
+    @staticmethod
+    def get_id(name):
+        return Repository.get_instance().dict_ids.get(name, 0)
 
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
     EPIC_SCHEMA = os.path.join(ROOT_DIR, "..\\..\\schemas\\epic_schema.json")

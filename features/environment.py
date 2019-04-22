@@ -18,13 +18,13 @@ def before_scenario(context, scenario):
     elif 'create_project_epic' in scenario.tags:
         logger.info("Create a project and get the id of the project")
         project_id = Project_Helper.create_project()["id"]
-        Repository.get_instance().project_id = project_id
+        Repository.get_instance().add_id('proj_id', project_id)
     elif 'create_epic' in scenario.tags:
         logger.info("Create a project and get the id of the project")
         project_id = Project_Helper.create_project()["id"]
-        Repository.get_instance().project_id = project_id
+        Repository.get_instance().add_id('proj_id', project_id)
         epic_id = EpicHelper.create_epic(project_id)["id"]
-        Repository.get_instance().epic_id = epic_id
+        Repository.get_instance().add_id('epic_id', epic_id)
     elif "create_account" in scenario.tags:
         logger.info("Create an account and get the id account")
         context.ids = [Account_helper.create_account()]
@@ -48,5 +48,5 @@ def after_scenario(context, scenario):
         Project_Helper.delete_project(context.response.json())
     elif 'delete_project_epic' in scenario.tags:
         logger.info("Delete the project that was created for epics")
-        Project_Helper.delete_project_by_id(Repository.get_instance().project_id)
+        Project_Helper.delete_project_by_id(Repository.get_instance().get_id('proj_id'))
 

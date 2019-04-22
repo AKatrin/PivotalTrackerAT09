@@ -20,9 +20,10 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-
-    if "{epic_id}" in endpoint or "{proj_id}" in endpoint:
-        endpoint = EndpointHelper.translate_endpoint(endpoint)
+    for key_name in Repository.get_instance().dict_ids.keys():
+        if key_name in endpoint:
+            endpoint = EndpointHelper.translate_endpoint(endpoint)
+            break
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
@@ -70,7 +71,7 @@ def step_impl(context):
 def step_imp(context):
     logger.info('Get Epic Id created')
     print("Response id epic: ", context.response.json()['id'])
-    Repository.get_instance().epic_id = context.response.json()['id']
+    Repository.get_instance().add_id('epic_id', context.response.json()['id'])
 
 
 @step(u'I validated the epic schema')
