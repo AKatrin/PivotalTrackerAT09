@@ -19,17 +19,13 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-<<<<<<< HEAD
-    final_endpoint = Utils.check_endpoint(endpoint, context.ids)
-    client.set_endpoint(final_endpoint)
-=======
     for key_name in Repository.get_instance().dict_ids.keys():
         if key_name in endpoint:
             endpoint = EndpointHelper.translate_endpoint(endpoint)
             break
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
->>>>>>> 938927a7969e0eb36f4888ad49dfb79aed83effb
+
     context.client = client
 
 @then(u'I get a "{status_code}" status code as response')
@@ -74,15 +70,6 @@ def step_impl(context):
 @step(u'I get the Epic Id created')
 def step_imp(context):
     logger.info('Get Epic Id created')
-<<<<<<< HEAD
-    print("REsponse iD epic: ",context.response.json()['id'])
-    Repository.get_instance().epic_id = context.response.json()['id']
-
-
-@given("hola")
-def step_impl(context):
-    pass
-=======
     print("Response id epic: ", context.response.json()['id'])
     Repository.get_instance().add_id('epic_id', context.response.json()['id'])
 
@@ -93,6 +80,3 @@ def step_impl(context):
     with open(Repository.get_instance().EPIC_SCHEMA, "r") as read_file:
         data = json.load(read_file)
     jsonschema.validate(context.response.json(), data)
-
-
->>>>>>> 938927a7969e0eb36f4888ad49dfb79aed83effb
