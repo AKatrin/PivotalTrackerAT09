@@ -1,15 +1,12 @@
 from behave import *
 from compare import *
 
-import json
 import jsonschema
 
-from core.logger.singleton_logger import SingletonLogger
-from core.rest_client.request_manager import *
 from core.utils.json_helper import JsonHelper
 from core.utils.util import *
-from core.utils.endpoint_helper import EndpointHelper
 from core.utils.repository import Repository
+from core.utils.project_helper import *
 
 
 logger = SingletonLogger().get_logger()
@@ -20,13 +17,10 @@ def step_impl(context, method, endpoint):
     logger.info("Make the call")
     client = RequestManager()
     client.set_method(method)
-    for key_name in Repository.get_instance().dict_ids.keys():
-        if key_name in endpoint:
-            endpoint = EndpointHelper.translate_endpoint(endpoint)
-            break
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
+
 
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
@@ -62,16 +56,47 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Add Data to request")
     if "{epic_id}" in context.text:
-        context.text = EndpointHelper.translate_endpoint(context.text)
+        context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
+
+
+@step("I verify all projects schema")
+def step_impl(context):
+    logger.info("Verify all the projects with schema")
+    errors = Project_Helper.compare_all_schema(context.response.json())
+    expect([]).to_equal(errors)
+
+
+@step("Sent Data should contain the same info, name:'{name}'")
+def step_impl(context, name):
+    logger.info("Sent Data should contain the same info")
+    expect(name).to_equal(context.response.json()["name"])
+
+
+@step("I verify the schema of project")
+def step_impl(context):
+    logger.info("Verify the schema of project")
+    errors = Project_Helper.compare_schema(context.response.json())
+    expect([]).to_equal(errors)
 
 
 @step(u'I get the Epic Id created')
 def step_imp(context):
     logger.info('Get Epic Id created')
-    print("Response id epic: ", context.response.json()['id'])
-    Repository.get_instance().add_id('epic_id', context.response.json()['id'])
+    Repository.get_instance().epic_id = context.response.json()['id']
+    context.ids["{epic_id}"] = context.response.json()['id']
+
+
+@given("I count all the projects which exist in a account")
+def step_impl(context):
+    context.length_project = len(Project_Helper.get_all_projects())
+
+
+@step("The length of projects is reduced by one")
+def step_impl(context):
+    actual = len(Project_Helper.get_all_projects())
+    expect(context.length_project - 1).to_equal(actual)
 
 
 @step(u'I validated the epic schema')
