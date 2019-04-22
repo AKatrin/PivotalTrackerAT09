@@ -1,14 +1,10 @@
 from behave import *
 from compare import *
 
-import json
 import jsonschema
 
-from core.logger.singleton_logger import SingletonLogger
-from core.rest_client.request_manager import *
 from core.utils.json_helper import JsonHelper
 from core.utils.util import *
-from core.utils.endpoint_helper import EndpointHelper
 from core.utils.repository import Repository
 from core.utils.project_helper import *
 
@@ -60,7 +56,7 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Add Data to request")
     if "{epic_id}" in context.text:
-        context.text = EndpointHelper.translate_endpoint(context.text)
+        context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
 
@@ -101,8 +97,6 @@ def step_impl(context):
 def step_impl(context):
     actual = len(Project_Helper.get_all_projects())
     expect(context.length_project - 1).to_equal(actual)
-    print("Response id epic: ", context.response.json()['id'])
-    Repository.get_instance().add_id('epic_id', context.response.json()['id'])
 
 
 @step(u'I validated the epic schema')
