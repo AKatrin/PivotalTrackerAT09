@@ -1,0 +1,160 @@
+ {
+   "definitions": {},
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "$id": "http://example.com/root.json",
+   "type": "object",
+   "title": "The Root Schema",
+   "required": [
+     "created_at",
+     "id",
+     "kind",
+     "label",
+     "name",
+     "project_id",
+     "updated_at",
+     "url"
+   ],
+   "properties": {
+     "created_at": {
+       "$id": "#/properties/created_at",
+       "type": "string",
+       "title": "The Created_at Schema",
+       "default": "",
+       "examples": [
+         "2019-04-16T12:00:00Z"
+       ],
+       "pattern": "^(.*)$"
+     },
+     "id": {
+       "$id": "#/properties/id",
+       "type": "integer",
+       "title": "The Id Schema",
+       "default": 0,
+       "examples": [
+         2100
+       ]
+     },
+     "kind": {
+       "$id": "#/properties/kind",
+       "type": "string",
+       "title": "The Kind Schema",
+       "default": "",
+       "examples": [
+         "epic"
+       ],
+       "pattern": "^(.*)$"
+     },
+      "label": {
+        "$id": "#/properties/label",
+        "type": "object",
+        "title": "The Label Schema",
+        "required": [
+          "kind",
+          "id",
+          "project_id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "kind": {
+            "$id": "#/properties/label/properties/kind",
+            "type": "string",
+            "title": "The Kind Schema",
+            "default": "",
+            "examples": [
+              "label"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "id": {
+            "$id": "#/properties/label/properties/id",
+            "type": "integer",
+            "title": "The Id Schema",
+            "default": 0,
+            "examples": [
+             5100
+            ]
+          },
+          "project_id": {
+            "$id": "#/properties/label/properties/project_id",
+            "type": "integer",
+            "title": "The Project_id Schema",
+            "default": 0,
+            "examples": [
+              99
+            ]
+          },
+          "name": {
+            "$id": "#/properties/label/properties/name",
+            "type": "string",
+            "title": "The Name Schema",
+            "default": "",
+            "examples": [
+              "tractor beams"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "created_at": {
+            "$id": "#/properties/label/properties/created_at",
+           "type": "string",
+           "title": "The Created_at Schema",
+           "default": "",
+           "examples": [
+             "2019-04-16T12:00:00Z"
+           ],
+           "pattern": "^(.*)$"
+         },
+         "updated_at": {
+           "$id": "#/properties/label/properties/updated_at",
+           "type": "string",
+           "title": "The Updated_at Schema",
+           "default": "",
+           "examples": [
+             "2019-04-16T12:00:00Z"
+           ],
+           "pattern": "^(.*)$"
+         }
+       }
+     },
+     "name": {
+       "$id": "#/properties/name",
+       "type": "string",
+       "title": "The Name Schema",
+       "default": "",
+       "examples": [
+         "Tractor Beams"
+       ],
+       "pattern": "^(.*)$"
+     },
+     "project_id": {
+       "$id": "#/properties/project_id",
+       "type": "integer",
+       "title": "The Project_id Schema",
+       "default": 0,
+       "examples": [
+         99
+       ]
+     },
+     "updated_at": {
+       "$id": "#/properties/updated_at",
+       "type": "string",
+       "title": "The Updated_at Schema",
+       "default": "",
+       "examples": [
+         "2019-04-16T12:00:00Z"
+       ],
+       "pattern": "^(.*)$"
+     },
+     "url": {
+       "$id": "#/properties/url",
+       "type": "string",
+       "title": "The Url Schema",
+       "default": "",
+       "examples": [
+         "http://localhost/epic/show/2100"
+       ],
+       "pattern": "^(.*)$"
+     }
+   }
+ }

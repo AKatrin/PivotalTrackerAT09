@@ -76,3 +76,14 @@ class Project_Helper:
             if result != []:
                 error.append(result)
         return error
+
+    @staticmethod
+    def delete_project_by_id(id_project):
+        '''
+        Delete project
+        :param id_project: int
+        '''
+        client = RequestManager()
+        client.set_method('DELETE')
+        client.set_endpoint('/projects/' + str(id_project))
+        client.execute_request()
