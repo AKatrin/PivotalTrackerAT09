@@ -6,3 +6,4 @@ class Utils:
             if item == string:
                 endpoint = endpoint.replace(string, str(ids[string]))
         return endpoint
+
