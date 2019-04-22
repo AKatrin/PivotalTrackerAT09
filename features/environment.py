@@ -13,11 +13,11 @@ def before_scenario(context, scenario):
         context.ids["{proj_id}"] = Project_Helper.create_project()["id"]
     elif "create_account" in scenario.tags:
         logger.info("Create an account and get the id account")
-        context.ids["{proj_id}"] = Account_helper.create_account()
+        context.ids["{id}"] = Account_helper.create_account()
     elif "create_account_memberships" in scenario.tags:
         logger.info("Create a membership and get the id account")
         context.ids["{id}"] = Account_helper.create_account()
-        Account_helper.create_account_membership(context.id)
+        Account_helper.create_account_membership(context.ids["{id}"])
     elif "get_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
         context.ids["{proj_id}"] = Project_Helper.get_all_projects()[0]['id']
