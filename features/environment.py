@@ -13,6 +13,7 @@ def before_scenario(context, scenario):
         logger.info("Create a project and get the id of the project")
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
+        print("create a project: ", context.ids)
     elif 'create_epic' in scenario.tags:
         logger.info("Create a project and get the id of the project")
         context.project = Project_Helper.create_project()

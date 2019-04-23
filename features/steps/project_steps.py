@@ -7,7 +7,7 @@ from core.utils.json_helper import JsonHelper
 from core.utils.util import *
 from core.utils.repository import Repository
 from core.utils.project_helper import *
-
+from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
 
@@ -55,10 +55,17 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
-    if "{epic_id}" in context.text:
-        context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    body = json.loads(context.text)
+
+    if context.ids[0] is []:
+        body = json.loads(context.text)
+    else:
+        data = WorkspaceHelper.get_project_id(context.ids[0], "{project_id}", context.text)
+        body = json.loads(data)
     context.client.set_body(json.dumps(body))
+    # if "{epic_id}" in context.text:
+    #     context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
+    # body = json.loads(context.text)
+    # context.client.set_body(json.dumps(body))
 
 
 @step("I verify all projects schema")
