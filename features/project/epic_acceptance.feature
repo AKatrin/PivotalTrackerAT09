@@ -12,7 +12,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
   @create_project @delete_project
@@ -31,7 +31,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
  @create_project @delete_project
@@ -49,7 +49,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
   @create_epic @delete_project
@@ -65,7 +65,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
   @create_epic @delete_project
   Scenario: Create a new Epic related to before Epic
@@ -80,7 +80,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
    @create_epic  @delete_project
@@ -88,14 +88,14 @@ Feature: Epics
     Given I set up a "GET" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
   @create_epic @delete_project
   Scenario: Get Epic
     Given I set up a "GET" request to "/epics/{epic_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
   @create_epic  @delete_project
   Scenario: Update Epic name
@@ -108,7 +108,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
   @create_epic  @delete_project
   Scenario: Update Epic description
@@ -121,4 +121,4 @@ Feature: Epics
     """
     When I send the request
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
