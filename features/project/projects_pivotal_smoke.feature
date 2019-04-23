@@ -1,5 +1,5 @@
 @smoke
-Feature: Create, Read, Update and Delete Projects
+Feature: Smoke test of Create, Read, Update and Delete Projects
 
   Scenario: Access a user's projects
     Given I set up a "GET" request to "/projects" endpoint

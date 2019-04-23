@@ -68,10 +68,12 @@ def step_impl(context):
     expect([]).to_equal(errors)
 
 
-@step("Sent Data should contain the same info, name:'{name}'")
-def step_impl(context, name):
+@step("Sent Data should contain the same info, {field} and '{content}'")
+def step_impl(context, field, content):
     logger.info("Sent Data should contain the same info")
-    expect(name).to_equal(context.response.json()["name"])
+    if content.find("{") > -1:
+        content = context.ids[content]
+    expect(content).to_equal(context.response.json()[field])
 
 
 @step("I verify the schema of project")
@@ -107,3 +109,7 @@ def step_impl(context):
     jsonschema.validate(context.response.json(), data)
 
 
+@step("I get the same json and compare with the modified json")
+def step_impl(context):
+    compare = JsonHelper.compare_json_against_json()
+    expect(True).to_equal(compare)

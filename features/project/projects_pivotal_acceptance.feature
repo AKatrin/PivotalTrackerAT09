@@ -1,5 +1,5 @@
 @acceptance
-Feature: Create, Read, Update and Delete Projects
+Feature: Acceptance test of Create, Read, Update and Delete Projects
 
   Scenario: Access a user's projects
     Given I set up a "GET" request to "/projects" endpoint
@@ -26,7 +26,7 @@ Feature: Create, Read, Update and Delete Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the schema of project
-    And Sent Data should contain the same info, name:'Project Test'
+    And Sent Data should contain the same info, name and 'Project Test'
 
   @create_project @delete_project
   Scenario: Access the content of a specific project
@@ -34,10 +34,11 @@ Feature: Create, Read, Update and Delete Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the schema of project
+    And Sent Data should contain the same info, id and '{proj_id}'
 
 
   @create_project @delete_project
-  Scenario: Update the specific project
+  Scenario Outline: Update the specific project
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -48,7 +49,10 @@ Feature: Create, Read, Update and Delete Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the schema of project
-    And Sent Data should contain the same info, name:'Change Project Name'
+    And Sent Data should contain the same info, <field> and '<content>'
+    Examples:
+      |field|content|
+      |name |Change Project Name|
 
   @create_project
   Scenario: Delete a specific project
