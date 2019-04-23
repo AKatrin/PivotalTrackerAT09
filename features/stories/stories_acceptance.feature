@@ -72,6 +72,8 @@ Feature: Stories Acceptance Test
     Given I set up a "GET" request to "/projects/{proj_id}/stories?after_story_id={story_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
+    And I verify all project schema
+
 
   @create_stories
   Scenario: Get Stories by Id with before

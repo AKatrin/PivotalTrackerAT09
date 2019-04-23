@@ -24,4 +24,8 @@ Feature: Stories Smoke Tests
     When I send the request
     Then I get a "200" status code as response
 
-
+  @create_stories
+  Scenario: Get Stories by Id for bullk
+    Given I set up a "GET" request to "/projects/{proj_id}/stories/bulk?ids={id_story}%2C{id2}" endpoint
+    When I send the request
+    Then I get a "200" status code as response

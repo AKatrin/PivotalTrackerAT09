@@ -107,15 +107,3 @@ def step_impl(context):
         data = json.load(read_file)
     jsonschema.validate(context.response.json(), data)
 
-
-# @given('I set up a {method} request to {endpoint} endpoint with parameters')
-# def step_impl(context, method, endpoint):
-#     logger.info("Validate the parameters")
-#     client = RequestManager()
-#     client.set_method(method)
-#     if "?" in endpoint:
-#         client.set_parameters()
-#     endpoint = Utils.check_endpoint(endpoint, context.ids)
-#     client.set_endpoint(endpoint)
-#     context.client = client
-

@@ -23,98 +23,58 @@
         "$id": "#/properties/kind",
         "type": "string",
         "title": "The Kind Schema",
-        "default": "",
-        "examples": [
-          "story"
-        ],
         "pattern": "^(.*)$"
       },
       "id": {
         "$id": "#/properties/id",
         "type": "integer",
-        "title": "The Id Schema",
-        "default": 0,
-        "examples": [
-          165457506
-        ]
+        "title": "The Id Schema"
       },
       "created_at": {
         "$id": "#/properties/created_at",
         "type": "string",
         "title": "The Created_at Schema",
-        "default": "",
-        "examples": [
-          "2019-04-18T20:46:41Z"
-        ],
         "pattern": "^(.*)$"
       },
       "updated_at": {
         "$id": "#/properties/updated_at",
         "type": "string",
         "title": "The Updated_at Schema",
-        "default": "",
-        "examples": [
-          "2019-04-18T20:46:41Z"
-        ],
         "pattern": "^(.*)$"
       },
       "story_type": {
         "$id": "#/properties/story_type",
         "type": "string",
         "title": "The Story_type Schema",
-        "default": "",
-        "examples": [
-          "feature"
-        ],
         "pattern": "^(.*)$"
       },
       "name": {
         "$id": "#/properties/name",
         "type": "string",
         "title": "The Name Schema",
-        "default": "",
-        "examples": [
-          "Exhaust ports are ray shielded 👹"
-        ],
         "pattern": "^(.*)$"
       },
       "current_state": {
         "$id": "#/properties/current_state",
         "type": "string",
         "title": "The Current_state Schema",
-        "default": "",
-        "examples": [
-          "unscheduled"
-        ],
         "pattern": "^(.*)$"
       },
       "requested_by_id": {
         "$id": "#/properties/requested_by_id",
         "type": "integer",
-        "title": "The Requested_by_id Schema",
-        "default": 0,
-        "examples": [
-          3167793
-        ]
+        "title": "The Requested_by_id Schema"
       },
      "url": {
        "$id": "#/properties/url",
        "type": "string",
        "title": "The Url Schema",
-       "default": "",
-       "examples": [
-         "https://www.pivotaltracker.com/story/show/165457506"
-       ],
        "pattern": "^(.*)$"
      },
      "project_id": {
        "$id": "#/properties/project_id",
        "type": "integer",
-       "title": "The Project_id Schema",
-       "default": 0,
-       "examples": [
-         2327748
-       ]
+       "title": "The Project_id Schema"
     },
      "owner_ids": {
        "$id": "#/properties/owner_ids",
