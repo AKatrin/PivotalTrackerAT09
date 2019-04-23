@@ -26,6 +26,6 @@ Feature: Stories Smoke Tests
 
   @create_stories
   Scenario: Get Stories by Id and with parameters
-    Given I set up a "GET" request to "/projects/{proj_id}/stories?fields=current_state&with_state=unstarted" endpoint
+    Given I set up a "GET" request to "/projects/{proj_id}/stories?fields=current_state&with_state=unscheduled" endpoint
     When I send the request
     Then I get a "200" status code as response
