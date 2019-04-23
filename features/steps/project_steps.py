@@ -58,8 +58,8 @@ def step_impl(context):
     logger.info("Add Data to request")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    body = json.loads(context.text)
-    context.client.set_body(json.dumps(body))
+    context.body = json.loads(context.text)
+    context.client.set_body(json.dumps(context.body))
 
 
 @step("I verify all {schema} schema")
@@ -69,10 +69,12 @@ def step_impl(context, schema):
     expect([]).to_equal(errors)
 
 
-@step("Sent Data should contain the same info, name:'{name}'")
-def step_impl(context, name):
+@step("Sent Data should contain the same info, {field} and '{content}'")
+def step_impl(context, field, content):
     logger.info("Sent Data should contain the same info")
-    expect(name).to_equal(context.response.json()["name"])
+    if content.find("{") > -1:
+        content = context.ids[content]
+    expect(content).to_equal(context.response.json()[field])
 
 
 @step("I verify the {schema} schema")
@@ -107,3 +109,18 @@ def step_impl(context):
         data = json.load(read_file)
     jsonschema.validate(context.response.json(), data)
 
+<<<<<<< HEAD
+=======
+
+@step("I get the same json and compare with the modified json")
+def step_impl(context):
+    json_actual = JsonHelper.get_json("project", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
+
+
+@step("Sent Data should be the same info of the respond")
+def step_impl(context):
+    result = JsonHelper.compare_data_against_json(context.body, context.response.json())
+    expect({}).to_equal(result)
+>>>>>>> 981864bb1a56467b3cb7223ce4e87f8b287fb787
