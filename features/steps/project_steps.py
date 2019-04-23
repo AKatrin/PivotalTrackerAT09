@@ -102,14 +102,6 @@ def step_impl(context):
     expect(context.length_project - 1).to_equal(actual)
 
 
-@step(u'I validated the epic schema')
-def step_impl(context):
-    logger.info("Validate the epic schema")
-    with open(Repository.get_instance().EPIC_SCHEMA, "r") as read_file:
-        data = json.load(read_file)
-    jsonschema.validate(context.response.json(), data)
-
-
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
     json_actual = JsonHelper.get_json("project", context.ids)
@@ -121,3 +113,9 @@ def step_impl(context):
 def step_impl(context):
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
     expect({}).to_equal(result)
+
+
+@step('The {name_id} should be the same id of data')
+def step_impl(context, name_id):
+    logger.info("Id sent should be the same response's id")
+    expect(context.ids[name_id]).to_equal(context.response.json()["id"])
