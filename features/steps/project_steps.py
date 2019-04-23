@@ -22,9 +22,10 @@ def step_impl(context, method, endpoint):
     context.client = client
 
 
-@step('I filter by "{field}" with the values "{values}"')
+@step('I configure the "{field}" with the values "{values}"')
 def step_impl(context, field, values):
     context.client.set_parameters({field: values})
+
 
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
