@@ -1,6 +1,3 @@
-import os
-
-
 class Repository:
     __instance = None
     dict_ids = {}
@@ -16,8 +13,8 @@ class Repository:
     def get_id(name):
         return Repository.get_instance().dict_ids.get(name, 0)
 
-    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-    EPIC_SCHEMA = os.path.join(ROOT_DIR, "..\\..\\schemas\\epic_schema.json")
+    # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    # EPIC_SCHEMA = os.path.join(ROOT_DIR, "..\\..\\schemas\\epic_schema.json")
 
     @staticmethod
     def get_instance():
