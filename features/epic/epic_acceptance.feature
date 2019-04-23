@@ -69,6 +69,24 @@ Feature: Epics
     Then I get a "200" status code as response
     And I validated the epic schema
 
+   @create_project @delete_project
+  Scenario: Create a new Epic with name two comments
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "comments":[{
+                     "text":"Use this image on all external comms",
+                     "text":"Use this image on all external commss"
+                  }],
+      "name":"PR"
+    }
+    """
+    When I send the request
+    And I get the Epic Id created
+    Then I get a "200" status code as response
+    And I validated the epic schema
+
 
   @create_epic @delete_project
   Scenario: Create a new Epic related to after Epic

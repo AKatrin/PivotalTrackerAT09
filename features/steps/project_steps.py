@@ -60,8 +60,10 @@ def step_impl(context):
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     if "{long_name_epic}" in context.text:
         context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
-    if "{little_name_epic}" in context.text:
-        context.text = context.text.replace("{little_name_epic}", EpicHelper.long_string(1))
+    if "{long_desc_epic}" in context.text:
+        context.text = context.text.replace("{long_desc_epic}", EpicHelper.long_string(20000))
+    if "{label_name}" in context.text:
+        context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(255))
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
 
