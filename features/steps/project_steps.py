@@ -3,6 +3,7 @@ from compare import *
 
 import jsonschema
 
+from core.utils.epic_helper import EpicHelper
 from core.utils.json_helper import JsonHelper
 from core.utils.util import *
 from core.utils.repository import Repository
@@ -57,6 +58,10 @@ def step_impl(context):
     logger.info("Add Data to request")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
+    if "{long_name_epic}" in context.text:
+        context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
+    if "{little_name_epic}" in context.text:
+        context.text = context.text.replace("{little_name_epic}", EpicHelper.long_string(1))
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
 
@@ -107,3 +112,7 @@ def step_impl(context):
     jsonschema.validate(context.response.json(), data)
 
 
+@step(u'I compare de epic name')
+def step_imp(context):
+    logger.info("verify the epic name")
+    expect("Test Epic").to_equal(context.response.json()["name"])

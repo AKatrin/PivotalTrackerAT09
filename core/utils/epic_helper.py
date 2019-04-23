@@ -32,3 +32,8 @@ class EpicHelper:
         id_project = response['id']
         client.set_endpoint('/epics/' + str(id_project))
         client.execute_request()
+
+    @staticmethod
+    def long_string(length):
+        return "x" * length
+
