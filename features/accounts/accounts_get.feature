@@ -27,3 +27,11 @@ Feature: Get accounts
     Given I set up a "GET" request to "/accounts/{id}/memberships" endpoint
     When I send the request
     Then I get a "200" status code as response
+
+
+  @acceptance @create_account
+  Scenario: Get a account by id
+    Given I set up a "GET" request to "/accounts/{id}" endpoint
+    When I send the request
+    Then I get a "200" status code as response
+    And I verify the account schema
