@@ -8,7 +8,7 @@ logger = SingletonLogger().get_logger()
 def before_scenario(context, scenario):
     print("***************NEW SCENARIO******************")
     if "get_id_account" in scenario.tags:
-        context.ids["{account_id}"] = 1091601
+        context.ids["{account_id}"] = Account_helper.get_account_id()
     elif 'create_project' in scenario.tags:
         logger.info("Create a project and get the id of the project")
         context.project = Project_Helper.create_project()

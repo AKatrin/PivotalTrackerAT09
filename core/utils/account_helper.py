@@ -30,3 +30,11 @@ class Account_helper:
             }
             """
         )
+
+    @staticmethod
+    def get_account_id():
+        client = RequestManager()
+        client.set_method('GET')
+        client.set_endpoint('/accounts')
+        response = client.execute_request()
+        return response.json()[0]["id"]
