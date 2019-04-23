@@ -5,14 +5,14 @@ Feature: Create, Read, Update and Delete Projects
     Given I set up a "GET" request to "/projects" endpoint
     When I send the request
     Then I get a "200" status code as response
-    And I verify all projects schema
+    And I verify all project schema
 
   @get_id_account
   Scenario: Access a user's projects with the same account_id
     Given I set up a "GET" request to "/projects?account_ids={proj_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
-    And I verify all projects schema
+    And I verify all project schema
 
   @delete_project
   Scenario: Create a new empty project
@@ -25,7 +25,7 @@ Feature: Create, Read, Update and Delete Projects
       """
     When I send the request
     Then I get a "200" status code as response
-    And I verify the schema of project
+    And I verify the project schema
     And Sent Data should contain the same info, name:'Project Test'
 
   @create_project @delete_project
@@ -33,7 +33,7 @@ Feature: Create, Read, Update and Delete Projects
     Given I set up a "GET" request to "/projects/{proj_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
-    And I verify the schema of project
+    And I verify the project schema
 
 
   @create_project @delete_project
@@ -47,7 +47,7 @@ Feature: Create, Read, Update and Delete Projects
       """
     When I send the request
     Then I get a "200" status code as response
-    And I verify the schema of project
+    And I verify the project schema
     And Sent Data should contain the same info, name:'Change Project Name'
 
   @create_project
