@@ -26,7 +26,7 @@ Feature: Acceptance test of Create, Read, Update and Delete Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should contain the same info, name and 'Project Test'
+    And Sent Data should be the same info of the respond
 
 
   @create_project @delete_project
@@ -40,7 +40,7 @@ Feature: Acceptance test of Create, Read, Update and Delete Projects
 
 
   @create_project @delete_project
-  Scenario Outline: Update the specific project
+  Scenario: Update the specific project
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -51,10 +51,8 @@ Feature: Acceptance test of Create, Read, Update and Delete Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should contain the same info, <field> and '<content>'
-    Examples:
-      |field|content|
-      |name |Change Project Name|
+    And Sent Data should be the same info of the respond
+
 
 
   @create_project
