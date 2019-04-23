@@ -20,8 +20,11 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
-    if "%2C" in endpoint:
-        print(endpoint)
+
+
+@step('I filter by "{field}" with the values "{values}"')
+def step_impl(context, field, values):
+    context.client.set_parameters({field: values})
 
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):
@@ -51,6 +54,7 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
+    print(context.response.url)
 
 
 @step(u'I set up the data')
@@ -109,8 +113,6 @@ def step_impl(context):
         data = json.load(read_file)
     jsonschema.validate(context.response.json(), data)
 
-<<<<<<< HEAD
-=======
 
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
@@ -123,4 +125,3 @@ def step_impl(context):
 def step_impl(context):
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
     expect({}).to_equal(result)
->>>>>>> 981864bb1a56467b3cb7223ce4e87f8b287fb787

@@ -22,7 +22,7 @@ class RequestManager:
         self.headers = headers
 
     def set_parameters(self, parameters):
-        self.parameters = parameters
+        self.parameters.update(parameters)
 
     def set_body(self, body):
         self.body = body
@@ -64,7 +64,7 @@ class RequestManager:
         global result_request
         uri = self.build_url()
         if self.method == 'GET':
-            result_request = requests.get(uri, headers=self.headers, auth=self.authentication,  params=self.get_parameters())
+            result_request = requests.get(uri, headers=self.headers, auth=self.authentication, params=self.get_parameters())
         elif self.method == 'POST':
             result_request = requests.post(uri, headers=self.headers, auth=self.authentication, data=self.get_body())
         elif self.method == 'PUT':
