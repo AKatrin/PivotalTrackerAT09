@@ -4,9 +4,10 @@ from compare import *
 import jsonschema
 
 from core.utils.json_helper import JsonHelper
-from core.utils.util import *
 from core.utils.repository import Repository
+from core.utils.util import *
 from core.utils.project_helper import *
+from core.utils.schema_helper import *
 
 
 logger = SingletonLogger().get_logger()
@@ -61,10 +62,10 @@ def step_impl(context):
     context.client.set_body(json.dumps(body))
 
 
-@step("I verify all projects schema")
-def step_impl(context):
-    logger.info("Verify all the projects with schema")
-    errors = Project_Helper.compare_all_schema(context.response.json())
+@step("I verify all {schema} schema")
+def step_impl(context, schema):
+    logger.info("Verify all schema of " + schema + " list")
+    errors = Schema_Helper.compare_all_schema(context.response.json(),schema)
     expect([]).to_equal(errors)
 
 
@@ -76,10 +77,10 @@ def step_impl(context, field, content):
     expect(content).to_equal(context.response.json()[field])
 
 
-@step("I verify the schema of project")
-def step_impl(context):
-    logger.info("Verify the schema of project")
-    errors = Project_Helper.compare_schema(context.response.json())
+@step("I verify the {schema} schema")
+def step_impl(context, schema):
+    logger.info("Verify the schema of " + schema)
+    errors = Schema_Helper.compare_schema(context.response.json(), schema)
     expect([]).to_equal(errors)
 
 
