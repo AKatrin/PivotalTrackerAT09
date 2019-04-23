@@ -43,7 +43,7 @@ class Project_Helper:
         client = RequestManager()
         client.set_method('POST')
         client.set_endpoint('/projects')
-        body = {"name": "Project Test"}
+        body = {"name": "Project Test2"}
         client.set_body(json.dumps(body))
         response = client.execute_request()
         return response.json()

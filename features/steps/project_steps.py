@@ -56,11 +56,10 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Add Data to request")
 
-    if context.ids[0] is []:
-        body = json.loads(context.text)
-    else:
-        data = WorkspaceHelper.get_project_id(context.ids[0], "{project_id}", context.text)
-        body = json.loads(data)
+    if context.ids["{proj_id}"] is not []:
+        context.text = WorkspaceHelper.get_project_id(int((context.ids["{proj_id}"])["id"]), "{new_project_ids}", context.text)
+
+    body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
     # if "{epic_id}" in context.text:
     #     context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
