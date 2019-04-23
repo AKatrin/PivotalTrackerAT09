@@ -58,8 +58,8 @@ def step_impl(context):
     logger.info("Add Data to request")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    body = json.loads(context.text)
-    context.client.set_body(json.dumps(body))
+    context.body = json.loads(context.text)
+    context.client.set_body(json.dumps(context.body))
 
 
 @step("I verify all {schema} schema")
@@ -112,5 +112,12 @@ def step_impl(context):
 
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
-    compare = JsonHelper.compare_json_against_json()
-    expect(True).to_equal(compare)
+    json_actual = JsonHelper.obtain_json("project", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
+
+
+@step("Sent Data should be the same info of the respond")
+def step_impl(context):
+    result = JsonHelper.compare_data_against_json(context.body, context.response.json())
+    expect({}).to_equal(result)
