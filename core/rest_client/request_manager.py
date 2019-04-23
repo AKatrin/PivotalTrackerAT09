@@ -64,7 +64,7 @@ class RequestManager:
         global result_request
         uri = self.build_url()
         if self.method == 'GET':
-            result_request = requests.get(uri, headers=self.headers, auth=self.authentication)
+            result_request = requests.get(uri, headers=self.headers, auth=self.authentication,  params=self.get_parameters())
         elif self.method == 'POST':
             result_request = requests.post(uri, headers=self.headers, auth=self.authentication, data=self.get_body())
         elif self.method == 'PUT':

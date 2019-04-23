@@ -19,7 +19,8 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
-    print(endpoint)
+    if "%2C" in endpoint:
+        print(endpoint)
 
 @then(u'I get a "{status_code}" status code as response')
 def step_impl(context, status_code):

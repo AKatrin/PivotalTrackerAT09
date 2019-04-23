@@ -1,7 +1,7 @@
 @smoke @stories
 Feature: Stories Smoke Tests
 
-  Scenario: Post Stories by Ids
+  Scenario: Post Stories by by id of project
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -13,19 +13,15 @@ Feature: Stories Smoke Tests
     Then I get a "200" status code as response
 
   @create_stories
-  Scenario: Get Stories by Id
+  Scenario: Get all Stories by id of project
     Given I set up a "GET" request to "/projects/{proj_id}/stories" endpoint
     When I send the request
     Then I get a "200" status code as response
 
   @create_stories
-  Scenario: Get Stories by Id for bullk
+  Scenario: Get Stories by by id of project for bullk
     Given I set up a "GET" request to "/projects/{proj_id}/stories/bulk?ids={story_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
 
-  @create_stories
-  Scenario: Get Stories by Id and with parameters
-    Given I set up a "GET" request to "/projects/{proj_id}/stories?fields=current_state&with_state=unscheduled" endpoint
-    When I send the request
-    Then I get a "200" status code as response
+
