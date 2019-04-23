@@ -1,5 +1,5 @@
-
 from core.utils.project_helper import *
+
 class JsonHelper:
 
     @staticmethod
@@ -23,9 +23,8 @@ class JsonHelper:
         return answer
 
     @staticmethod
-    def obtain_json(type_of_json, ids):
+    def get_json(type_of_json, ids):
         obtain_json = ""
         if type_of_json == "project":
             obtain_json = Project_Helper.get_project(str(ids["{proj_id}"]))
-
         return obtain_json

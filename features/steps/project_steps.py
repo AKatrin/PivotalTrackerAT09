@@ -112,7 +112,7 @@ def step_impl(context):
 
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
-    json_actual = JsonHelper.obtain_json("project", context.ids)
+    json_actual = JsonHelper.get_json("project", context.ids)
     compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
     expect({}).to_equal(compare)
 
