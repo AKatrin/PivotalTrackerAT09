@@ -6,7 +6,7 @@
       When    I send the request
       Then    I get a "200" status code as response
 
-    @create_project
+    @create_project_for_workspace @delete_workspace
     Scenario: Create a new workspace
       Given   I set up a "POST" request to "/my/workspaces" endpoint
       And     I set up the data:
@@ -19,14 +19,8 @@
       When    I send the request
       Then    I get a "200" status code as response
 
-#      Scenario: Create a new Workspace
-#      Given   I set up a "POST" request to "/my/workspaces" endpoint
-#      And     I set up the data:
-#       """
-#        {
-#          "name":"A new workspace16",
-#          "project_ids":[{project_id}]
-#        }
-#       """
-#      When    I send the request
-#Then I get a "200" status code as response
+    @create_workspace @delete_workspace
+    Scenario: Get a workspace by id
+      Given   I set up a "GET" request to "/my/workspaces/{workspace_id}" endpoint
+      When    I send the request
+      Then    I get a "200" status code as response

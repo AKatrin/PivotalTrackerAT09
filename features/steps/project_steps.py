@@ -56,15 +56,12 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Add Data to request")
 
-    if context.ids["{proj_id}"] is not []:
-        context.text = WorkspaceHelper.get_project_id(int((context.ids["{proj_id}"])["id"]), "{new_project_ids}", context.text)
-
+    if "{epic_id}" in context.text:
+        context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
+    elif "{new_project_ids}" in context.text:
+        context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id_for_workspace}")))
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
-    # if "{epic_id}" in context.text:
-    #     context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    # body = json.loads(context.text)
-    # context.client.set_body(json.dumps(body))
 
 
 @step("I verify all projects schema")
