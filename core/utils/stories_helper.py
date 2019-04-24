@@ -9,3 +9,4 @@ class Stories_helper:
         client.set_endpoint('/projects/' + str(id) + '/stories')
         response = client.execute_request()
         return response.json()
+
