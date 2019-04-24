@@ -71,21 +71,21 @@ def before_feature(context, feature):
     if 'epic' in feature.tags:
         logger.info("Create a project and get the id of the project")
         context.project = Project_Helper.create_project()
-        context.ids = [context.project['id']]
+        context.ids["{proj_id}"] = context.project['id']
     elif 'stories' in feature.tags:
         logger.info("Create a project and get the id of the project")
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project['id']
-    if 'workspace' in feature.tags:
+    elif 'workspace' in feature.tags:
         logger.info("Create a project and get the id of the project")
         context.projects = Project_Helper.create_projects(5)
         print("New workspaces: ", context.projects)
 
 
 def after_feature(context, feature):
-    if 'epic' or 'stories' in feature.tags:
+    if 'stories' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.project)
-    if 'workspace' in feature.tags:
+    elif 'workspace' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_projects(context.projects)
