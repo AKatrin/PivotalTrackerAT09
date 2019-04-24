@@ -184,3 +184,29 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+
+
+  @create_epic  @delete_project
+  Scenario: Update Epic numerical name
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+      "name" : "{long}"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+
+
+  @create_epic  @delete_project
+  Scenario: Update Epic long1 description
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+       "description":"{more_long}"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response

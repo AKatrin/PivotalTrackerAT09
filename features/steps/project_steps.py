@@ -71,6 +71,8 @@ def step_impl(context):
         context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
     elif "{long}" in context.text:
         context.text = context.text.replace("{long}", EpicHelper.long_string(20000))
+    elif "{more_long}" in context.text:
+        context.text = context.text.replace("{more_long}", EpicHelper.long_string(20001))
     elif "{long_label_name}" in context.text:
         context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(256))
     elif "{new_project_ids}" in context.text:
