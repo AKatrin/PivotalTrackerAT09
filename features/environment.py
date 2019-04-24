@@ -53,7 +53,6 @@ def before_scenario(context, scenario):
         context.del_stories = Story_Helper.delete_story(context.ids["{proj_id}"], context.ids["{stories_id}"])
 
 
-
 def after_scenario(context, scenario):
     if "delete_project" in scenario.tags:
         logger.info("Delete the project that was created")
