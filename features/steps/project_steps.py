@@ -1,14 +1,12 @@
 from behave import *
 from compare import *
-
-import jsonschema
-
 from core.utils.json_helper import JsonHelper
 from core.utils.repository import Repository
 from core.utils.util import *
 from core.utils.project_helper import *
 from core.utils.schema_helper import *
 
+import jsonschema
 
 logger = SingletonLogger().get_logger()
 
@@ -61,10 +59,18 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
+    print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    context.body = json.loads(context.text)
-    context.client.set_body(json.dumps(context.body))
+
+    elif "{new_project_ids}" in context.text:
+        context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
+    elif "{update_project_ids}" in context.text:
+        print("contest in update:", context.projects[0].get("id"))
+        context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
+    body = json.loads(context.text)
+    context.client.set_body(json.dumps(body))
+
 
 
 @step("I verify all {schema} schema")
