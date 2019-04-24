@@ -2,6 +2,7 @@ from core.utils.account_helper import Account_helper
 from core.utils.epic_helper import EpicHelper
 from core.utils.project_helper import *
 from core.utils.stories_helper import *
+from core.utils.story_helper import Story_Helper
 from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
@@ -39,6 +40,17 @@ def before_scenario(context, scenario):
         logger.info("Get all project and get the id of the project")
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
         print(context.ids)
+
+    elif "create_stories_project" in scenario.tags:
+        context.project = Project_Helper.create_project()
+        context.ids["{proj_id}"] = context.project["id"]
+        context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
+
+    elif "delete_stories_by_id" in scenario.tags:
+        context.project = Project_Helper.create_project()
+        context.ids["{proj_id}"] = context.project["id"]
+        context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
+        context.del_stories = Story_Helper.delete_story(context.ids["{proj_id}"], context.ids["{stories_id}"])
 
 
 def after_scenario(context, scenario):
