@@ -12,7 +12,6 @@ from core.utils.schema_helper import *
 
 logger = SingletonLogger().get_logger()
 
-
 @step(u'I set up a "{method}" request to "{endpoint}" endpoint')
 def step_impl(context, method, endpoint):
     logger.info("Make the call")
@@ -21,6 +20,11 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
+
+
+@step('I configure the "{field}" with the values "{values}"')
+def step_impl(context, field, values):
+    context.client.set_parameters({field: values})
 
 
 @then(u'I get a "{status_code}" status code as response')
@@ -51,6 +55,7 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
+    print(context.response.url)
 
 
 @step(u'I set up the data')
