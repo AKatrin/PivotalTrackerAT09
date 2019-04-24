@@ -13,7 +13,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
   @create_project @delete_project
@@ -28,7 +28,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
   @create_project @delete_project
@@ -44,7 +44,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
   @create_project @delete_project
@@ -60,7 +60,7 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 
 
   @create_project @delete_project
@@ -79,5 +79,5 @@ Feature: Epics
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
-    And I validated the epic schema
+    And I verify the epic schema
 

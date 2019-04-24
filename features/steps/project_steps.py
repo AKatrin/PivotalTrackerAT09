@@ -4,7 +4,7 @@ from compare import *
 import jsonschema
 
 #from core.utils.epic_helper import EpicHelper
-
+from core.utils.epic_helper import EpicHelper
 from core.utils.json_helper import JsonHelper
 from core.utils.repository import Repository
 from core.utils.util import *
@@ -121,14 +121,6 @@ def step_impl(context):
 def step_impl(context):
     actual = len(Project_Helper.get_all_projects())
     expect(context.length_project - 1).to_equal(actual)
-
-
-@step(u'I validated the epic schema')
-def step_impl(context):
-    logger.info("Validate the epic schema")
-    with open(Repository.get_instance().EPIC_SCHEMA, "r") as read_file:
-        data = json.load(read_file)
-    jsonschema.validate(context.response.json(), data)
 
 
 @step(u'I compare de epic name')
