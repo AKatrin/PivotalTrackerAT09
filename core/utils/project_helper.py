@@ -1,6 +1,7 @@
 from core.logger.singleton_logger import SingletonLogger
 from core.rest_client.request_manager import *
 from jsonschema.validators import Draft7Validator
+
 import random
 import json
 logger = SingletonLogger().get_logger()

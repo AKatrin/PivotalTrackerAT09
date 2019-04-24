@@ -1,13 +1,12 @@
 from behave import *
 from compare import *
+from core.utils.json_helper import JsonHelper
+from core.utils.repository import Repository
+from core.utils.util import *
+from core.utils.project_helper import *
+from core.utils.schema_helper import *
 
 import jsonschema
-
-from core.utils.json_helper import JsonHelper
-from core.utils.util import *
-from core.utils.repository import Repository
-from core.utils.project_helper import *
-from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
 
@@ -58,6 +57,7 @@ def step_impl(context):
     print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
+
     elif "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
     elif "{update_project_ids}" in context.text:
@@ -67,23 +67,26 @@ def step_impl(context):
     context.client.set_body(json.dumps(body))
 
 
-@step("I verify all projects schema")
-def step_impl(context):
-    logger.info("Verify all the projects with schema")
-    errors = Project_Helper.compare_all_schema(context.response.json())
+
+@step("I verify all {schema} schema")
+def step_impl(context, schema):
+    logger.info("Verify all schema of " + schema + " list")
+    errors = Schema_Helper.compare_all_schema(context.response.json(),schema)
     expect([]).to_equal(errors)
 
 
-@step("Sent Data should contain the same info, name:'{name}'")
-def step_impl(context, name):
+@step("Sent Data should contain the same info, {field} and '{content}'")
+def step_impl(context, field, content):
     logger.info("Sent Data should contain the same info")
-    expect(name).to_equal(context.response.json()["name"])
+    if content.find("{") > -1:
+        content = context.ids[content]
+    expect(content).to_equal(context.response.json()[field])
 
 
-@step("I verify the schema of project")
-def step_impl(context):
-    logger.info("Verify the schema of project")
-    errors = Project_Helper.compare_schema(context.response.json())
+@step("I verify the {schema} schema")
+def step_impl(context, schema):
+    logger.info("Verify the schema of " + schema)
+    errors = Schema_Helper.compare_schema(context.response.json(), schema)
     expect([]).to_equal(errors)
 
 
@@ -113,3 +116,14 @@ def step_impl(context):
     jsonschema.validate(context.response.json(), data)
 
 
+@step("I get the same json and compare with the modified json")
+def step_impl(context):
+    json_actual = JsonHelper.get_json("project", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
+
+
+@step("Sent Data should be the same info of the respond")
+def step_impl(context):
+    result = JsonHelper.compare_data_against_json(context.body, context.response.json())
+    expect({}).to_equal(result)
