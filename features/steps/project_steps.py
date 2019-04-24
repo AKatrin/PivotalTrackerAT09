@@ -3,15 +3,17 @@ from compare import *
 
 import jsonschema
 
-from core.utils.epic_helper import EpicHelper
-from core.utils.json_helper import JsonHelper
-from core.utils.util import *
-from core.utils.repository import Repository
-from core.utils.project_helper import *
+#from core.utils.epic_helper import EpicHelper
 
+from core.utils.json_helper import JsonHelper
+from core.utils.repository import Repository
+from core.utils.util import *
+from core.utils.project_helper import *
+from core.utils.schema_helper import *
+
+import jsonschema
 
 logger = SingletonLogger().get_logger()
-
 
 @step(u'I set up a "{method}" request to "{endpoint}" endpoint')
 def step_impl(context, method, endpoint):
@@ -21,6 +23,11 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
+
+
+@step('I configure the "{field}" with the values "{values}"')
+def step_impl(context, field, values):
+    context.client.set_parameters({field: values})
 
 
 @then(u'I get a "{status_code}" status code as response')
@@ -51,40 +58,50 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
+    print(context.response.url)
 
 
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
+    print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    if "{long_name_epic}" in context.text:
+    elif "{long_name_epic}" in context.text:
         context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
-    if "{long_desc_epic}" in context.text:
+    elif "{long_desc_epic}" in context.text:
         context.text = context.text.replace("{long_desc_epic}", EpicHelper.long_string(20000))
-    if "{label_name}" in context.text:
+    elif "{label_name}" in context.text:
         context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(255))
+    elif "{new_project_ids}" in context.text:
+        context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
+    elif "{update_project_ids}" in context.text:
+        print("contest in update:", context.projects[0].get("id"))
+        context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
 
 
-@step("I verify all projects schema")
-def step_impl(context):
-    logger.info("Verify all the projects with schema")
-    errors = Project_Helper.compare_all_schema(context.response.json())
+
+@step("I verify all {schema} schema")
+def step_impl(context, schema):
+    logger.info("Verify all schema of " + schema + " list")
+    errors = Schema_Helper.compare_all_schema(context.response.json(),schema)
     expect([]).to_equal(errors)
 
 
-@step("Sent Data should contain the same info, name:'{name}'")
-def step_impl(context, name):
+@step("Sent Data should contain the same info, {field} and '{content}'")
+def step_impl(context, field, content):
     logger.info("Sent Data should contain the same info")
-    expect(name).to_equal(context.response.json()["name"])
+    if content.find("{") > -1:
+        content = context.ids[content]
+    expect(content).to_equal(context.response.json()[field])
 
 
-@step("I verify the schema of project")
-def step_impl(context):
-    logger.info("Verify the schema of project")
-    errors = Project_Helper.compare_schema(context.response.json())
+@step("I verify the {schema} schema")
+def step_impl(context, schema):
+    logger.info("Verify the schema of " + schema)
+    errors = Schema_Helper.compare_schema(context.response.json(), schema)
     expect([]).to_equal(errors)
 
 
@@ -118,3 +135,17 @@ def step_impl(context):
 def step_imp(context):
     logger.info("verify the epic name")
     expect("Test Epic").to_equal(context.response.json()["name"])
+
+    
+@step("I get the same json and compare with the modified json")
+def step_impl(context):
+    json_actual = JsonHelper.get_json("project", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
+
+
+@step("Sent Data should be the same info of the respond")
+def step_impl(context):
+    result = JsonHelper.compare_data_against_json(context.body, context.response.json())
+    expect({}).to_equal(result)
+

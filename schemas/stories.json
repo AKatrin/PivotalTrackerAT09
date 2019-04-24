@@ -1,0 +1,90 @@
+   {
+     "definitions": {},
+     "$schema": "http://json-schema.org/draft-07/schema#",
+     "$id": "http://example.com/root.json",
+     "type": "object",
+     "title": "The Root Schema",
+     "required": [
+       "kind",
+       "id",
+      "created_at",
+      "updated_at",
+      "story_type",
+      "name",
+      "current_state",
+      "requested_by_id",
+      "url",
+      "project_id",
+      "owner_ids",
+      "labels"
+    ],
+    "properties": {
+      "kind": {
+        "$id": "#/properties/kind",
+        "type": "string",
+        "title": "The Kind Schema",
+        "pattern": "^(.*)$"
+      },
+      "id": {
+        "$id": "#/properties/id",
+        "type": "integer",
+        "title": "The Id Schema"
+      },
+      "created_at": {
+        "$id": "#/properties/created_at",
+        "type": "string",
+        "title": "The Created_at Schema",
+        "pattern": "^(.*)$"
+      },
+      "updated_at": {
+        "$id": "#/properties/updated_at",
+        "type": "string",
+        "title": "The Updated_at Schema",
+        "pattern": "^(.*)$"
+      },
+      "story_type": {
+        "$id": "#/properties/story_type",
+        "type": "string",
+        "title": "The Story_type Schema",
+        "pattern": "^(.*)$"
+      },
+      "name": {
+        "$id": "#/properties/name",
+        "type": "string",
+        "title": "The Name Schema",
+        "pattern": "^(.*)$"
+      },
+      "current_state": {
+        "$id": "#/properties/current_state",
+        "type": "string",
+        "title": "The Current_state Schema",
+        "pattern": "^(.*)$"
+      },
+      "requested_by_id": {
+        "$id": "#/properties/requested_by_id",
+        "type": "integer",
+        "title": "The Requested_by_id Schema"
+      },
+     "url": {
+       "$id": "#/properties/url",
+       "type": "string",
+       "title": "The Url Schema",
+       "pattern": "^(.*)$"
+     },
+     "project_id": {
+       "$id": "#/properties/project_id",
+       "type": "integer",
+       "title": "The Project_id Schema"
+    },
+     "owner_ids": {
+       "$id": "#/properties/owner_ids",
+       "type": "array",
+       "title": "The Owner_ids Schema"
+     },
+     "labels": {
+       "$id": "#/properties/labels",
+       "type": "array",
+       "title": "The Labels Schema"
+     }
+   }
+ }
