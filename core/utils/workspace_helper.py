@@ -39,4 +39,5 @@ class WorkspaceHelper:
         body = {"name": "Project Test2", "project_ids": [id_project]}
         client.set_body(json.dumps(body))
         response = client.execute_request()
+        print(response.text)
         return response.json()
