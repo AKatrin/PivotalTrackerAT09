@@ -1,17 +1,14 @@
 from behave import *
 from compare import *
-
-import jsonschema
-
 from core.utils.json_helper import JsonHelper
 from core.utils.repository import Repository
 from core.utils.util import *
 from core.utils.project_helper import *
 from core.utils.schema_helper import *
 
+import jsonschema
 
 logger = SingletonLogger().get_logger()
-
 
 @step(u'I set up a "{method}" request to "{endpoint}" endpoint')
 def step_impl(context, method, endpoint):
@@ -21,6 +18,11 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
+
+
+@step('I configure the "{field}" with the values "{values}"')
+def step_impl(context, field, values):
+    context.client.set_parameters({field: values})
 
 
 @then(u'I get a "{status_code}" status code as response')
@@ -51,15 +53,24 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
+    print(context.response.url)
 
 
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
+    print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    context.body = json.loads(context.text)
-    context.client.set_body(json.dumps(context.body))
+
+    elif "{new_project_ids}" in context.text:
+        context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
+    elif "{update_project_ids}" in context.text:
+        print("contest in update:", context.projects[0].get("id"))
+        context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
+    body = json.loads(context.text)
+    context.client.set_body(json.dumps(body))
+
 
 
 @step("I verify all {schema} schema")
