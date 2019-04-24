@@ -41,7 +41,6 @@ def before_scenario(context, scenario):
         print(context.ids)
 
 
-
 def after_scenario(context, scenario):
     if "delete_project" in scenario.tags:
         logger.info("Delete the project that was created")
@@ -67,7 +66,7 @@ def before_feature(context, feature):
         context.ids["{proj_id}"] = context.project['id']
     if 'workspace' in feature.tags:
         logger.info("Create a project and get the id of the project")
-        context.projects = Project_Helper.create_projects(5)
+        context.projects = Project_Helper.create_projects(2)
         print("New workspaces: ", context.projects)
 
 
@@ -75,6 +74,7 @@ def after_feature(context, feature):
     if 'epic' or 'stories' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.project)
-    if 'workspace' in feature.tags:
-        logger.info("Delete the project that was created")
-        Project_Helper.delete_projects(context.projects)
+    # if 'workspace_project' in feature.tags:
+    #     logger.info("Delete the project that was created")
+    #     print("I am into after feature")
+    #     Project_Helper.delete_projects(context.projects)

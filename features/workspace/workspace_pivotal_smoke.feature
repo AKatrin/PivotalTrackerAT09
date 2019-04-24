@@ -36,3 +36,9 @@
       """
       When    I send the request
       Then    I get a "200" status code as response
+
+    @create_project @create_workspace @delete_workspace
+    Scenario: Delete a Workspace
+      Given   I set up a "DELETE" request to "/my/workspaces/{workspace_id}" endpoint
+      When    I send the request
+      Then    I get a "204" status code as response
