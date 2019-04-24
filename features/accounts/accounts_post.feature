@@ -7,8 +7,8 @@ Feature: Create a account membership
     And I set up the data
     """
     {
-      "email":"dookudhgj@example.com",
-      "initials":"CDd",
+      "email":"dooku@example.com",
+      "initials":"CD",
       "name":"Count Dooku"
     }
     """
