@@ -69,10 +69,10 @@ def step_impl(context):
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     elif "{long_name_epic}" in context.text:
         context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
-    elif "{long_desc_epic}" in context.text:
-        context.text = context.text.replace("{long_desc_epic}", EpicHelper.long_string(20000))
-    elif "{label_name}" in context.text:
-        context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(255))
+    elif "{long}" in context.text:
+        context.text = context.text.replace("{long}", EpicHelper.long_string(20000))
+    elif "{long_label_name}" in context.text:
+        context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(256))
     elif "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
     elif "{update_project_ids}" in context.text:
@@ -127,6 +127,11 @@ def step_impl(context):
 def step_imp(context):
     logger.info("verify the epic name")
     expect("Test Epic").to_equal(context.response.json()["name"])
+
+@step(u'I compare de error message')
+def step_imp(context):
+    logger.info("verify the error message")
+    expect("The label 'project epic' is already used by another epic.").to_equal(context.response.json()["general_problem"])
 
     
 @step("I get the same json and compare with the modified json")

@@ -13,6 +13,7 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
 
+
   @create_epic  @delete_project
   Scenario: Get Epic from project
     Given I set up a "GET" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
@@ -24,6 +25,7 @@ Feature: Epics
     Given I set up a "GET" request to "/epics/{epic_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
+
 
   @create_epic  @delete_project
   Scenario: Update Epic
@@ -37,11 +39,13 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
 
+
   @create_epic  @delete_project
   Scenario: Get all Epics
     Given I set up a "GET" request to "/projects/{proj_id}/epics" endpoint
     When I send the request
     Then I get a "200" status code as response
+
 
   @create_epic  @delete_project
   Scenario: Delete epic

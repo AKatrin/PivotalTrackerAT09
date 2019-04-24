@@ -69,6 +69,7 @@ Feature: Epics
     Then I get a "200" status code as response
     And I verify the epic schema
 
+
    @create_project @delete_project
   Scenario: Create a new Epic with name two comments
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
