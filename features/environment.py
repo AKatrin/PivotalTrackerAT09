@@ -33,18 +33,14 @@ def before_scenario(context, scenario):
     elif "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
-        print(context.ids)
     if "create_workspace" in scenario.tags:
         logger.info("Create a project and get the id of the project")
         context.workspace = WorkspaceHelper.create_workspace(context.project)
         context.ids["{workspace_id}"] = context.workspace["id"]
-
-
     elif "create_stories_project" in scenario.tags:
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
         context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
-
     elif "delete_stories_by_id" in scenario.tags:
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
@@ -79,7 +75,6 @@ def before_feature(context, feature):
     if 'workspace' in feature.tags:
         logger.info("Create a project and get the id of the project")
         context.projects = Project_Helper.create_projects(5)
-        # print("New workspaces: ", context.projects)
 
 
 def after_feature(context, feature):

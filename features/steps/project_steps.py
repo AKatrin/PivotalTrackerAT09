@@ -18,7 +18,7 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
-    print(context.ids)
+
 
 @step('I configure the "{field}" with the values "{values}"')
 def step_impl(context, field, values):
@@ -64,15 +64,13 @@ def step_impl(context):
     # print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-
     elif "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
     elif "{update_project_ids}" in context.text:
         print("contest in update:", context.projects[0].get("id"))
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
-    body = json.loads(context.text)
-    context.client.set_body(json.dumps(body))
-
+    context.body = json.loads(context.text)
+    context.client.set_body(json.dumps(context.body))
 
 
 @step("I verify all {schema} schema")

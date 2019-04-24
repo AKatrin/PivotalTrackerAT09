@@ -5,18 +5,7 @@
      "type": "object",
      "title": "The Root Schema",
      "required": [
-       "kind",
-       "id",
-      "created_at",
-      "updated_at",
-      "story_type",
-      "name",
-      "current_state",
-      "requested_by_id",
-      "url",
-      "project_id",
-      "owner_ids",
-      "labels"
+       "id"
     ],
     "properties": {
       "kind": {
@@ -87,4 +76,4 @@
        "title": "The Labels Schema"
      }
    }
- }
+}

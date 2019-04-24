@@ -24,4 +24,5 @@ Feature: Stories Smoke Tests
     And I configure the "ids" with the values "{story_id}"
     When I send the request
     Then I get a "200" status code as response
+    And I verify all stories schema
 
