@@ -130,10 +130,14 @@ def step_imp(context):
     logger.info("verify the epic name")
     expect("Test Epic").to_equal(context.response.json()["name"])
 
-@step(u'I compare de error message')
-def step_imp(context):
+
+@step(u'I compare de {request_response} message')
+def step_imp(context, request_response):
     logger.info("verify the error message")
-    expect("The label 'project epic' is already used by another epic.").to_equal(context.response.json()["general_problem"])
+    if request_response == 'label error':
+        expect("The label 'project epic' is already used by another epic.").to_equal(context.response.json()["general_problem"])
+    elif request_response == 'missing name error':
+        expect("The label 'project epic' is already used by another epic.").to_equal(context.response.json()["general_problem"])
 
     
 @step("I get the same json and compare with the modified json")

@@ -130,7 +130,7 @@ Feature: Epics
 
 
   @create_epic @delete_project
-  Scenario: Create a new Epic with name, repeted labelasociate.
+  Scenario: Create a new Epic with name, repeated label associate.
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
@@ -144,7 +144,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare de error message
+    And I compare de label error message
 
 
   @create_epic  @delete_project
@@ -158,6 +158,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare de missing name error message
 
 
   @create_epic  @delete_project
