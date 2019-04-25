@@ -19,6 +19,7 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
+    print(client.get_headers())
 
 
 @step('I configure the "{field}" with the values "{values}"')
@@ -132,3 +133,12 @@ def step_impl(context):
 def step_impl(context, name_id):
     logger.info("Id sent should be the same response's id")
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
+
+
+@step("I should see a messages error: {message}")
+def step_impl(context, message):
+    logger.info("Validate the error message")
+    if message in context.response.json()["error"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()
