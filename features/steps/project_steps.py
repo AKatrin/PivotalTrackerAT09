@@ -55,7 +55,6 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
-    print(context.response.url)
 
 
 @step(u'I set up the data')
