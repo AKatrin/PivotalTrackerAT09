@@ -11,7 +11,7 @@ class JsonHelper:
         answer = {}
         for item in data:
             if data[item] != json_result[item]:
-                answer = "Values are not the same"
+                answer[item] = "Values are not the same"
         return answer
 
     @staticmethod

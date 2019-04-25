@@ -62,14 +62,16 @@ def step_impl(context):
     print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-
     elif "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
     elif "{update_project_ids}" in context.text:
         print("contest in update:", context.projects[0].get("id"))
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
-    body = json.loads(context.text)
-    context.client.set_body(json.dumps(body))
+    elif "{min_velocity_averaged_over}" in context.text:
+        context.text = context.text.replace("{min_velocity_averaged_over}",
+                                            str(context.project['velocity_averaged_over']))
+    context.body = json.loads(context.text)
+    context.client.set_body(json.dumps(context.body))
 
 
 
