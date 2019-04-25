@@ -1,6 +1,7 @@
 @smoke @workspace
-  Feature: Create CRUD for Workspace
+  Feature: Create "Smoke" test CRUD's(Create, Read, Update and Delete) for Workspace
 
+    @create_project @create_workspace @delete_project @delete_workspace
     Scenario: Get all the Workspaces
       Given   I set up a "GET" request to "/my/workspaces" endpoint
       When    I send the request

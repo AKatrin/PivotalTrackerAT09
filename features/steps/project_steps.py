@@ -10,6 +10,7 @@ import jsonschema
 
 logger = SingletonLogger().get_logger()
 
+
 @step(u'I set up a "{method}" request to "{endpoint}" endpoint')
 def step_impl(context, method, endpoint):
     logger.info("Make the call")
@@ -67,7 +68,6 @@ def step_impl(context):
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
     body = json.loads(context.text)
     context.client.set_body(json.dumps(body))
-
 
 
 @step("I verify all {schema} schema")

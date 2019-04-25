@@ -61,7 +61,7 @@ def after_scenario(context, scenario):
     if "delete_workspace" in scenario.tags:
         logger.info("Delete a Workspace")
         workspace = context.response.json()
-        id_workspace = workspace["id"] if context.ids.get("{workspace_id}")is None else context.ids.get("{workspace_id}")
+        id_workspace = context.ids.get("{workspace_id}") if type(workspace) is list else workspace["id"]
         WorkspaceHelper.delete_workspace(id_workspace)
 
 
@@ -76,12 +76,13 @@ def before_feature(context, feature):
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project['id']
     if 'workspace' in feature.tags:
-        logger.info("Create a project and get the id of the project")
+        logger.info("Create two projects for workspace")
         context.projects = Project_Helper.create_projects(2)
+        # project_json['id'] = context.projects[-1]
 
 
 def after_feature(context, feature):
-    if 'epic' or 'stories' in feature.tags:
+    if 'stories' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.project)
     if 'workspace' in feature.tags:

@@ -1,6 +1,7 @@
 from core.rest_client.request_manager import RequestManager
 
 import json
+import random
 
 class WorkspaceHelper:
 
@@ -34,7 +35,7 @@ class WorkspaceHelper:
         client.set_method('POST')
         id_project = response['id']
         client.set_endpoint('/my/workspaces')
-        body = {"name": "Project Test2", "project_ids": [id_project]}
+        body = {"name": "Workspace Test" + str(random.randint(1, 1001)), "project_ids": [id_project]}
         client.set_body(json.dumps(body))
         response = client.execute_request()
         return response.json()
