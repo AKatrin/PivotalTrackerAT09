@@ -29,7 +29,7 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-
+    And Sent Data should be the same info of the respond
 
   @create_project @delete_project
   Scenario: Create a new Epic with name and long description.
