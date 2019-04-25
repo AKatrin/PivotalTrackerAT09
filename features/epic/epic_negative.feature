@@ -12,6 +12,21 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
+
+
+    @create_project @delete_project
+    Scenario: Create a new Epic with null name
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "name" : null
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_project @delete_project
@@ -25,6 +40,8 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
+
 
   @create_project @delete_project
   Scenario: Create a new Epic with long name
@@ -37,10 +54,24 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-
+    And I compare the invalid error message
 
 
   @create_epic @delete_project
+  Scenario: Create a new Epic with the numeric name
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "name": "      Project Epic      "
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I compare the invalid error message
+
+
+    @create_proyect @delete_project
   Scenario: Create a new Epic with the numeric name
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
@@ -51,6 +82,50 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
+
+
+# @create_epic @delete_project
+#  Scenario: Create a new Epic related to after Epic same epic
+#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+#    And I set up the data
+#    """
+#    {
+#      "after_id":{epic_id},
+#      "name":"PR"
+#    }
+#    """
+#    When I send the request
+#    And I get the Epic Id created
+#    Then I get a "400" status code as response
+#    And I verify the epic schema
+#
+#  @create_epic @delete_project
+#  Scenario: Create a new Epic related to before Epic
+#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+#    And I set up the data
+#    """
+#    {
+#      "before_id":{epic_id},
+#      "name":"PR"
+#    }
+#    """
+#    When I send the request
+#    And I get the Epic Id created
+#    Then I get a "400" status code as response
+#    And I verify the epic schema
+#  @create_project @delete_project
+#  Scenario: Create a new Epic with boolean name
+#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+#    And I set up the data
+#    """
+#    {
+#      "name" : "      hola"
+#    }
+#    """
+#    When I send the request
+#    Then I get a "400" status code as response
+#    And I compare the name message
 
   @create_project @delete_project
   Scenario: Create a new Epic with name and comments with boolean value
@@ -66,6 +141,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_project @delete_project
@@ -82,6 +158,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_project @delete_project
@@ -96,6 +173,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_project @delete_project
@@ -110,6 +188,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_project @delete_project
@@ -127,6 +206,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_epic @delete_project
@@ -144,7 +224,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare de label error message
+    And I compare the label error message
 
 
   @create_epic  @delete_project
@@ -158,7 +238,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare de missing name error message
+    And I compare the invalid error message
 
 
   @create_epic  @delete_project
@@ -172,6 +252,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_epic  @delete_project
@@ -185,6 +266,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
   @create_epic  @delete_project
@@ -198,16 +280,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
+    And I compare the invalid error message
 
 
-  @create_epic  @delete_project
-  Scenario: Update Epic long1 description
-    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
-    And I set up the data
-    """
-    {
-       "description":"{more_long}"
-    }
-    """
-    When I send the request
-    Then I get a "400" status code as response
+

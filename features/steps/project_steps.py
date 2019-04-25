@@ -68,7 +68,6 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
-    print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     elif "{long_name_epic}" in context.text:
@@ -137,13 +136,15 @@ def step_imp(context):
     expect("Test Epic").to_equal(context.response.json()["name"])
 
 
-@step(u'I compare de {request_response} message')
+@step(u'I compare the {request_response} message')
 def step_imp(context, request_response):
     logger.info("verify the error message")
     if request_response == 'label error':
         expect("The label 'project epic' is already used by another epic.").to_equal(context.response.json()["general_problem"])
-    elif request_response == 'missing name error':
-        expect("The label 'project epic' is already used by another epic.").to_equal(context.response.json()["general_problem"])
+    elif request_response == 'invalid error':
+         expect("One or more request parameters was missing or invalid.").to_equal(context.response.json()["error"])
+    elif request_response == 'name':
+         expect("      hola").to_equal(context.response.json()["label: name"])
 
 
 @step("I get the same json and compare with the modified json")

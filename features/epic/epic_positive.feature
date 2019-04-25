@@ -14,6 +14,8 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
+   # And Sent Data should be the same info of the respond
+   # And I get the same json and compare with the modified json
 
 
   @create_project @delete_project
@@ -45,6 +47,7 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
+    And Sent Data should be the same info of the respond
 
 
   @create_project @delete_project
@@ -61,6 +64,7 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
+    And Sent Data should be the same info of the respond
 
 
   @create_project @delete_project
@@ -77,6 +81,7 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
+   # And Sent Data should be the same info of the respond
 
 
   @create_project @delete_project
@@ -96,6 +101,7 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
+    #And Sent Data should be the same info of the respond
 
 
   @create_project @delete_project
@@ -114,6 +120,7 @@ Feature: Epics
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
+    #And Sent Data should be the same info of the respond
 
 
   @create_epic  @delete_project
@@ -128,6 +135,7 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
+    And Sent Data should be the same info of the respond
 
 
   @create_epic  @delete_project
@@ -142,6 +150,7 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
+    And Sent Data should be the same info of the respond
 
 
   @create_epic  @delete_project
@@ -156,6 +165,7 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
+    And Sent Data should be the same info of the respond
 
 
   @create_epic  @delete_project
@@ -170,6 +180,7 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
+    And Sent Data should be the same info of the respond
 
 
   @create_epic  @delete_project
@@ -184,6 +195,7 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
+    #And Sent Data should be the same info of the respond
 
 
   @create_epic  @delete_project
@@ -202,5 +214,6 @@ Feature: Epics
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
+    #And Sent Data should be the same info of the respond
 
 
