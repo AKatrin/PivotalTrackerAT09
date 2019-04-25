@@ -134,5 +134,6 @@
       "title": "The Time_enterer Schema",
       "default": false
     }
-  }
+  },
+  "additionalProperties": false
 }
