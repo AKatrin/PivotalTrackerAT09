@@ -1,14 +1,15 @@
 from behave import *
 from compare import *
-from core.utils.json_helper import JsonHelper
-from core.utils.repository import Repository
-from core.utils.util import *
-from core.utils.project_helper import *
-from core.utils.schema_helper import *
 
-import jsonschema
+from core.utils.json_helper import JsonHelper
+from core.utils.project_helper import *
+from core.utils.repository import Repository
+from core.utils.schema_helper import *
+from core.utils.util import *
+
 
 logger = SingletonLogger().get_logger()
+
 
 @step(u'I set up a "{method}" request to "{endpoint}" endpoint')
 def step_impl(context, method, endpoint):
@@ -69,6 +70,12 @@ def step_impl(context):
     elif "{update_project_ids}" in context.text:
         print("contest in update:", context.projects[0].get("id"))
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
+<<<<<<< HEAD
+=======
+    elif "{min_velocity_averaged_over}" in context.text:
+        context.text = context.text.replace("{min_velocity_averaged_over}",
+                                            str(context.project['velocity_averaged_over']))
+>>>>>>> 97a3490629f7a50c15a6901820f579e8860809db
     context.body = json.loads(context.text)
     context.client.set_body(json.dumps(context.body))
 
@@ -76,7 +83,7 @@ def step_impl(context):
 @step("I verify all {schema} schema")
 def step_impl(context, schema):
     logger.info("Verify all schema of " + schema + " list")
-    errors = Schema_Helper.compare_all_schema(context.response.json(),schema)
+    errors = Schema_Helper.compare_all_schema(context.response.json(), schema)
     expect([]).to_equal(errors)
 
 
@@ -113,14 +120,6 @@ def step_impl(context):
     expect(context.length_project - 1).to_equal(actual)
 
 
-@step(u'I validated the epic schema')
-def step_impl(context):
-    logger.info("Validate the epic schema")
-    with open(Repository.get_instance().EPIC_SCHEMA, "r") as read_file:
-        data = json.load(read_file)
-    jsonschema.validate(context.response.json(), data)
-
-
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
     json_actual = JsonHelper.get_json("project", context.ids)
@@ -132,3 +131,9 @@ def step_impl(context):
 def step_impl(context):
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
     expect({}).to_equal(result)
+
+
+@step('The {name_id} should be the same id of data')
+def step_impl(context, name_id):
+    logger.info("Id sent should be the same response's id")
+    expect(context.ids[name_id]).to_equal(context.response.json()["id"])

@@ -21,3 +21,4 @@ class Stories_helper:
             """
         )
         return client.execute_request().json()['id']
+
