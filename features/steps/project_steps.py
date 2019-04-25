@@ -19,7 +19,6 @@ def step_impl(context, method, endpoint):
     endpoint = Utils.check_endpoint(endpoint, context.ids)
     client.set_endpoint(endpoint)
     context.client = client
-    print(client.get_headers())
 
 
 @step('I configure the "{field}" with the values "{values}"')
@@ -55,6 +54,7 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
+    print(context.response.url)
 
 
 @step(u'I set up the data')
