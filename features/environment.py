@@ -78,7 +78,6 @@ def before_feature(context, feature):
     if 'workspace' in feature.tags:
         logger.info("Create two projects for workspace")
         context.projects = Project_Helper.create_projects(2)
-        # project_json['id'] = context.projects[-1]
 
 
 def after_feature(context, feature):
