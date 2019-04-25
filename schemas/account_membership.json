@@ -1,0 +1,138 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "kind",
+    "id",
+    "person",
+    "account_id",
+    "created_at",
+    "updated_at",
+    "owner",
+    "admin",
+    "project_creator",
+    "timekeeper",
+    "time_enterer"
+  ],
+  "properties": {
+    "kind": {
+      "$id": "#/properties/kind",
+      "type": "string",
+      "title": "The Kind Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    },
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The Id Schema"
+    },
+    "person": {
+      "$id": "#/properties/person",
+      "type": "object",
+      "title": "The Person Schema",
+      "required": [
+        "kind",
+        "id",
+        "name",
+        "email",
+        "initials",
+        "username"
+      ],
+      "properties": {
+        "kind": {
+          "$id": "#/properties/person/properties/kind",
+          "type": "string",
+          "title": "The Kind Schema",
+          "default": "",
+          "pattern": "^(.*)$"
+        },
+        "id": {
+          "$id": "#/properties/person/properties/id",
+          "type": "integer",
+          "title": "The Id Schema"
+        },
+        "name": {
+          "$id": "#/properties/person/properties/name",
+          "type": "string",
+          "title": "The Name Schema",
+          "default": "",
+          "pattern": "^(.*)$"
+        },
+        "email": {
+          "$id": "#/properties/person/properties/email",
+          "type": "string",
+          "title": "The Email Schema",
+          "default": "",
+          "pattern": "^(.*)$"
+        },
+        "initials": {
+          "$id": "#/properties/person/properties/initials",
+          "type": "string",
+          "title": "The Initials Schema",
+          "default": "",
+          "pattern": "^(.*)$"
+        },
+        "username": {
+          "$id": "#/properties/person/properties/username",
+          "type": "string",
+          "title": "The Username Schema",
+          "default": "",
+          "pattern": "^(.*)$"
+        }
+      }
+    },
+    "account_id": {
+      "$id": "#/properties/account_id",
+      "type": "integer",
+      "title": "The Account_id Schema"
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "The Created_at Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "The Updated_at Schema",
+      "default": "",
+      "pattern": "^(.*)$"
+    },
+    "owner": {
+      "$id": "#/properties/owner",
+      "type": "boolean",
+      "title": "The Owner Schema",
+      "default": false
+    },
+    "admin": {
+      "$id": "#/properties/admin",
+      "type": "boolean",
+      "title": "The Admin Schema",
+      "default": false
+    },
+    "project_creator": {
+      "$id": "#/properties/project_creator",
+      "type": "boolean",
+      "title": "The Project_creator Schema",
+      "default": false
+    },
+    "timekeeper": {
+      "$id": "#/properties/timekeeper",
+      "type": "boolean",
+      "title": "The Timekeeper Schema",
+      "default": false
+    },
+    "time_enterer": {
+      "$id": "#/properties/time_enterer",
+      "type": "boolean",
+      "title": "The Time_enterer Schema",
+      "default": false
+    }
+  }
+}
