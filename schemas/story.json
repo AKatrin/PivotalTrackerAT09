@@ -29,6 +29,16 @@
       ],
       "pattern": "^(.*)$"
     },
+    "accepted_at": {
+      "$id": "#/properties/accepted_at",
+      "type": "string",
+      "title": "The Accepted_at Schema",
+      "default": "",
+      "examples": [
+        "2019-04-16T12:00:05Z"
+      ],
+      "pattern": "^(.*)$"
+    },
     "current_state": {
       "$id": "#/properties/current_state",
       "type": "string",

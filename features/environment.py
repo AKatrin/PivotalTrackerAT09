@@ -41,17 +41,31 @@ def before_scenario(context, scenario):
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
         print(context.ids)
 
+    elif "create_stories_in_project" in scenario.tags:
+        context.project = Project_Helper.create_project()
+        context.ids["{proj_id}"] = context.project["id"]
+        context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
+
     elif "create_stories_project" in scenario.tags:
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
         context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
-
-    elif "delete_stories_by_id" in scenario.tags:
-        context.project = Project_Helper.create_project()
-        context.ids["{proj_id}"] = context.project["id"]
-        context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
-        context.del_stories = Story_Helper.delete_story(context.ids["{proj_id}"], context.ids["{stories_id}"])
-
+        #context.id_stories = Stories_helper.create_stories(context.project["id"])
+        #context.stories = Story_Helper.put_stories(context.ids["{proj_id}"], context.id_stories)
+        #arreglar
+        #context.ids["{id_old_stories}"] = context.stories
+        #print("storiessssssssccccccccccccc : ",context.stories)
+        context.ids["{account_id}"] = Story_Helper.account_me()["id"]
+        context.ids["{story_before_id}"] = Stories_helper.create_stories(context.project["id"])
+    #
+    # elif "create_stories_project_ids" in scenario.tags:
+    #     context.project = Project_Helper.create_project()
+    #     context.ids["{proj_id}"] = context.project["id"]
+    #     context.ids["{story_after_id}"] = Stories_helper.create_stories(context.project["id"])
+    #     print("cuentaaaaaaaaaaaaa: ", context.ids["{proj_id}"])
+    #     print("stories que almacena after_  id: ::::::::::::", context.ids["{story_after_id}"])
+    #     context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
+    #     print("stories que debe modificar: :::::::::::: ", context.ids["{stories_id}"])
 
 
 def after_scenario(context, scenario):

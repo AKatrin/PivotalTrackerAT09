@@ -50,4 +50,4 @@ Feature: Functional Test Positive Cases of Create, Read, Update and Delete Proje
     And I get the same json and compare with the modified json
     Examples:
     |day|
-    |   |
+

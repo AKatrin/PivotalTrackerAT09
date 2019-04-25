@@ -2,6 +2,7 @@ from behave import *
 from compare import *
 from core.utils.json_helper import JsonHelper
 from core.utils.repository import Repository
+from core.utils.story_helper import Story_Helper
 from core.utils.util import *
 from core.utils.project_helper import *
 from core.utils.schema_helper import *
@@ -68,9 +69,24 @@ def step_impl(context):
     elif "{update_project_ids}" in context.text:
         print("contest in update:", context.projects[0].get("id"))
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
-    body = json.loads(context.text)
-    context.client.set_body(json.dumps(body))
 
+    #mioooooo
+    elif "{story_before_id}" in context.text:
+        context.text = context.text.replace("{story_before_id}", str(context.ids["{story_before_id}"]))
+
+    elif "{story_after_id}" in context.text:
+        context.text = context.text.replace("{story_after_id}", str(context.ids["{story_after_id}"]))
+
+    elif "{id_old_stories}" in context.text:
+        print("entre a old stories")
+        context.text = context.text.replace("{id_old_stories}", str(context.ids["{id_old_stories}"]))
+
+    elif "{account_id}" in context.text:
+        context.text = context.text.replace("{account_id}", str(context.ids["{account_id}"]))
+    print(context.text)
+    context.body = json.loads(context.text)
+
+    context.client.set_body(json.dumps(context.body))
 
 
 @step("I verify all {schema} schema")
@@ -113,6 +129,16 @@ def step_impl(context):
     expect(context.length_project - 1).to_equal(actual)
 
 
+@given("I count all the stories of a project which exist in a account")
+def step_impl(context):
+    context.length_stories_project = len(Story_Helper.get_all_stories(context.ids["{proj_id}"]))
+
+@step("The length of the stories of a project is reduced by one")
+def step_impl(context):
+    actual = len(Story_Helper.get_all_stories(context.ids["{proj_id}"]))
+    expect(context.length_stories_project - 1).to_equal(actual)
+
+
 @step(u'I validated the epic schema')
 def step_impl(context):
     logger.info("Validate the epic schema")
@@ -128,7 +154,29 @@ def step_impl(context):
     expect({}).to_equal(compare)
 
 
+@step("I get the same json and compare with the modified json story")
+def step_impl(context):
+    json_actual = JsonHelper.get_json("story", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
+
 @step("Sent Data should be the same info of the respond")
 def step_impl(context):
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
     expect({}).to_equal(result)
+
+
+@step("Sent Data should be the same info of the respond story")
+def step_impl(context):
+    logger.info("realizando la comparacion para story")
+    result = JsonHelper.compare(context.body,context.response.json())
+    expect("").to_equal(result)
+
+
+@step("Sent Data should be the same info of the respond story body")
+def step_impl(context):
+    logger.info("realizando la una nueva compararcion para story")
+    print("realizando la una nueva compararcion para story")
+    result = JsonHelper.compareProject(context.body,context.response.json())
+    print("entre aqui 2222222222222222222222222", result)
+    expect("").to_equal(result)

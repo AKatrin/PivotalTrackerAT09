@@ -28,3 +28,66 @@ class JsonHelper:
         if type_of_json == "project":
             obtain_json = Project_Helper.get_project(str(ids["{proj_id}"]))
         return obtain_json
+
+    @staticmethod
+    def compare(body, json_result):
+        answer = ""
+        body = body["labels"]
+        result = json_result["labels"]
+        if len(body) == len(result):
+            for item in body:
+                if str(type(item)).find("dict") > 0:
+                    for element in item:
+                        flag = False
+                        for jsons in result:
+                            if jsons[element] == item[element]:
+                                flag = True
+                                break
+                        if flag is False:
+                            answer = answer + "The value is not the same in " + element + ": " + item[element]
+                elif str(type(item)).find("str") > 0:
+
+                    flag = False
+                    for jsons in result:
+                        if jsons["name"] == item:
+                            flag = True
+                            break
+                    if flag is False:
+                        answer = answer + "The value is not the same in name: " + item
+        else:
+            answer = "The size of Labels of result are not the same as the body"
+        return answer
+
+
+    @staticmethod
+    def compareProject(body, json_result):
+        answer = ""
+        print("body 111111111111 ",body)
+        body = body["labels"]
+        print("body 222222222222 ", body)
+        print("jsonnnnnnnnnnn 111111111: ",json_result)
+        result = json_result["labels"]
+        print("jsonnnnnnnnnnn 22222222222: ",result)
+        if len(body) == len(result):
+            for item in body:
+                if str(type(item)).find("dict") > 0:
+                    for element in item:
+                        flag = False
+                        for jsons in result:
+                            if jsons[element] == item[element]:
+                                flag = True
+                                break
+                        if flag is False:
+                            answer = answer + "The value is not the same in " + element + ": " + item[element]
+                elif str(type(item)).find("str") > 0:
+
+                    flag = False
+                    for jsons in result:
+                        if jsons["name"] == item:
+                            flag = True
+                            break
+                    if flag is False:
+                        answer = answer + "The value is not the same in name: " + item
+        else:
+            answer = "The size of Labels of result are not the same as the body"
+        return answer
