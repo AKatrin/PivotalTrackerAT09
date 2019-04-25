@@ -18,7 +18,7 @@ def before_scenario(context, scenario):
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
     elif 'create_epic' in scenario.tags:
-        logger.info("Create a project and get the id of the project")
+        logger.info("Create a epic and get the id of the project")
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
         context.ids["{epic_id}"] = EpicHelper.create_epic(context.ids["{proj_id}"])["id"]
@@ -56,7 +56,7 @@ def after_scenario(context, scenario):
         logger.info("Delete the project that was created")
         try:
             Project_Helper.delete_project(context.project)
-        except:
+        except AttributeError:
             Project_Helper.delete_project(context.response.json())
     if "delete_workspace" in scenario.tags:
         logger.info("Delete a Workspace")
@@ -67,11 +67,7 @@ def after_scenario(context, scenario):
 
 def before_feature(context, feature):
     context.ids = {}
-    if 'epic' in feature.tags:
-        logger.info("Create a project and get the id of the project")
-        context.project = Project_Helper.create_project()
-        context.ids = [context.project['id']]
-    elif 'stories' in feature.tags:
+    if 'project' in feature.tags or "stories" in feature.tags or 'epic' in feature.tags:
         logger.info("Create a project and get the id of the project")
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project['id']
@@ -84,6 +80,6 @@ def after_feature(context, feature):
     if 'stories' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.project)
-    if 'workspace' in feature.tags:
+    elif 'workspace' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_projects(context.projects)

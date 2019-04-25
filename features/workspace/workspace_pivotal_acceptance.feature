@@ -8,4 +8,15 @@
       Then    I get a "200" status code as response
       And     I verify all workspace schema
 
-
+    @create_project  @delete_project @delete_workspace
+    Scenario: Create a new workspace
+      Given   I set up a "POST" request to "/my/workspaces" endpoint
+      And     I set up the data:
+      """
+        {
+          "name":"I am a new Workspace",
+          "project_ids":[{new_project_ids}]
+        }
+      """
+      When    I send the request
+      Then    I get a "200" status code as response
