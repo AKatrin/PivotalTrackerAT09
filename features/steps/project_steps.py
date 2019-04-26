@@ -141,3 +141,12 @@ def step_impl(context, message):
         expect(message).to_be_truthy()
     else:
         expect(message).to_be_falsy()
+
+
+@step("I Should see the problem: {message}")
+def step_impl(context, message):
+    logger.info("Validate the error message")
+    if message in context.response.json()["general_problem"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()

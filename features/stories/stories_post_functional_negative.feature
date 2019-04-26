@@ -1,7 +1,7 @@
-@functional_negative @stories
-Feature: #
+@functional_post_negative @stories
+Feature: Functional test Negative cases of stories for create
 
-  Scenario: Post Stories by id of project with only name
+  Scenario: Create a new stories by id of project with kind and name
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -14,8 +14,7 @@ Feature: #
     Then I get a "200" status code as response
     And I verify the stories schema
 
-
-  Scenario: Post Stories by id of project with only name
+  Scenario: Create a new stories by id of project with name is empty
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -25,8 +24,10 @@ Feature: #
       """
     When I send the request
     Then I get a "400" status code as response
+    And I should see a messages error: One or more request parameters was missing or invalid.
+    And I Should see the problem: Name can't be blank
 
-  Scenario: Post Stories by id of project with only name
+  Scenario: Create a new stories by id of project with name is null
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -36,8 +37,10 @@ Feature: #
       """
     When I send the request
     Then I get a "400" status code as response
+    And I should see a messages error: One or more request parameters was missing or invalid.
+    And I Should see the problem: Name can't be blank
 
-  Scenario Outline: Post Stories by id of project with name, story_type and current_state
+  Scenario Outline: Create a new stories by id of project with name, story_type and current_state
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -49,7 +52,7 @@ Feature: #
       """
     When I send the request
     Then I get a "400" status code as response
-#    And I verify the stories schema
+    And I should see a messages error: One or more request parameters was missing or invalid.
       Examples:
         | value_story_type | value_current_state |
         |bug|planned|
@@ -69,36 +72,19 @@ Feature: #
         |release|rejected|
         |release|planned|
 
-  Scenario Outline: Post Stories by id of project with only name
-    Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
-    And I set up the data:
-      """
-        {
-          "name": "<value_name>"
-
-        }
-      """
-    When I send the request
-    Then I get a "200" status code as response
-    And I verify the stories schema
-    And Sent Data should be the same info of the respond
-    Examples:
-      | value_name |
-      |    x       |
-
-  Scenario Outline: Post Stories by id of project with name, created_at
+  Scenario Outline: Create a new stories by id of project with name, created_at
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
         {
           "name": "test007",
-          "created_at": "<value_create_at>",
+          "created_at": "<value_create_at>"
         }
       """
     When I send the request
     Then I get a "400" status code as response
-
+    And I should see a messages error: One or more request parameters was missing or invalid.
+    And I Should see the problem: <message_problem>
     Examples:
-      | value_create_at |
-      |2018-04-17T18:56:15Z|
-      |2019-04-25T00:00:00Z|
+      | value_create_at | message_problem |
+      |2000-01-01T00:00:00Z|The date you entered 2000-01-01T00:00:00Z, is too far in the past. Please enter a date after 2005-01-01T00:00:00Z.|
