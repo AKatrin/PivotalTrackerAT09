@@ -108,13 +108,18 @@ def step_imp(context):
 @given("I count all the projects which exist in a account")
 def step_impl(context):
     logger.info("The length of projects in the account is captured")
-    context.length_project = len(Project_Helper.get_all_projects())
+    projects = Project_Helper.get_all_projects()
+    context.length_project = len(projects)
+    print(projects)
+    print("LENGHT:", context.length_project)
 
 
 @step("The length of projects is reduced by one")
 def step_impl(context):
     logger.info("Check if projects was reduced by one")
-    actual = len(Project_Helper.get_all_projects())
+    project = Project_Helper.get_all_projects()
+    actual = len(project)
+    print(project)
     expect(context.length_project - 1).to_equal(actual)
 
 
@@ -137,7 +142,6 @@ def step_impl(context):
 def step_impl(context, name_id):
     logger.info("Id sent should be the same response's id")
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
-
 
 
 @step("I verify the data of project json is not changed")
