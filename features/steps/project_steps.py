@@ -166,3 +166,12 @@ def step_impl(context):
             flag = True
             break
     expect(False).to_equal(flag)
+
+
+@step("I should see a messages error: {message}")
+def step_impl(context, message):
+    logger.info("Validate the error message")
+    if message in context.response.json()["error"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()
