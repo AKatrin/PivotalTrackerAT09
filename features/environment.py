@@ -36,7 +36,8 @@ def before_scenario(context, scenario):
         logger.info("Create a project and get the id of the project")
         context.workspace = WorkspaceHelper.create_workspace(context.project)
         context.ids["{workspace_id}"] = context.workspace["id"]
-    elif "create_stories" in scenario.tags:
+
+    if "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
 
@@ -59,10 +60,11 @@ def after_scenario(context, scenario):
             Project_Helper.delete_project(context.project)
         except AttributeError:
             Project_Helper.delete_project(context.response.json())
-    elif "delete_workspace" in scenario.tags:
-        logger.info("Delete the project that was created for create a Workspace")
-        Project_Helper.delete_project(context.project)
-        WorkspaceHelper.delete_workspace(context.response.json())
+    if "delete_workspace" in scenario.tags:
+        logger.info("Delete a Workspace")
+        workspace = context.response.json()
+        id_workspace = context.ids.get("{workspace_id}") if type(workspace) is list else workspace["id"]
+        WorkspaceHelper.delete_workspace(id_workspace)
 
 
 def before_feature(context, feature):
@@ -71,9 +73,9 @@ def before_feature(context, feature):
         logger.info("Create a project and get the id of the project")
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project['id']
-    elif 'workspace' in feature.tags:
-        logger.info("Create a project and get the id of the project")
-        context.projects = Project_Helper.create_projects(5)
+    if 'workspace' in feature.tags:
+        logger.info("Create two projects for workspace")
+        context.projects = Project_Helper.create_projects(2)
 
 
 def after_feature(context, feature):
