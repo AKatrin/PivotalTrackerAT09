@@ -1,8 +1,8 @@
 @acceptance @workspace
-  Feature: Create "Acceptance" test CRUD's(Create, Read, Update and Delete) for Workspace
+  Feature: Acceptance test of "workspace", CRUD's(Create, Read, Update and Delete)
 
     @create_project @create_workspace @delete_project @delete_workspace
-    Scenario: Get all the workspaces
+    Scenario: Read all the workspaces
       Given   I set up a "GET" request to "/my/workspaces" endpoint
       When    I send the request
       Then    I get a "200" status code as response
