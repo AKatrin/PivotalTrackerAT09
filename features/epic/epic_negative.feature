@@ -12,7 +12,8 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    #And I compare the invalid error message
+    And I should see a message error: 'name' must be an extended_string
 
 
     @create_project @delete_project
@@ -58,7 +59,7 @@ Feature: Epics
 
 
   @create_epic @delete_project
-  Scenario: Create a new Epic with the numeric name
+  Scenario: Create a new Epic with name with spaces
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
@@ -68,10 +69,11 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a messages error: "The label 'project epic' is already used by another epic."
+    #And I compare the invalid error message
 
 
-    @create_proyect @delete_project
+    @create_project @delete_project
   Scenario: Create a new Epic with the numeric name
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data

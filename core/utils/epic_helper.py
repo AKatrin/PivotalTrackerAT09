@@ -20,7 +20,6 @@ class EpicHelper:
         response = client.execute_request()
         return response.json()
 
-
     @staticmethod
     def delete_epic(response):
         '''
