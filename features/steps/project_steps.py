@@ -6,7 +6,7 @@ from core.utils.project_helper import *
 from core.utils.repository import Repository
 from core.utils.schema_helper import *
 from core.utils.util import *
-
+from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
 
@@ -139,3 +139,15 @@ def step_impl(context, message):
         expect(message).to_be_truthy()
     else:
         expect(message).to_be_falsy()
+
+
+@step("The {workspace_id} be will found {answer}")
+def step_impl(context, workspace_id, answer):
+    """
+    :type context: behave.runner.Context
+    """
+
+    logger.info("Sent Data should contain the same info")
+    if workspace_id.find("id") > -1:
+        id = context.ids["{" + workspace_id + "}"]
+        expect(WorkspaceHelper.exist_workspaces(id)).to_equal(answer)
