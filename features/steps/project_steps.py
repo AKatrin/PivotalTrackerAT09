@@ -67,7 +67,6 @@ def step_impl(context):
     elif "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
     elif "{update_project_ids}" in context.text:
-        print("contest in update:", context.projects[0].get("id"))
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
     elif "{min_velocity_averaged_over}" in context.text:
         context.text = context.text.replace("{min_velocity_averaged_over}",
@@ -133,3 +132,12 @@ def step_impl(context):
 def step_impl(context, name_id):
     logger.info("Id sent should be the same response's id")
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
+
+
+@step("I should see a messages error: {message}")
+def step_impl(context, message):
+    logger.info("Validate the error message")
+    if message in context.response.json()["error"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()
