@@ -1,6 +1,6 @@
 @acceptance
-Feature: Acceptance test of Create, Read, Update and Delete Projects
-
+Feature: Acceptance test of "workspace", CRUD's(Create, Read, Update and Delete)
+  
   Scenario: Access a user's projects
     Given I set up a "GET" request to "/projects" endpoint
     When I send the request
