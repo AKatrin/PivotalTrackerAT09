@@ -1,0 +1,440 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "kind",
+    "guid",
+    "project_version",
+    "message",
+    "highlight",
+    "changes",
+    "primary_resources",
+    "secondary_resources",
+    "project",
+    "performed_by",
+    "occurred_at"
+  ],
+  "properties": {
+    "kind": {
+      "$id": "#/properties/kind",
+      "type": "string",
+      "title": "The Kind Schema",
+      "default": "",
+      "examples": [
+        "story_create_activity"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "guid": {
+      "$id": "#/properties/guid",
+      "type": "string",
+      "title": "The Guid Schema",
+      "default": "",
+      "examples": [
+        "2334730_2"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "project_version": {
+      "$id": "#/properties/project_version",
+      "type": "integer",
+      "title": "The Project_version Schema",
+      "default": 0,
+      "examples": [
+        2
+      ]
+    },
+    "message": {
+      "$id": "#/properties/message",
+      "type": "string",
+      "title": "The Message Schema",
+      "default": "",
+      "examples": [
+        "yfert_0209 added this feature"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "highlight": {
+      "$id": "#/properties/highlight",
+      "type": "string",
+      "title": "The Highlight Schema",
+      "default": "",
+      "examples": [
+        "added"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "changes": {
+      "$id": "#/properties/changes",
+      "type": "array",
+      "title": "The Changes Schema",
+      "items": {
+        "$id": "#/properties/changes/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "kind",
+          "change_type",
+          "id",
+          "new_values",
+          "name",
+          "story_type"
+        ],
+        "properties": {
+          "kind": {
+            "$id": "#/properties/changes/items/properties/kind",
+            "type": "string",
+            "title": "The Kind Schema",
+            "default": "",
+            "examples": [
+              "story"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "change_type": {
+            "$id": "#/properties/changes/items/properties/change_type",
+            "type": "string",
+            "title": "The Change_type Schema",
+            "default": "",
+            "examples": [
+              "create"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "id": {
+            "$id": "#/properties/changes/items/properties/id",
+            "type": "integer",
+            "title": "The Id Schema",
+            "default": 0,
+            "examples": [
+              165634446
+            ]
+          },
+          "new_values": {
+            "$id": "#/properties/changes/items/properties/new_values",
+            "type": "object",
+            "title": "The New_values Schema",
+            "required": [
+              "id",
+              "project_id",
+              "name",
+              "story_type",
+              "current_state",
+              "requested_by_id",
+              "owner_ids",
+              "label_ids",
+              "follower_ids",
+              "created_at",
+              "updated_at",
+              "blocked_story_ids",
+              "labels"
+            ],
+            "properties": {
+              "id": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/id",
+                "type": "integer",
+                "title": "The Id Schema",
+                "default": 0,
+                "examples": [
+                  165634446
+                ]
+              },
+              "project_id": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/project_id",
+                "type": "integer",
+                "title": "The Project_id Schema",
+                "default": 0,
+                "examples": [
+                  2334730
+                ]
+              },
+              "name": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/name",
+                "type": "string",
+                "title": "The Name Schema",
+                "default": "",
+                "examples": [
+                  "Test_001"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "story_type": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/story_type",
+                "type": "string",
+                "title": "The Story_type Schema",
+                "default": "",
+                "examples": [
+                  "feature"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "current_state": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/current_state",
+                "type": "string",
+                "title": "The Current_state Schema",
+                "default": "",
+                "examples": [
+                  "unscheduled"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "requested_by_id": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/requested_by_id",
+                "type": "integer",
+                "title": "The Requested_by_id Schema",
+                "default": 0,
+                "examples": [
+                  3167446
+                ]
+              },
+              "owner_ids": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/owner_ids",
+                "type": "array",
+                "title": "The Owner_ids Schema"
+              },
+              "label_ids": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/label_ids",
+                "type": "array",
+                "title": "The Label_ids Schema"
+              },
+              "follower_ids": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/follower_ids",
+                "type": "array",
+                "title": "The Follower_ids Schema"
+              },
+              "created_at": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/created_at",
+                "type": "string",
+                "title": "The Created_at Schema",
+                "default": "",
+                "examples": [
+                  "2019-04-26T10:52:45Z"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "updated_at": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/updated_at",
+                "type": "string",
+                "title": "The Updated_at Schema",
+                "default": "",
+                "examples": [
+                  "2019-04-26T10:52:45Z"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "blocked_story_ids": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/blocked_story_ids",
+                "type": "array",
+                "title": "The Blocked_story_ids Schema"
+              },
+              "labels": {
+                "$id": "#/properties/changes/items/properties/new_values/properties/labels",
+                "type": "array",
+                "title": "The Labels Schema"
+              }
+            }
+          },
+          "name": {
+            "$id": "#/properties/changes/items/properties/name",
+            "type": "string",
+            "title": "The Name Schema",
+            "default": "",
+            "examples": [
+              "Test_001"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "story_type": {
+            "$id": "#/properties/changes/items/properties/story_type",
+            "type": "string",
+            "title": "The Story_type Schema",
+            "default": "",
+            "examples": [
+              "feature"
+            ],
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    },
+    "primary_resources": {
+      "$id": "#/properties/primary_resources",
+      "type": "array",
+      "title": "The Primary_resources Schema",
+      "items": {
+        "$id": "#/properties/primary_resources/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "kind",
+          "id",
+          "name",
+          "story_type",
+          "url"
+        ],
+        "properties": {
+          "kind": {
+            "$id": "#/properties/primary_resources/items/properties/kind",
+            "type": "string",
+            "title": "The Kind Schema",
+            "default": "",
+            "examples": [
+              "story"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "id": {
+            "$id": "#/properties/primary_resources/items/properties/id",
+            "type": "integer",
+            "title": "The Id Schema",
+            "default": 0,
+            "examples": [
+              165634446
+            ]
+          },
+          "name": {
+            "$id": "#/properties/primary_resources/items/properties/name",
+            "type": "string",
+            "title": "The Name Schema",
+            "default": "",
+            "examples": [
+              "Test_001"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "story_type": {
+            "$id": "#/properties/primary_resources/items/properties/story_type",
+            "type": "string",
+            "title": "The Story_type Schema",
+            "default": "",
+            "examples": [
+              "feature"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "url": {
+            "$id": "#/properties/primary_resources/items/properties/url",
+            "type": "string",
+            "title": "The Url Schema",
+            "default": "",
+            "examples": [
+              "https://www.pivotaltracker.com/story/show/165634446"
+            ],
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    },
+    "secondary_resources": {
+      "$id": "#/properties/secondary_resources",
+      "type": "array",
+      "title": "The Secondary_resources Schema"
+    },
+    "project": {
+      "$id": "#/properties/project",
+      "type": "object",
+      "title": "The Project Schema",
+      "required": [
+        "kind",
+        "id",
+        "name"
+      ],
+      "properties": {
+        "kind": {
+          "$id": "#/properties/project/properties/kind",
+          "type": "string",
+          "title": "The Kind Schema",
+          "default": "",
+          "examples": [
+            "project"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "id": {
+          "$id": "#/properties/project/properties/id",
+          "type": "integer",
+          "title": "The Id Schema",
+          "default": 0,
+          "examples": [
+            2334730
+          ]
+        },
+        "name": {
+          "$id": "#/properties/project/properties/name",
+          "type": "string",
+          "title": "The Name Schema",
+          "default": "",
+          "examples": [
+            "Project Test201"
+          ],
+          "pattern": "^(.*)$"
+        }
+      }
+    },
+    "performed_by": {
+      "$id": "#/properties/performed_by",
+      "type": "object",
+      "title": "The Performed_by Schema",
+      "required": [
+        "kind",
+        "id",
+        "name",
+        "initials"
+      ],
+      "properties": {
+        "kind": {
+          "$id": "#/properties/performed_by/properties/kind",
+          "type": "string",
+          "title": "The Kind Schema",
+          "default": "",
+          "examples": [
+            "person"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "id": {
+          "$id": "#/properties/performed_by/properties/id",
+          "type": "integer",
+          "title": "The Id Schema",
+          "default": 0,
+          "examples": [
+            3167446
+          ]
+        },
+        "name": {
+          "$id": "#/properties/performed_by/properties/name",
+          "type": "string",
+          "title": "The Name Schema",
+          "default": "",
+          "examples": [
+            "yfert_0209"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "initials": {
+          "$id": "#/properties/performed_by/properties/initials",
+          "type": "string",
+          "title": "The Initials Schema",
+          "default": "",
+          "examples": [
+            "YF"
+          ],
+          "pattern": "^(.*)$"
+        }
+      }
+    },
+    "occurred_at": {
+      "$id": "#/properties/occurred_at",
+      "type": "string",
+      "title": "The Occurred_at Schema",
+      "default": "",
+      "examples": [
+        "2019-04-26T10:52:45Z"
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}

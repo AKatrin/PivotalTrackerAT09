@@ -7,7 +7,6 @@ from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
 
-
 def before_scenario(context, scenario):
     print("***************NEW SCENARIO******************")
 
@@ -33,25 +32,22 @@ def before_scenario(context, scenario):
     elif "get_id_account_of_other_user" in scenario.tags:
         logger.info("Get the id the a account of other user account")
         context.ids["{id}"] = Account_helper.get_account_of_other_user()
-    if "create_workspace" in scenario.tags:
-        logger.info("Create a project and get the id of the project")
-        context.workspace = WorkspaceHelper.create_workspace(context.project)
-        context.ids["{workspace_id}"] = context.workspace["id"]
-
-    if "create_stories" in scenario.tags:
+    elif "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
-
     elif "create_stories_project" in scenario.tags:
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
         context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
-
     elif "delete_stories_by_id" in scenario.tags:
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
         context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
         context.del_stories = Story_Helper.delete_story(context.ids["{proj_id}"], context.ids["{stories_id}"])
+    if "create_workspace" in scenario.tags:
+        logger.info("Create a project and get the id of the project")
+        context.workspace = WorkspaceHelper.create_workspace(context.project)
+        context.ids["{workspace_id}"] = context.workspace["id"]
 
 
 def after_scenario(context, scenario):

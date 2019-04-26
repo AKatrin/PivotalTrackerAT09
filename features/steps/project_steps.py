@@ -6,7 +6,7 @@ from core.utils.project_helper import *
 from core.utils.repository import Repository
 from core.utils.schema_helper import *
 from core.utils.util import *
-
+from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
 
@@ -23,7 +23,10 @@ def step_impl(context, method, endpoint):
 
 @step('I configure the "{field}" with the values "{values}"')
 def step_impl(context, field, values):
-    context.client.set_parameters({field: values})
+    if "story_id" in values:
+        context.client.set_parameters({field: context.ids.get("{story_id}")})
+    else:
+        context.client.set_parameters({field: values})
 
 
 @then(u'I get a "{status_code}" status code as response')
@@ -54,8 +57,7 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
-    print(context.response.url)
-
+    print( "\n" + context.response.url + "\n")
 
 @step(u'I set up the data')
 def step_impl(context):
@@ -143,3 +145,14 @@ def step_impl(context, message):
         expect(message).to_be_truthy()
     else:
         expect(message).to_be_falsy()
+
+
+@step("The {workspace_id} be will found {answer}")
+def step_impl(context, workspace_id, answer):
+    """
+    :type context: behave.runner.Context
+    """
+    logger.info("Sent Data should contain the same info")
+    if workspace_id.find("id") > -1:
+        id = context.ids["{" + workspace_id + "}"]
+        expect(WorkspaceHelper.exist_workspaces(id)).to_equal(answer)
