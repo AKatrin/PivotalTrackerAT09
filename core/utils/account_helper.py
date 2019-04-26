@@ -76,3 +76,19 @@ class Account_helper:
         project_name = "Project " + ''.join(random.choices(string.digits, k=3))
         body = {"new_account_name": account_name, "name": project_name}
         return body
+
+    @staticmethod
+    def get_account_of_other_user():
+        """
+        Get the id of a account random of other user account.
+        :return: id account.
+        """
+        client = RequestManager()
+        client.set_headers({'X-TrackerToken': '6c8164fd6ceaefc042ba28e4c6887184',
+                            'Content-Type': 'application/json'})
+        client.set_method('GET')
+        client.set_endpoint('/accounts')
+        account_list_other_user = client.execute_request().json()
+        account = random.choice(account_list_other_user)
+        id_account = account['id']
+        return id_account
