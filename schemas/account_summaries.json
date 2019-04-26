@@ -43,6 +43,13 @@
       "title": "The Plan Schema",
       "default": "",
       "pattern": "^(.*)$"
+    },
+    "days_left": {
+      "$id": "#/properties/days_left",
+      "type": "integer",
+      "title": "The Days_left Schema",
+      "default": 0
     }
-  }
+  },
+  "additionalProperties": false
 }

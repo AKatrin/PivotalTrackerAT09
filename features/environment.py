@@ -29,7 +29,9 @@ def before_scenario(context, scenario):
         logger.info("Create a membership and get the id account")
         context.ids["{id}"] = Account_helper.create_account()
         Account_helper.create_account_membership(context.ids["{id}"])
-
+    elif "get_id_account_of_other_user" in scenario.tags:
+        logger.info("Get the id the a account of other user account")
+        context.ids["{id}"] = Account_helper.get_account_of_other_user()
     if "create_workspace" in scenario.tags:
         logger.info("Create a project and get the id of the project")
         context.workspace = WorkspaceHelper.create_workspace(context.project)
