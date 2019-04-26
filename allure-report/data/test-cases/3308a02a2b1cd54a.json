@@ -1,0 +1,135 @@
+{
+  "uid" : "3308a02a2b1cd54a",
+  "name" : "Create a membership for a account",
+  "historyId" : "23a20dfa5ecc89295288208ca3b92b86",
+  "time" : {
+    "start" : 1556287313233,
+    "stop" : 1556287315504,
+    "duration" : 2271
+  },
+  "status" : "failed",
+  "statusMessage" : "compare.UnmetExpectation: Expected 200 to equal 400\n",
+  "statusTrace" : "  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\behave\\model.py\", line 1329, in run\n    match.run(runner.context)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\behave\\matchers.py\", line 98, in run\n    self.func(context, *args, **kwargs)\n  File \"features\\steps\\project_steps.py\", line 42, in step_impl\n    expect(int(status_code)).to_equal(context.response.status_code)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\compare.py\", line 173, in to_equal\n    ensure(self.value == other, True, message)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\compare.py\", line 151, in ensure\n    raise UnmetExpectation(message)\n",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "compare.UnmetExpectation: Expected 200 to equal 400\n",
+    "statusTrace" : "  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\behave\\model.py\", line 1329, in run\n    match.run(runner.context)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\behave\\matchers.py\", line 98, in run\n    self.func(context, *args, **kwargs)\n  File \"features\\steps\\project_steps.py\", line 42, in step_impl\n    expect(int(status_code)).to_equal(context.response.status_code)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\compare.py\", line 173, in to_equal\n    ensure(self.value == other, True, message)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\compare.py\", line 151, in ensure\n    raise UnmetExpectation(message)\n",
+    "steps" : [ {
+      "name" : "Given I set up a \"POST\" request to \"/accounts/{id}/memberships\" endpoint",
+      "time" : {
+        "start" : 1556287314683,
+        "stop" : 1556287314972,
+        "duration" : 289
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "And I set up the data",
+      "time" : {
+        "start" : 1556287314973,
+        "stop" : 1556287314975,
+        "duration" : 2
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "3754dbfc93fe44e",
+        "name" : ".text",
+        "source" : "3754dbfc93fe44e.txt",
+        "type" : "text/plain",
+        "size" : 81
+      } ],
+      "parameters" : [ ],
+      "hasContent" : true,
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When I send the request",
+      "time" : {
+        "start" : 1556287314976,
+        "stop" : 1556287315502,
+        "duration" : 526
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then I get a \"200\" status code as response",
+      "time" : {
+        "start" : 1556287315502,
+        "stop" : 1556287315504,
+        "duration" : 2
+      },
+      "status" : "failed",
+      "statusMessage" : "compare.UnmetExpectation: Expected 200 to equal 400\n",
+      "statusTrace" : "  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\behave\\model.py\", line 1329, in run\n    match.run(runner.context)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\behave\\matchers.py\", line 98, in run\n    self.func(context, *args, **kwargs)\n  File \"features\\steps\\project_steps.py\", line 42, in step_impl\n    expect(int(status_code)).to_equal(context.response.status_code)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\compare.py\", line 173, in to_equal\n    ensure(self.value == other, True, message)\n  File \"c:\\users\\administrator\\appdata\\local\\programs\\python\\python37\\lib\\site-packages\\compare.py\", line 151, in ensure\n    raise UnmetExpectation(message)\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : true,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 4,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "create_account"
+  }, {
+    "name" : "tag",
+    "value" : "smoke"
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "feature",
+    "value" : "Create a account membership"
+  }, {
+    "name" : "framework",
+    "value" : "behave"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ "smoke", "create_account" ]
+  },
+  "source" : "3308a02a2b1cd54a.json",
+  "parameterValues" : [ ]
+}

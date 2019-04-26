@@ -1,5 +1,5 @@
 @negative
-Feature: Epics
+Feature: Negative test for Epic and Epics for Post and Put
 
   @create_project @delete_project
   Scenario: Create a new Epic with boolean name
@@ -12,7 +12,6 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    #And I compare the invalid error message
     And I should see a message error: 'name' must be an extended_string
 
 
@@ -27,7 +26,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: Please enter a name for the epic.
 
 
   @create_project @delete_project
@@ -41,11 +40,11 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: Please enter a name for the epic.
 
 
   @create_project @delete_project
-  Scenario: Create a new Epic with long name
+  Scenario: Create a new Epic with too long name
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
@@ -55,25 +54,24 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: This extended_string is too long
 
 
-  @create_epic @delete_project
-  Scenario: Create a new Epic with name with spaces
-    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-    And I set up the data
-    """
-    {
-      "name": "      Project Epic      "
-    }
-    """
-    When I send the request
-    Then I get a "400" status code as response
-    And I should see a messages error: "The label 'project epic' is already used by another epic."
-    #And I compare the invalid error message
+#  @create_epic @delete_project
+#  Scenario: Create a new Epic with name with spaces
+#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+#    And I set up the data
+#    """
+#    {
+#      "name": "      Project Epic      "
+#    }
+#    """
+#    When I send the request
+#    Then I get a "400" status code as response
+#    And I should see a messages error: "The label 'project epic' is already used by another epic."
 
 
-    @create_project @delete_project
+  @create_project @delete_project
   Scenario: Create a new Epic with the numeric name
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
@@ -84,8 +82,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
-
+    And I should see a message error: 'name' must be an extended_string
 
 # @create_epic @delete_project
 #  Scenario: Create a new Epic related to after Epic same epic
@@ -94,14 +91,15 @@ Feature: Epics
 #    """
 #    {
 #      "after_id":{epic_id},
-#      "name":"PR"
+#      "name":"Project Epic"
 #    }
 #    """
-#    When I send the request
+#
 #    And I get the Epic Id created
 #    Then I get a "400" status code as response
-#    And I verify the epic schema
-#
+
+
+
 #  @create_epic @delete_project
 #  Scenario: Create a new Epic related to before Epic
 #    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
@@ -116,6 +114,8 @@ Feature: Epics
 #    And I get the Epic Id created
 #    Then I get a "400" status code as response
 #    And I verify the epic schema
+
+
 #  @create_project @delete_project
 #  Scenario: Create a new Epic with boolean name
 #    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
@@ -143,11 +143,11 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message: The 'text' parameter value was 'true' but must be of type 'extended_string'
 
 
   @create_project @delete_project
-  Scenario: Create a new Epic with name and comments with numeric value
+  Scenario: Create a new Epic with name and the comments with numeric value
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
@@ -160,7 +160,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message: "The 'text' parameter value was '123' but must be of type 'extended_string'
 
 
   @create_project @delete_project
@@ -175,7 +175,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: 'description' must be an extended_string
 
 
   @create_project @delete_project
@@ -190,7 +190,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: 'description' must be an extended_string
 
 
   @create_project @delete_project
@@ -208,7 +208,25 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: Please enter a name for the label.
+
+
+  @create_project @delete_project
+  Scenario: Create a new Epic with long name and too long name label
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+    "description":"",
+    "label":{
+              "name":"{long}"
+            },
+    "name":"{long}"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: This extended_string is too long
 
 
   @create_epic @delete_project
@@ -226,7 +244,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the label error message
+    And I should see a message error: The label 'project epic' is already used by another epic.
 
 
   @create_epic  @delete_project
@@ -240,7 +258,7 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: Name can't be blank
 
 
   @create_epic  @delete_project
@@ -254,8 +272,22 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: 'name' must be an extended_string
 
+
+  @create_epic  @delete_project
+  Scenario: Update Epic null name
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+      "name" : null
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: 'name' must be an extended_string
+    #Name can't be blank
 
   @create_epic  @delete_project
   Scenario: Update Epic boolean name
@@ -268,11 +300,11 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
+    And I should see a message error: 'name' must be an extended_string
 
 
   @create_epic  @delete_project
-  Scenario: Update Epic numerical name
+  Scenario: Update Epic too long name
     Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
     And I set up the data
     """
@@ -282,7 +314,4 @@ Feature: Epics
     """
     When I send the request
     Then I get a "400" status code as response
-    And I compare the invalid error message
-
-
-
+    And I should see a message error: This extended_string is too long

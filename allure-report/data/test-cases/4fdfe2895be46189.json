@@ -1,0 +1,112 @@
+{
+  "uid" : "4fdfe2895be46189",
+  "name" : "Get account membership",
+  "historyId" : "2dbe187f125c3cab76c97360ce6a98fb",
+  "time" : {
+    "start" : 1556287303202,
+    "stop" : 1556287308967,
+    "duration" : 5765
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I set up a \"GET\" request to \"/accounts/{id}/memberships\" endpoint",
+      "time" : {
+        "start" : 1556287305399,
+        "stop" : 1556287308408,
+        "duration" : 3009
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When I send the request",
+      "time" : {
+        "start" : 1556287308408,
+        "stop" : 1556287308965,
+        "duration" : 557
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then I get a \"200\" status code as response",
+      "time" : {
+        "start" : 1556287308965,
+        "stop" : 1556287308966,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 3,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "smoke"
+  }, {
+    "name" : "tag",
+    "value" : "create_account_memberships"
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "feature",
+    "value" : "Get accounts"
+  }, {
+    "name" : "framework",
+    "value" : "behave"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "f4a9f2a2b8ab9097",
+      "status" : "passed",
+      "time" : {
+        "start" : 1556287295079,
+        "stop" : 1556287297504,
+        "duration" : 2425
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ "smoke", "create_account_memberships" ]
+  },
+  "source" : "4fdfe2895be46189.json",
+  "parameterValues" : [ ]
+}

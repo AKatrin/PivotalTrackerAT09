@@ -1,0 +1,6 @@
+  {
+  "time_zone": {
+         "olson_name": "America/La_Paz",
+         "offset": "-04:00"
+  }
+  }

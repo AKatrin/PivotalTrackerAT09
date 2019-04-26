@@ -1,0 +1,128 @@
+{
+  "uid" : "89137dc224a7a514",
+  "name" : "Update Epic",
+  "historyId" : "b36418a3a9cbdea2adb7c0ff2363065a",
+  "time" : {
+    "start" : 1556287445366,
+    "stop" : 1556287449212,
+    "duration" : 3846
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I set up a \"PUT\" request to \"/projects/{proj_id}/epics/{epic_id}\" endpoint",
+      "time" : {
+        "start" : 1556287446931,
+        "stop" : 1556287446933,
+        "duration" : 2
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "And I set up the data",
+      "time" : {
+        "start" : 1556287446933,
+        "stop" : 1556287446935,
+        "duration" : 2
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "8a6b2c2aaa225b4d",
+        "name" : ".text",
+        "source" : "8a6b2c2aaa225b4d.txt",
+        "type" : "text/plain",
+        "size" : 38
+      } ],
+      "parameters" : [ ],
+      "hasContent" : true,
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When I send the request",
+      "time" : {
+        "start" : 1556287446935,
+        "stop" : 1556287447644,
+        "duration" : 709
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then I get a \"200\" status code as response",
+      "time" : {
+        "start" : 1556287447644,
+        "stop" : 1556287448374,
+        "duration" : 730
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 4,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "smoke"
+  }, {
+    "name" : "tag",
+    "value" : "create_epic"
+  }, {
+    "name" : "tag",
+    "value" : "delete_project"
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "feature",
+    "value" : "Epics"
+  }, {
+    "name" : "framework",
+    "value" : "behave"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ "delete_project", "create_epic", "smoke" ]
+  },
+  "source" : "89137dc224a7a514.json",
+  "parameterValues" : [ ]
+}

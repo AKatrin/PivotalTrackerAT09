@@ -1,5 +1,5 @@
 @acceptance
-Feature: Epics
+Feature: Acceptance test for Epic and Epics for Post and Get
   @create_project @delete_project
   Scenario: Create a new Epic with name
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint

@@ -1,5 +1,5 @@
 @smoke
-Feature: Epics
+Feature: Smoke Test of Epic and Epics for CRUD
   @create_project @delete_project
   Scenario: Create a new Epic
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint

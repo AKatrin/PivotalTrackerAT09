@@ -1,0 +1,155 @@
+{
+  "uid" : "9cc0c98580e389c5",
+  "name" : "Create a new empty project",
+  "historyId" : "3ce1c03169eefbd5595d55e0234f73fb",
+  "time" : {
+    "start" : 1556287457913,
+    "stop" : 1556287459289,
+    "duration" : 1376
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given I set up a \"POST\" request to \"/projects\" endpoint",
+      "time" : {
+        "start" : 1556287457915,
+        "stop" : 1556287457917,
+        "duration" : 2
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "And I set up the data",
+      "time" : {
+        "start" : 1556287457917,
+        "stop" : 1556287457919,
+        "duration" : 2
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ {
+        "uid" : "caa4dd0ec4beb5e6",
+        "name" : ".text",
+        "source" : "caa4dd0ec4beb5e6.txt",
+        "type" : "text/plain",
+        "size" : 36
+      } ],
+      "parameters" : [ ],
+      "hasContent" : true,
+      "stepsCount" : 0,
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "When I send the request",
+      "time" : {
+        "start" : 1556287457919,
+        "stop" : 1556287458650,
+        "duration" : 731
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Then I get a \"200\" status code as response",
+      "time" : {
+        "start" : 1556287458650,
+        "stop" : 1556287458652,
+        "duration" : 2
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "And I verify the project schema",
+      "time" : {
+        "start" : 1556287458652,
+        "stop" : 1556287458655,
+        "duration" : 3
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "And Sent Data should be the same info of the respond",
+      "time" : {
+        "start" : 1556287458655,
+        "stop" : 1556287458655,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "hasContent" : false,
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 6,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "delete_project"
+  }, {
+    "name" : "tag",
+    "value" : "acceptance"
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "feature",
+    "value" : "Acceptance test of Create, Read, Update and Delete Projects"
+  }, {
+    "name" : "framework",
+    "value" : "behave"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ "delete_project", "acceptance" ]
+  },
+  "source" : "9cc0c98580e389c5.json",
+  "parameterValues" : [ ]
+}

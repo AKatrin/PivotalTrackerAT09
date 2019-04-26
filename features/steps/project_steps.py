@@ -181,5 +181,13 @@ def step_impl(context, invalid):
     text = context.response.json()["general_problem"]
     if invalid in context.response.json()["general_problem"]:
         expect(invalid).to_be_truthy()
+
     else:
         expect(invalid).to_be_falsy()
+
+@step("I should see a message: {requirement}")
+def step_impl(context, requirement):
+    logger.info("Validate the error message")
+    text = context.response.json()["requirement"]
+    if requirement in context.response.json()["requirement"]:
+        expect(requirement).to_be_truthy()

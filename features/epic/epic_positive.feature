@@ -1,5 +1,5 @@
 @positive
-Feature: Epics
+Feature: Positive test for Epic and Epics for Post and Put
 
   @create_project @delete_project
   Scenario: Create a new Epic with long name
