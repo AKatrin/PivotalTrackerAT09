@@ -60,17 +60,18 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
-    print("into the data")
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     elif "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
     elif "{update_project_ids}" in context.text:
-        print("contest in update:", context.projects[0].get("id"))
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
     elif "{min_velocity_averaged_over}" in context.text:
         context.text = context.text.replace("{min_velocity_averaged_over}",
                                             str(context.project['velocity_averaged_over']))
+    elif "{name_existent}" in context.text:
+        context.text = context.text.replace("{name_existent}", context.name)
+        context.text = context.text.replace("{account}", context.account)
     context.body = json.loads(context.text)
     context.client.set_body(json.dumps(context.body))
 
@@ -106,17 +107,20 @@ def step_imp(context):
 
 @given("I count all the projects which exist in a account")
 def step_impl(context):
+    logger.info("The length of projects in the account is captured")
     context.length_project = len(Project_Helper.get_all_projects())
 
 
 @step("The length of projects is reduced by one")
 def step_impl(context):
+    logger.info("Check if projects was reduced by one")
     actual = len(Project_Helper.get_all_projects())
     expect(context.length_project - 1).to_equal(actual)
 
 
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
+    logger.info("Compare the information of the json with a GET of the same project")
     json_actual = JsonHelper.get_json("project", context.ids)
     compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
     expect({}).to_equal(compare)
@@ -124,6 +128,7 @@ def step_impl(context):
 
 @step("Sent Data should be the same info of the respond")
 def step_impl(context):
+    logger.info("The data should be the same info of the respond")
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
     expect({}).to_equal(result)
 
@@ -132,3 +137,38 @@ def step_impl(context):
 def step_impl(context, name_id):
     logger.info("Id sent should be the same response's id")
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
+
+
+@step("I verify the {schema} schema is not modified")
+def step_impl(context, schema):
+    logger.info("Verify the schema of " + schema)
+    errors = Schema_Helper.compare_schema(context.project, schema)
+    expect([]).to_equal(errors)
+
+
+@step("I verify the data of project json is not changed")
+def step_impl(context):
+    logger.info("I verify the data of project json is not changed")
+    json_actual = JsonHelper.get_json("project", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.project, json_actual)
+    expect({}).to_equal(compare)
+
+
+@step("I get a existent project")
+def step_impl(context):
+    logger.info("A ID project is gotten of a existent project")
+    project = Project_Helper.get_all_projects()[0]
+    context.name = project['name']
+    context.account = str(project['account_id'])
+
+
+@step("The project is not exist in the account")
+def step_impl(context):
+    logger.info("Check if the project was erased")
+    projects = Project_Helper.get_all_projects()
+    flag = False
+    for item in projects:
+        if item['id'] == context.project['id']:
+            flag = True
+            break
+    expect(False).to_equal(flag)

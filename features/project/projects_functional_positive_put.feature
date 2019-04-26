@@ -1,5 +1,5 @@
 @positive @project
-Feature: Functional Test Positive Cases of Create, Read, Update and Delete Projects
+Feature: Functional Test Positive Cases of Update Projects
 
   Scenario Outline: : Update the name of project with extreme characters in name
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
@@ -44,7 +44,7 @@ Feature: Functional Test Positive Cases of Create, Read, Update and Delete Proje
     |Friday   |
     |Saturday |
 
-
+#
 
   Scenario: Update the "point scale" of project with 49 characters and 12 values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
