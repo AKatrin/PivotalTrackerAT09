@@ -165,7 +165,7 @@ def step_impl(context):
         if item['id'] == context.project['id']:
             flag = True
             break
-    expect(False).to_equal(flag)
+    expect(flag).to_be_falsy()
 
 
 @step("I should see a messages error: {message}")
