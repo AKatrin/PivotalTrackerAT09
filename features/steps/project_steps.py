@@ -148,7 +148,6 @@ def step_impl(context, workspace_id, answer):
     """
     :type context: behave.runner.Context
     """
-
     logger.info("Sent Data should contain the same info")
     if workspace_id.find("id") > -1:
         id = context.ids["{" + workspace_id + "}"]
