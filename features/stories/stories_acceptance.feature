@@ -23,7 +23,7 @@ Feature: Stories Acceptance Test
     And I set up the data:
       """
         {
-          "description":"null",
+          "description":"test of description",
           "name":"Exhaust ports are ray shielded 👹 2"
         }
       """
@@ -37,7 +37,7 @@ Feature: Stories Acceptance Test
     And I set up the data:
       """
         {
-          "labels":["plans"],
+          "labels":["plans","Inspected by TK-421"],
           "name":"test001"
         }
       """

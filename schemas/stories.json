@@ -12,98 +12,52 @@
     "kind": {
       "$id": "#/properties/kind",
       "type": "string",
-      "title": "The Kind Schema",
-      "default": "",
-      "examples": [
-        "story"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Kind Schema"
     },
     "id": {
       "$id": "#/properties/id",
       "type": "integer",
-      "title": "The Id Schema",
-      "default": 0,
-      "examples": [
-        165626894
-      ]
+      "title": "The Id Schema"
     },
     "project_id": {
       "$id": "#/properties/project_id",
       "type": "integer",
-      "title": "The Project_id Schema",
-      "default": 0,
-      "examples": [
-        2334519
-      ]
+      "title": "The Project_id Schema"
     },
     "name": {
       "$id": "#/properties/name",
       "type": "string",
-      "title": "The Name Schema",
-      "default": "",
-      "examples": [
-        "test001"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Name Schema"
    },
     "description": {
       "$id": "#/properties/description",
       "type": "string",
-      "title": "The Description Schema",
-      "default": "",
-      "examples": [
-        "null"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Description Schema"
     },
     "story_type": {
       "$id": "#/properties/story_type",
       "type": "string",
-      "title": "The Story_type Schema",
-      "default": "",
-      "examples": [
-        "feature"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Story_type Schema"
     },
     "current_state": {
       "$id": "#/properties/current_state",
       "type": "string",
-      "title": "The Current_state Schema",
-      "default": "",
-      "examples": [
-        "unscheduled"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Current_state Schema"
     },
     "estimate": {
       "$id": "#/properties/estimate",
       "type": "integer",
-      "title": "The Estimate Schema",
-      "default": 0,
-      "examples": [
-        1
-      ]
+      "title": "The Estimate Schema"
     },
     "accepted_at": {
       "$id": "#/properties/accepted_at",
       "type": "string",
-      "title": "The Accepted_at Schema",
-      "default": "",
-      "examples": [
-        "2019-04-26T00:13:24Z"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Accepted_at Schema"
     },
     "requested_by_id": {
       "$id": "#/properties/requested_by_id",
       "type": "integer",
-      "title": "The Requested_by_id Schema",
-      "default": 0,
-      "examples": [
-        3167793
-      ]
+      "title": "The Requested_by_id Schema"
     },
     "owner_ids": {
       "$id": "#/properties/owner_ids",
@@ -130,60 +84,32 @@
           "kind": {
             "$id": "#/properties/labels/items/properties/kind",
             "type": "string",
-            "title": "The Kind Schema",
-            "default": "",
-            "examples": [
-              "label"
-            ],
-            "pattern": "^(.*)$"
+            "title": "The Kind Schema"
           },
           "id": {
             "$id": "#/properties/labels/items/properties/id",
             "type": "integer",
-            "title": "The Id Schema",
-            "default": 0,
-            "examples": [
-              21265187
-            ]
+            "title": "The Id Schema"
           },
           "project_id": {
             "$id": "#/properties/labels/items/properties/project_id",
             "type": "integer",
-            "title": "The Project_id Schema",
-            "default": 0,
-            "examples": [
-              2334519
-            ]
+            "title": "The Project_id Schema"
           },
           "name": {
             "$id": "#/properties/labels/items/properties/name",
             "type": "string",
-            "title": "The Name Schema",
-            "default": "",
-            "examples": [
-              "inspected by tk-421"
-            ],
-            "pattern": "^(.*)$"
+            "title": "The Name Schema"
           },
           "created_at": {
             "$id": "#/properties/labels/items/properties/created_at",
             "type": "string",
-            "title": "The Created_at Schema",
-            "default": "",
-            "examples": [
-              "2019-04-26T00:09:50Z"
-            ],
-            "pattern": "^(.*)$"
+            "title": "The Created_at Schema"
           },
           "updated_at": {
             "$id": "#/properties/labels/items/properties/updated_at",
             "type": "string",
-            "title": "The Updated_at Schema",
-            "default": "",
-            "examples": [
-              "2019-04-26T00:09:50Z"
-            ],
-            "pattern": "^(.*)$"
+            "title": "The Updated_at Schema"
           }
         }
       }
@@ -191,22 +117,12 @@
     "created_at": {
       "$id": "#/properties/created_at",
       "type": "string",
-      "title": "The Created_at Schema",
-      "default": "",
-      "examples": [
-        "2019-04-26T00:09:50Z"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Created_at Schema"
     },
     "updated_at": {
       "$id": "#/properties/updated_at",
       "type": "string",
-      "title": "The Updated_at Schema",
-      "default": "",
-      "examples": [
-        "2019-04-26T00:09:50Z"
-      ],
-      "pattern": "^(.*)$"
+      "title": "The Updated_at Schema"
     },
     "url": {
       "$id": "#/properties/url",
@@ -215,8 +131,7 @@
       "default": "",
       "examples": [
         "https://www.pivotaltracker.com/story/show/165626894"
-      ],
-      "pattern": "^(.*)$"
+      ]
     }
   },
     "additionalProperties": false
