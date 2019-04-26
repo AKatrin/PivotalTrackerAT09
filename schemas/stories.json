@@ -127,11 +127,7 @@
     "url": {
       "$id": "#/properties/url",
       "type": "string",
-      "title": "The Url Schema",
-      "default": "",
-      "examples": [
-        "https://www.pivotaltracker.com/story/show/165626894"
-      ]
+      "title": "The Url Schema"
     }
   },
     "additionalProperties": false
