@@ -69,6 +69,10 @@ def step_impl(context):
     elif "{min_velocity_averaged_over}" in context.text:
         context.text = context.text.replace("{min_velocity_averaged_over}",
                                             str(context.project['velocity_averaged_over']))
+    elif "{email}" in context.text and "{initials}" in context.text and "{name}" in context.text:
+        context.text = context.text.replace("{email}", str(context.membership['email']))
+        context.text = context.text.replace("{initials}", str(context.membership['initials']))
+        context.text = context.text.replace("{name}", str(context.membership['name']))
     context.body = json.loads(context.text)
     context.client.set_body(json.dumps(context.body))
 
