@@ -139,12 +139,6 @@ def step_impl(context, name_id):
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
 
 
-@step("I verify the {schema} schema is not modified")
-def step_impl(context, schema):
-    logger.info("Verify the schema of " + schema)
-    errors = Schema_Helper.compare_schema(context.project, schema)
-    expect([]).to_equal(errors)
-
 
 @step("I verify the data of project json is not changed")
 def step_impl(context):

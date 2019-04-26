@@ -11,7 +11,6 @@ Feature: Functional Test Negative Cases of Update Projects
       """
     When I send the request
     Then I get a "400" status code as response
-    And I verify the project schema is not modified
     And I verify the data of project json is not changed
     Examples:
     |name|
@@ -35,7 +34,7 @@ Feature: Functional Test Negative Cases of Update Projects
       """
     When I send the request
     Then I get a "400" status code as response
-    And I verify the project schema is not modified
+#    And I verify the project schema is not modified
     And I verify the data of project json is not changed
 
 
@@ -50,7 +49,7 @@ Feature: Functional Test Negative Cases of Update Projects
       """
     When I send the request
     Then I get a "400" status code as response
-    And I verify the project schema is not modified
+#    And I verify the project schema is not modified
     And I verify the data of project json is not changed
     Examples:
     |day|
@@ -73,7 +72,7 @@ Feature: Functional Test Negative Cases of Update Projects
       """
     When I send the request
     Then I get a "400" status code as response
-    And I verify the project schema is not modified
+#    And I verify the project schema is not modified
     And I verify the data of project json is not changed
     Examples:
       |values|
