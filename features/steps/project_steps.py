@@ -130,11 +130,3 @@ def step_impl(context):
 def step_impl(context, name_id):
     logger.info("Id sent should be the same response's id")
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
-
-
-# @step("The {id_workspace} not be will found {true}")
-# def step_impl(context):
-#     """
-#     :type context: behave.runner.Context
-#     """
-#     pass

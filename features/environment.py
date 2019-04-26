@@ -77,7 +77,7 @@ def before_feature(context, feature):
 
 
 def after_feature(context, feature):
-    if 'stories' in feature.tags:
+    if 'stories' in feature.tags or 'project' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.project)
     elif 'workspace' in feature.tags:
