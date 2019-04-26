@@ -7,7 +7,6 @@ from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
 
-
 def before_scenario(context, scenario):
     print("***************NEW SCENARIO******************")
 
@@ -29,19 +28,10 @@ def before_scenario(context, scenario):
         logger.info("Create a membership and get the id account")
         context.ids["{id}"] = Account_helper.create_account()
         Account_helper.create_account_membership(context.ids["{id}"])
-<<<<<<< HEAD
-    elif "create_stories" in scenario.tags:
-=======
     elif "get_id_account_of_other_user" in scenario.tags:
         logger.info("Get the id the a account of other user account")
         context.ids["{id}"] = Account_helper.get_account_of_other_user()
-    if "create_workspace" in scenario.tags:
-        logger.info("Create a project and get the id of the project")
-        context.workspace = WorkspaceHelper.create_workspace(context.project)
-        context.ids["{workspace_id}"] = context.workspace["id"]
-
-    if "create_stories" in scenario.tags:
->>>>>>> c210d38e6f90bc72ea8d5c6ad1d4f7404c2d2253
+    elif "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
     elif "create_stories_project" in scenario.tags:

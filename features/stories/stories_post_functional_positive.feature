@@ -1,7 +1,6 @@
-@functional_positive @stories
-Feature: Functional Test Positive cases of Create and read
-
-
+@functional_post_positive @stories
+Feature: #Enter feature name here
+  Create a new stories by id of project changing three elements on body
   Scenario Outline: Post Stories by id of project with only name
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
@@ -36,6 +35,7 @@ Feature: Functional Test Positive cases of Create and read
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
+    And Sent Data should be the same info of the respond
       Examples:
         | value_current_state |
         |accepted|
@@ -59,6 +59,7 @@ Feature: Functional Test Positive cases of Create and read
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
+    And Sent Data should be the same info of the respond
       Examples:
         | value_current_state |
 
@@ -78,6 +79,7 @@ Scenario Outline: Post Stories by id of project with name, story_type Chore and 
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
+    And Sent Data should be the same info of the respond
       Examples:
         | value_current_state |
         |accepted|
@@ -98,33 +100,9 @@ Scenario Outline: Post Stories by id of project with name, story_type Chore and 
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
+    And Sent Data should be the same info of the respond
       Examples:
         | value_current_state |
         |accepted|
         |unstarted|
         |unscheduled|
-
-  @create_stories
-  Scenario: Get Stories by id with after story id
-    Given I set up a "GET" request to "/projects/{proj_id}/stories" endpoint
-    And I configure the "after_story_id" with the values "{story_id}"
-    When I send the request
-    Then I get a "200" status code as response
-    And I verify all stories schema
-
-  @create_stories
-  Scenario: Get Stories by id with before id
-    Given I set up a "GET" request to "/projects/{proj_id}/stories" endpoint
-    And I configure the "before_story_id" with the values "{story_id}"
-    When I send the request
-    Then I get a "200" status code as response
-    And I verify all stories schema
-
-  @create_stories
-  Scenario: Get Stories by Id
-    Given I set up a "GET" request to "/projects/{proj_id}/stories" endpoint
-    And I configure the "fields" with the values "comments(:default,file_attachments(:default,uploader))"
-    And I configure the "with_state" with the values "unstarted"
-    When I send the request
-    Then I get a "200" status code as response
-    And I verify all stories schema

@@ -13,7 +13,7 @@ Feature: #
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And
+
 
   Scenario: Post Stories by id of project with only name
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
@@ -31,7 +31,7 @@ Feature: #
     And I set up the data:
       """
         {
-          "name": ""
+          "name": null
         }
       """
     When I send the request
