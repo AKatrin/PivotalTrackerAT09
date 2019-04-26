@@ -23,7 +23,10 @@ def step_impl(context, method, endpoint):
 
 @step('I configure the "{field}" with the values "{values}"')
 def step_impl(context, field, values):
-    context.client.set_parameters({field: values})
+    if "story_id" in values:
+        context.client.set_parameters({field: context.ids.get("{story_id}")})
+    else:
+        context.client.set_parameters({field: values})
 
 
 @then(u'I get a "{status_code}" status code as response')
@@ -54,8 +57,7 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
-    print(context.response.url)
-
+    print( "\n" + context.response.url + "\n")
 
 @step(u'I set up the data')
 def step_impl(context):

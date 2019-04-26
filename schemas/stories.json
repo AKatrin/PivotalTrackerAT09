@@ -1,90 +1,136 @@
-   {
-     "definitions": {},
-     "$schema": "http://json-schema.org/draft-07/schema#",
-     "$id": "http://example.com/root.json",
-     "type": "object",
-     "title": "The Root Schema",
-     "required": [
-       "kind",
-       "id",
-      "created_at",
-      "updated_at",
-      "story_type",
-      "name",
-      "current_state",
-      "requested_by_id",
-      "url",
-      "project_id",
-      "owner_ids",
-      "labels"
-    ],
-    "properties": {
-      "kind": {
-        "$id": "#/properties/kind",
-        "type": "string",
-        "title": "The Kind Schema",
-        "pattern": "^(.*)$"
-      },
-      "id": {
-        "$id": "#/properties/id",
-        "type": "integer",
-        "title": "The Id Schema"
-      },
-      "created_at": {
-        "$id": "#/properties/created_at",
-        "type": "string",
-        "title": "The Created_at Schema",
-        "pattern": "^(.*)$"
-      },
-      "updated_at": {
-        "$id": "#/properties/updated_at",
-        "type": "string",
-        "title": "The Updated_at Schema",
-        "pattern": "^(.*)$"
-      },
-      "story_type": {
-        "$id": "#/properties/story_type",
-        "type": "string",
-        "title": "The Story_type Schema",
-        "pattern": "^(.*)$"
-      },
-      "name": {
-        "$id": "#/properties/name",
-        "type": "string",
-        "title": "The Name Schema",
-        "pattern": "^(.*)$"
-      },
-      "current_state": {
-        "$id": "#/properties/current_state",
-        "type": "string",
-        "title": "The Current_state Schema",
-        "pattern": "^(.*)$"
-      },
-      "requested_by_id": {
-        "$id": "#/properties/requested_by_id",
-        "type": "integer",
-        "title": "The Requested_by_id Schema"
-      },
-     "url": {
-       "$id": "#/properties/url",
-       "type": "string",
-       "title": "The Url Schema",
-       "pattern": "^(.*)$"
-     },
-     "project_id": {
-       "$id": "#/properties/project_id",
-       "type": "integer",
-       "title": "The Project_id Schema"
+  {
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+
+    "kind",
+    "id"
+
+  ],
+  "properties": {
+    "kind": {
+      "$id": "#/properties/kind",
+      "type": "string",
+      "title": "The Kind Schema"
     },
-     "owner_ids": {
-       "$id": "#/properties/owner_ids",
-       "type": "array",
-       "title": "The Owner_ids Schema"
-     },
-     "labels": {
-       "$id": "#/properties/labels",
-       "type": "array",
-       "title": "The Labels Schema"
-     }
-   }
- }
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The Id Schema"
+    },
+    "project_id": {
+      "$id": "#/properties/project_id",
+      "type": "integer",
+      "title": "The Project_id Schema"
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "The Name Schema"
+   },
+    "description": {
+      "$id": "#/properties/description",
+      "type": "string",
+      "title": "The Description Schema"
+    },
+    "story_type": {
+      "$id": "#/properties/story_type",
+      "type": "string",
+      "title": "The Story_type Schema"
+    },
+    "current_state": {
+      "$id": "#/properties/current_state",
+      "type": "string",
+      "title": "The Current_state Schema"
+    },
+    "estimate": {
+      "$id": "#/properties/estimate",
+      "type": "integer",
+      "title": "The Estimate Schema"
+    },
+    "accepted_at": {
+      "$id": "#/properties/accepted_at",
+      "type": "string",
+      "title": "The Accepted_at Schema"
+    },
+    "requested_by_id": {
+      "$id": "#/properties/requested_by_id",
+      "type": "integer",
+      "title": "The Requested_by_id Schema"
+    },
+    "owner_ids": {
+      "$id": "#/properties/owner_ids",
+      "type": "array",
+      "title": "The Owner_ids Schema"
+    },
+    "labels": {
+      "$id": "#/properties/labels",
+      "type": "array",
+      "title": "The Labels Schema",
+      "items": {
+        "$id": "#/properties/labels/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "kind",
+          "id",
+          "project_id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "kind": {
+            "$id": "#/properties/labels/items/properties/kind",
+            "type": "string",
+            "title": "The Kind Schema"
+          },
+          "id": {
+            "$id": "#/properties/labels/items/properties/id",
+            "type": "integer",
+            "title": "The Id Schema"
+          },
+          "project_id": {
+            "$id": "#/properties/labels/items/properties/project_id",
+            "type": "integer",
+            "title": "The Project_id Schema"
+          },
+          "name": {
+            "$id": "#/properties/labels/items/properties/name",
+            "type": "string",
+            "title": "The Name Schema"
+          },
+          "created_at": {
+            "$id": "#/properties/labels/items/properties/created_at",
+            "type": "string",
+            "title": "The Created_at Schema"
+          },
+          "updated_at": {
+            "$id": "#/properties/labels/items/properties/updated_at",
+            "type": "string",
+            "title": "The Updated_at Schema"
+          }
+        }
+      }
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "The Created_at Schema"
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "The Updated_at Schema"
+    },
+    "url": {
+      "$id": "#/properties/url",
+      "type": "string",
+      "title": "The Url Schema"
+    }
+  },
+    "additionalProperties": false
+}
