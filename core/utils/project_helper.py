@@ -47,10 +47,6 @@ class Project_Helper:
         body = {"name": "Project Test" + str(random.randint(1, 1001))}
         client.set_body(json.dumps(body))
         response = client.execute_request()
-<<<<<<< HEAD
-        # print(response.text)
-=======
->>>>>>> 97a3490629f7a50c15a6901820f579e8860809db
         return response.json()
 
     @staticmethod

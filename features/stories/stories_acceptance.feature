@@ -23,7 +23,7 @@ Feature: Stories Acceptance Test
     And I set up the data:
       """
         {
-          "description":null,
+          "description":"null",
           "name":"Exhaust ports are ray shielded 👹 2"
         }
       """
@@ -37,13 +37,14 @@ Feature: Stories Acceptance Test
     And I set up the data:
       """
         {
-          "labels":["plans","Inspected by TK-421"],
+          "labels":["plans"],
           "name":"test001"
         }
       """
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
+    And Sent Data should be the same info of the respond
 
 #  Scenario: Post Stories by by id of project
 #    Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
@@ -64,7 +65,7 @@ Feature: Stories Acceptance Test
     And I configure the "with_state" with the values "unscheduled"
     When I send the request
     Then I get a "200" status code as response
-    And I verify all stories schema
+    And I verify all stories_with_filters schema
 
   @create_stories
   Scenario: Get Stories by id with two parameters
@@ -73,7 +74,7 @@ Feature: Stories Acceptance Test
     And I configure the "with_state" with the values "unscheduled"
     When I send the request
     Then I get a "200" status code as response
-    And I verify all stories schema
+    And I verify all stories_with_filters schema
 
   @create_stories
   Scenario: Get Stories by id and have comments
@@ -82,7 +83,7 @@ Feature: Stories Acceptance Test
     And I configure the "with_state" with the values "unscheduled"
     When I send the request
     Then I get a "200" status code as response
-    And I verify all stories schema
+    And I verify all stories_with_filters schema
 
   @create_stories
   Scenario: Get Stories by id with three parameters
@@ -93,7 +94,6 @@ Feature: Stories Acceptance Test
     When I send the request
     Then I get a "200" status code as response
     And I verify all stories schema
-
 
     #  @create_stories
 #  Scenario: Get Stories by Id for bullk

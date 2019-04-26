@@ -1,10 +1,4 @@
 api_url: https://www.pivotaltracker.com/services/v5
-<<<<<<< HEAD
 user: cxristian.lujan05@gmail.com
 pass: cxriss70891640591L
 token: d20a1f6be026b5824b2e243d3f391a17
-=======
-token: 1549c1737bbb397bfdb3d15c401ef5b9
-user: automation.api.testing@gmail.com
-pass: Control123*
->>>>>>> 97a3490629f7a50c15a6901820f579e8860809db

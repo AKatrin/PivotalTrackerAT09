@@ -6,7 +6,7 @@ Feature: Stories Smoke Tests
     And I set up the data:
       """
         {
-        "name": "Exhaust ports are ray shielded 👹"
+         "name": "Exhaust ports are ray shielded 👹"
         }
       """
     When I send the request
