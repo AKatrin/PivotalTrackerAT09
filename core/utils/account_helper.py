@@ -88,8 +88,8 @@ class Account_helper:
     @staticmethod
     def generate_body_membership():
         """
-        Create the body to create an account with account name and project name random.
-        :return: a body.
+        Generate the body to create a membership with name and email random.
+        :return: the body od membership.
         """
         new_email = "AT09" + ''.join(random.choices(string.digits, k=4)) + "@example.com"
         name = "Automation Testing" + ''.join(random.choices(string.digits, k=3))
