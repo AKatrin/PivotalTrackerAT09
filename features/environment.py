@@ -24,6 +24,7 @@ def before_scenario(context, scenario):
     elif "create_account" in scenario.tags:
         logger.info("Create an account and get the id account")
         context.ids["{id}"] = Account_helper.create_account()
+        context.membership = Account_helper.generate_body_membership()
     elif "create_account_memberships" in scenario.tags:
         logger.info("Create a membership and get the id account")
         context.ids["{id}"] = Account_helper.create_account()
