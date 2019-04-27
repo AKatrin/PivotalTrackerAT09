@@ -1,7 +1,6 @@
 @functional_post_positive @stories
-Feature: #Enter feature name here
-  Create a new stories by id of project changing three elements on body
-  Scenario Outline: Post Stories by id of project with only name
+Feature: Functional test Positive cases of stories for create
+  Scenario Outline: Create a new stories by id of project with only name
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -22,7 +21,7 @@ Feature: #Enter feature name here
       |`~!@#$%^&*()_+-={}[]:;\"\|'\\?/>.<,|
       |\"i need to do test to check some \"50\" characters.\"|
 
- Scenario Outline: Post Stories by id of project with name, story_type Bug and current_state
+ Scenario Outline: Create a new stories by id of project with story_type Bug and current_state valid
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -46,7 +45,7 @@ Feature: #Enter feature name here
         |unstarted|
         |unscheduled|
 
-  Scenario Outline: Post Stories by id of project with name, story_type feature and current_state
+  Scenario Outline: Create a new stories by id of project with story_type Feature and current_state valid
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -62,11 +61,10 @@ Feature: #Enter feature name here
     And Sent Data should be the same info of the respond
       Examples:
         | value_current_state |
-
         |unstarted|
         |unscheduled|
 
-Scenario Outline: Post Stories by id of project with name, story_type Chore and current_state
+Scenario Outline: Create a new stories by id of project with story_type Chore and current_state valid
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
@@ -87,7 +85,7 @@ Scenario Outline: Post Stories by id of project with name, story_type Chore and 
         |unstarted|
         |unscheduled|
 
-  Scenario Outline: Post Stories by id of project with name, story_type Release and current_state
+  Scenario Outline: Create a new stories by id of project with story_type Release and current_state valid
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
       """
