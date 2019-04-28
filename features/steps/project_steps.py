@@ -2,20 +2,12 @@ from behave import *
 from compare import *
 
 
-import jsonschema
-
-#from core.utils.epic_helper import EpicHelper
 from core.utils.epic_helper import EpicHelper
 from core.utils.json_helper import JsonHelper
-from core.utils.project_helper import *
 from core.utils.repository import Repository
-from core.utils.schema_helper import *
 from core.utils.util import *
 from core.utils.project_helper import *
 from core.utils.schema_helper import *
-
-import jsonschema
-
 from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
