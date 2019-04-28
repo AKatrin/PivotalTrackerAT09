@@ -104,3 +104,16 @@ class Story_Helper:
         else:
             answer = "The size of Labels of result are not the same as the body"
         return answer
+
+    @staticmethod
+    def get_all_stories(id_project):
+        '''
+        Get all stories of a project
+        :param id: Integer
+        :return: Stories Json
+        '''
+        client = RequestManager()
+        client.set_method('GET')
+        client.set_endpoint('/projects/' + str(id_project) + "/stories")
+        response = client.execute_request()
+        return response.json()

@@ -21,6 +21,7 @@
     And I verify the story schema
     And Sent Data should be the same info of the respond story
 
+
   @create_stories_project @delete_project
   Scenario: Update the labels of a storie of a project
     Given I set up a "PUT" request to "/projects/{proj_id}/stories/{stories_id}" endpoint
