@@ -59,7 +59,7 @@ Feature: Acceptance test for Epic and Epics for Post and Get
     """
     {
       "comments":[{
-                     "text":"Use this image on all external comms"
+                     "text":"Use this image on all external comments"
                   }],
       "name":"PR"
     }

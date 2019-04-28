@@ -15,7 +15,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
-   # And I get the same json and compare with the modified json
+   And I get the same json and compare with the modified json
 
 
   @create_project @delete_project
@@ -51,13 +51,13 @@ Feature: Positive test for Epic and Epics for Post and Put
 
 
   @create_project @delete_project
-  Scenario: Create a new Epic with name and short description.
+  Scenario: Create a new Epic with url name and short description.
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
     {
     "description":"x",
-    "name":"Tractor Beams"
+    "name":"/usr/local/tomcat/logs/CofaxTools.log"
     }
     """
     When I send the request
@@ -68,20 +68,20 @@ Feature: Positive test for Epic and Epics for Post and Put
 
 
   @create_project @delete_project
-  Scenario: Create a new Epic with name and empty description.
+  Scenario: Create a new Epic with abbrev name and empty description.
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
     {
     "description": "",
-    "name":"Tractor Beams"
+    "name":"ISO 8879:1986"
     }
     """
     When I send the request
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-   # And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the respond for name
 
 
   @create_project @delete_project
@@ -101,8 +101,110 @@ Feature: Positive test for Epic and Epics for Post and Put
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-    #And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the respond for name
+    And Sent Data should be the same info of the respond for description
 
+  @create_epic @delete_project
+  Scenario: Create a new Epic with different label related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "label": {
+                  "name": "Project Epic1"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with the same name of another Epic related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "label": {
+                  "name": "Project Epic1"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with the special characters label name of another Epic related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "label": {
+                  "name": "!#$%&/()=?¡¨*{}[];:_><"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with different label related to before Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "before_id":{epic_id},
+      "label": {
+                  "name": "Project Epic1"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with the same name of another Epic related to before Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "before_id":{epic_id},
+      "label": {
+                  "name": "Project Epic1"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with different label related to before Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "before_id":{epic_id},
+      "label": {
+                  "name": "!#$%&/();:´+{}[]"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
 
   @create_project @delete_project
   Scenario: Create a new Epic with name, long comments
@@ -120,7 +222,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-    #And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the respond for name
 
 
   @create_epic  @delete_project
@@ -189,13 +291,14 @@ Feature: Positive test for Epic and Epics for Post and Put
     And I set up the data
     """
     {
-       "description":""
+       "description":"",
+       "name": "Project Epic"
     }
     """
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
-    #And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the respond for name
 
 
   @create_epic  @delete_project
@@ -214,6 +317,44 @@ Feature: Positive test for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
-    #And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the respond for description
+    And Sent Data should be the same info of the respond for name
 
 
+ @create_epic  @delete_project
+  Scenario: Update label to a short name Epic
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+     "description":"{long}",
+     "label":{
+              "name":"x"
+            },
+     "name" : "Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And I verify the epic schema
+    And Sent Data should be the same info of the respond for description
+    And Sent Data should be the same info of the respond for name
+
+@create_epic  @delete_project
+  Scenario: Update label with special characters label name and name Epic
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+     "description":"{long}",
+     "label":{
+              "name":"!#$%&/()=?¡¨*{}:;_><}{+[]"
+            },
+     "name" : "!#$%&/()=?¡¨*{}:;_><}{+[]"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And I verify the epic schema
+    And Sent Data should be the same info of the respond for description
+    And Sent Data should be the same info of the respond for name

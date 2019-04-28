@@ -26,7 +26,7 @@ Feature: Negative test for Epic and Epics for Post and Put
     """
     When I send the request
     Then I get a "400" status code as response
-    And I should see a message error: Please enter a name for the epic.
+    And I should see a message error: Please enter a name for the label.
 
 
   @create_project @delete_project
@@ -40,7 +40,7 @@ Feature: Negative test for Epic and Epics for Post and Put
     """
     When I send the request
     Then I get a "400" status code as response
-    And I should see a message error: Please enter a name for the epic.
+    And I should see a message error: Please enter a name for the label.
 
 
   @create_project @delete_project
@@ -56,20 +56,66 @@ Feature: Negative test for Epic and Epics for Post and Put
     Then I get a "400" status code as response
     And I should see a message error: This extended_string is too long
 
+  @create_project @delete_project
+  Scenario: Create a new Epic with array name
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "name" : ["XML"]
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: 'name' must be an extended_string
 
-#  @create_epic @delete_project
-#  Scenario: Create a new Epic with name with spaces
-#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-#    And I set up the data
-#    """
-#    {
-#      "name": "      Project Epic      "
-#    }
-#    """
-#    When I send the request
-#    Then I get a "400" status code as response
-#    And I should see a messages error: "The label 'project epic' is already used by another epic."
+  @create_epic @delete_project
+  Scenario: Create a new Epic with the same label name
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+     "label": {
+                  "name": "Project Epic"
+               },
+      "name" : "Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: The label 'project epic' is already used by another epic.
 
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with the same label related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "label": {
+                  "name": "Project Epic"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: The label 'project epic' is already used by another epic.
+
+
+  @create_project @delete_project
+  Scenario: Create a new Epic with object name
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "name" : { "name":"John", "age":30, "city":"New York" }
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: 'name' must be an extended_string
 
   @create_project @delete_project
   Scenario: Create a new Epic with the numeric name
@@ -84,50 +130,51 @@ Feature: Negative test for Epic and Epics for Post and Put
     Then I get a "400" status code as response
     And I should see a message error: 'name' must be an extended_string
 
-# @create_epic @delete_project
-#  Scenario: Create a new Epic related to after Epic same epic
-#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-#    And I set up the data
-#    """
-#    {
-#      "after_id":{epic_id},
-#      "name":"Project Epic"
-#    }
-#    """
-#
-#    And I get the Epic Id created
-#    Then I get a "400" status code as response
+  @create_epic @delete_project
+  Scenario: Create a new Epic with the same name label related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: The label 'project epic' is already used by another epic.
 
+  @create_epic @delete_project
+  Scenario: Create a new Epic with empty label related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "label": {
+                  "name": ""
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: Please enter a name for the label.
 
+  @create_epic @delete_project
+  Scenario: Create a new Epic with the same label related to before Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "before_id":{epic_id},
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: The label 'project epic' is already used by another epic.
 
-#  @create_epic @delete_project
-#  Scenario: Create a new Epic related to before Epic
-#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-#    And I set up the data
-#    """
-#    {
-#      "before_id":{epic_id},
-#      "name":"PR"
-#    }
-#    """
-#    When I send the request
-#    And I get the Epic Id created
-#    Then I get a "400" status code as response
-#    And I verify the epic schema
-
-
-#  @create_project @delete_project
-#  Scenario: Create a new Epic with boolean name
-#    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-#    And I set up the data
-#    """
-#    {
-#      "name" : "      hola"
-#    }
-#    """
-#    When I send the request
-#    Then I get a "400" status code as response
-#    And I compare the name message
 
   @create_project @delete_project
   Scenario: Create a new Epic with name and comments with boolean value
@@ -194,30 +241,12 @@ Feature: Negative test for Epic and Epics for Post and Put
 
 
   @create_project @delete_project
-  Scenario: Create a new Epic with name, empty description and empty label.
-    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-    And I set up the data
-    """
-    {
-    "description":"",
-    "label":{
-              "name":""
-            },
-    "name":"epic"
-    }
-    """
-    When I send the request
-    Then I get a "400" status code as response
-    And I should see a message error: Please enter a name for the label.
-
-
-  @create_project @delete_project
   Scenario: Create a new Epic with long name and too long name label
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
     {
-    "description":"",
+    "description":"{more_long}",
     "label":{
               "name":"{long}"
             },
@@ -228,6 +257,22 @@ Feature: Negative test for Epic and Epics for Post and Put
     Then I get a "400" status code as response
     And I should see a message error: This extended_string is too long
 
+  @create_project @delete_project
+  Scenario: Create a new Epic with name, empty description and null label.
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+    "description":"",
+    "label":{
+              "name":null
+            },
+    "name":"epic"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: Can't use content of 'label' parameter.
 
   @create_epic @delete_project
   Scenario: Create a new Epic with name, repeated label associate.
@@ -315,3 +360,21 @@ Feature: Negative test for Epic and Epics for Post and Put
     When I send the request
     Then I get a "400" status code as response
     And I should see a message error: This extended_string is too long
+
+
+  @create_epic @delete_project
+  Scenario: Update Epic with too long label name
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+     "label": {
+                  "name":"{long}"
+               },
+      "name" : "Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a message error: This string is too long
+

@@ -68,24 +68,7 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
-    if "{epic_id}" in context.text:
-        context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    elif "{long_name_epic}" in context.text:
-        context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
-    elif "{long}" in context.text:
-        context.text = context.text.replace("{long}", EpicHelper.long_string(20000))
-    elif "{more_long}" in context.text:
-        context.text = context.text.replace("{more_long}", EpicHelper.long_string(20001))
-    elif "{long_label_name}" in context.text:
-        context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(256))
-    elif "{new_project_ids}" in context.text:
-        context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
-    elif "{update_project_ids}" in context.text:
-        print("contest in update:", context.projects[0].get("id"))
-        context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
-    elif "{min_velocity_averaged_over}" in context.text:
-        context.text = context.text.replace("{min_velocity_averaged_over}",
-                                            str(context.project['velocity_averaged_over']))
+    context = EpicHelper.inject_values(context)
     context.body = json.loads(context.text)
     context.client.set_body(json.dumps(context.body))
 
@@ -157,6 +140,12 @@ def step_impl(context):
 @step("Sent Data should be the same info of the respond")
 def step_impl(context):
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
+    expect({}).to_equal(result)
+
+
+@step("Sent Data should be the same info of the respond for {field}")
+def step_impl(context, field):
+    result = JsonHelper.compare_data_field_against_json(context.body, context.response.json(),field)
     expect({}).to_equal(result)
 
 
