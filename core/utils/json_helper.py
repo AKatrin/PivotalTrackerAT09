@@ -15,6 +15,13 @@ class JsonHelper:
         return answer
 
     @staticmethod
+    def compare_data_field_against_json(data, json_result, field):
+        answer = {}
+        if data[field] != json_result[field]:
+            answer[field] = "Values are not the same"
+        return answer
+
+    @staticmethod
     def compare_json_against_json(modified_json, actual_json):
         answer = {}
         for item in actual_json:

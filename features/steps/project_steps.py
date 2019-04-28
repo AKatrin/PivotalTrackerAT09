@@ -1,12 +1,22 @@
 from behave import *
 from compare import *
 
+
+import jsonschema
+
+#from core.utils.epic_helper import EpicHelper
+from core.utils.epic_helper import EpicHelper
 from core.utils.json_helper import JsonHelper
 from core.utils.project_helper import *
 from core.utils.repository import Repository
 from core.utils.schema_helper import *
 from core.utils.story_helper import Story_Helper
 from core.utils.util import *
+from core.utils.project_helper import *
+from core.utils.schema_helper import *
+
+import jsonschema
+
 from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
@@ -63,6 +73,7 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
+    context = EpicHelper.inject_values(context)
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     elif "{new_project_ids}" in context.text:
@@ -147,6 +158,23 @@ def step_impl(context):
     expect(context.length_project - 1).to_equal(actual)
 
 
+@step(u'I compare de epic name')
+def step_imp(context):
+    logger.info("verify the epic name")
+    expect("Test Epic").to_equal(context.response.json()["name"])
+
+
+@step(u'I compare the {request_response} message')
+def step_imp(context, request_response):
+    logger.info("verify the error message")
+    if request_response == 'label error':
+        expect("The label 'project epic' is already used by another epic.").to_equal(context.response.json()["general_problem"])
+    elif request_response == 'invalid error':
+         expect("One or more request parameters was missing or invalid.").to_equal(context.response.json()["error"])
+    elif request_response == 'name':
+         expect("      hola").to_equal(context.response.json()["label: name"])
+
+
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
     logger.info("Compare the information of the json with a GET of the same project")
@@ -159,6 +187,12 @@ def step_impl(context):
 def step_impl(context):
     logger.info("The data should be the same info of the respond")
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
+    expect({}).to_equal(result)
+
+
+@step("Sent Data should be the same info of the respond for {field}")
+def step_impl(context, field):
+    result = JsonHelper.compare_data_field_against_json(context.body, context.response.json(),field)
     expect({}).to_equal(result)
 
 
@@ -196,6 +230,23 @@ def step_impl(context, message):
     else:
         expect(message).to_be_falsy()
 
+@step("I should see a message error: {invalid}")
+def step_impl(context, invalid):
+    logger.info("Validate the error message")
+    text = context.response.json()["general_problem"]
+    if invalid in context.response.json()["general_problem"]:
+        expect(invalid).to_be_truthy()
+
+    else:
+        expect(invalid).to_be_falsy()
+
+@step("I should see a message: {requirement}")
+def step_impl(context, requirement):
+    logger.info("Validate the error message")
+    text = context.response.json()["requirement"]
+    if requirement in context.response.json()["requirement"]:
+        expect(requirement).to_be_truthy()
+        
 @step("The {workspace_id} be will found {answer}")
 def step_impl(context, workspace_id, answer):
     logger.info("Sent Data should contain the same info")
@@ -210,7 +261,6 @@ def step_impl(context, message):
         expect(message).to_be_truthy()
     else:
         expect(message).to_be_falsy()
-
 
 @step('I Should see the requirement: {message}')
 def step_impl(context, message):
