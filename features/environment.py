@@ -32,7 +32,7 @@ def before_scenario(context, scenario):
     elif "get_id_account_of_other_user" in scenario.tags:
         logger.info("Get the id the a account of other user account")
         context.ids["{id}"] = Account_helper.get_account_of_other_user()
-    elif "create_stories" in scenario.tags:
+    if "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
     elif "create_stories_project" in scenario.tags:
@@ -79,6 +79,6 @@ def after_feature(context, feature):
     if 'stories' in feature.tags or 'project' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_project(context.project)
-    elif 'workspace' in feature.tags:
+    if 'workspace' in feature.tags:
         logger.info("Delete the project that was created")
         Project_Helper.delete_projects(context.projects)
