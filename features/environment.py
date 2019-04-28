@@ -35,15 +35,30 @@ def before_scenario(context, scenario):
     if "create_stories" in scenario.tags:
         logger.info("Get all project and get the id of the project")
         context.ids["{story_id}"] = Stories_helper.create_stories(context.ids.get("{proj_id}"))
+    elif "create_stories_in_project" in scenario.tags:
+        logger.info("Get the id the a stories of a project")
+        context.project = Project_Helper.create_project()
+        context.ids["{proj_id}"] = context.project["id"]
+        context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
     elif "create_stories_project" in scenario.tags:
+        logger.info("Get the id of a storie and the id of a acccount of a project")
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
         context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
-    elif "delete_stories_by_id" in scenario.tags:
+        context.ids["{account_id}"] = Story_Helper.account_me()["id"]
+        context.ids["{story_after_id}"] = Stories_helper.create_stories(context.project["id"])
+    elif "create_stories_project_by_id" in context.tags:
+        logger.info("Get the id of the stories and the id of a project")
         context.project = Project_Helper.create_project()
         context.ids["{proj_id}"] = context.project["id"]
         context.ids["{stories_id}"] = Stories_helper.create_stories(context.project["id"])
-        context.del_stories = Story_Helper.delete_story(context.ids["{proj_id}"], context.ids["{stories_id}"])
+        context.id_stories = Stories_helper.create_stories(context.project["id"])
+        context.return_labels = Story_Helper.put_stories(context.ids["{proj_id}"], context.id_stories)
+        diccio = str(context.return_labels).split(' ')
+        id_st = diccio[3].split(',')
+        context.ids["{story_id}"] = int(id_st[0])
+        context.ids["{account_id}"] = Story_Helper.account_me()["id"]
+        context.ids["{story_before_id}"] = Stories_helper.create_stories(context.project["id"])
     if "create_workspace" in scenario.tags:
         logger.info("Create a project and get the id of the project")
         context.workspace = WorkspaceHelper.create_workspace(context.project)
