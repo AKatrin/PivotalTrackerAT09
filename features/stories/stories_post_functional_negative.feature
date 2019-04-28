@@ -14,6 +14,20 @@ Feature: Functional test Negative cases of stories for create
     Then I get a "200" status code as response
     And I verify the stories schema
 
+  Scenario: Create a new stories by id of project with only name
+    Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
+    And I set up the data:
+      """
+        {
+          "name": 0
+        }
+      """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a messages error: One or more request parameters was missing or invalid.
+    And I Should see the problem: 'name' must be an extended_string
+
+
   Scenario: Create a new stories by id of project with name is empty
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
     And I set up the data:
@@ -88,3 +102,19 @@ Feature: Functional test Negative cases of stories for create
     Examples:
       | value_create_at | message_problem |
       |2000-01-01T00:00:00Z|The date you entered 2000-01-01T00:00:00Z, is too far in the past. Please enter a date after 2005-01-01T00:00:00Z.|
+      |2005-1-31T00:00:00Z'|created_at' must be a time value represented as milliseconds/iso 8601 date|
+      |2019-10-15|created_at' must be a time value represented as milliseconds/iso 8601 date|
+
+    Scenario: Create a new stories by id of project with name, created_at in future
+    Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
+    And I set up the data:
+      """
+        {
+          "name": "test007",
+          "created_at": "2020-01-31T00:00:00Z"
+        }
+      """
+    When I send the request
+    Then I get a "400" status code as response
+    And I should see a messages error: One or more request parameters was missing or invalid.
+    And I Should see the requirement: Story created_at cannot be in the future.

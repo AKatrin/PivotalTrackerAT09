@@ -14,8 +14,8 @@ Feature: Functional test Positive cases of stories for create
     And Sent Data should be the same info of the respond
     Examples:
       | value_name |
-      |    X       |
-      |   12,3     |
+      |X|
+      |12,3|
       |2*6-5+65/1|
       |https://www.deepl.com|
       |`~!@#$%^&*()_+-={}[]:;\"\|'\\?/>.<,|
@@ -104,3 +104,21 @@ Scenario Outline: Create a new stories by id of project with story_type Chore an
         |accepted|
         |unstarted|
         |unscheduled|
+
+Scenario Outline: Create a new stories by id of project with name, created_at
+    Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
+    And I set up the data:
+      """
+        {
+          "name": "test007",
+          "created_at": "<value_create_at>"
+        }
+      """
+    When I send the request
+    Then I get a "200" status code as response
+    And I verify the stories schema
+    And Sent Data should be the same info of the respond
+    Examples:
+      | value_create_at |
+      |2015-01-01T00:00:00Z|
+      |2019-04-27T00:00:00Z|
