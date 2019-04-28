@@ -298,7 +298,7 @@ Feature: Functional Test Positive Cases of Update Projects
 
 
 
-    Scenario Outline: Update the Week start day with Start_date in the project
+  Scenario Outline: Update the Week start day with Start_date in the project
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """

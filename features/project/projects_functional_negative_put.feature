@@ -84,7 +84,7 @@ Feature: Functional Test Negative Cases of Update Projects
       |null|Projects require a point scale., This is not a valid custom point scale.|
 
 
-  Scenario Outline: Cannot update the boolean the param of "bugs_and_chores_are_estimatable" of project
+  Scenario Outline: Cannot update the boolean the param of "bugs_and_chores_are_estimatable" of project with strange values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -101,7 +101,7 @@ Feature: Functional Test Negative Cases of Update Projects
     | 1 |
 
 
-  Scenario Outline: Update the boolean the param of "automatic_planning" of project
+  Scenario Outline: Update the boolean the param of "automatic_planning" of project with strange values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -130,7 +130,7 @@ Feature: Functional Test Negative Cases of Update Projects
     And I verify the general_problem of error is: "This extended_string is too long:  'extended string[140] in the request body. - A description of the project's content. Entered through the web UI on the Project Settings page. '"
 
 
-  Scenario Outline: Cannot update the boolean param of "enable_tasks" of project
+  Scenario Outline: Cannot update the boolean param of "enable_tasks" of project with strange values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -146,7 +146,7 @@ Feature: Functional Test Negative Cases of Update Projects
     | "true" |
     | 1 |
 
-  Scenario Outline: Cannot update the boolean of the param of "public" of project
+  Scenario Outline: Cannot update the boolean of the param of "public" of project with strange values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -162,7 +162,7 @@ Feature: Functional Test Negative Cases of Update Projects
     | "true" |
     | 1 |
 
-  Scenario Outline: Cannot update the integer field of the param of "iteration_length" of project
+  Scenario Outline: Cannot update the integer field of the param of "iteration_length" of project with different values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -181,7 +181,7 @@ Feature: Functional Test Negative Cases of Update Projects
     |true|'iteration_length' must be an integer value |
 
 
-  Scenario Outline: Cannot update the integer param of "initial_velocity" of project
+  Scenario Outline: Cannot update the integer param of "initial_velocity" of project with extreme values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -200,7 +200,7 @@ Feature: Functional Test Negative Cases of Update Projects
     |true|'initial_velocity' must be an integer value |
 
 
-  Scenario Outline: Cannot update the integer param of "velocity_averaged_over" of project
+  Scenario Outline: Cannot update the integer param of "velocity_averaged_over" of project with extreme values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -217,3 +217,108 @@ Feature: Functional Test Negative Cases of Update Projects
     | 5 |is not a valid velocity scheme|
     |"1"|'velocity_averaged_over' must be an integer value  |
     |true|'velocity_averaged_over' must be an integer value |
+
+
+   Scenario Outline: Cannot update the integer param of "number_of_done_iterations_to_show" of project with extreme values
+    Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
+    And I set up the data:
+    """
+      {
+	    "number_of_done_iterations_to_show": <number>
+      }
+      """
+    When I send the request
+    Then I get a "400" status code as response
+    And I verify the general_problem of error is: "<message>"
+    Examples:
+    |number|message|
+    | 1 |Your project must load enough done iterations to calculate your velocity according to your settings.|
+#    This number is the limit + 1 of the integer
+    | 2147483648 |The number is exceeded the limit of integers|
+    |"letter"    |'number_of_done_iterations_to_show' must be an integer value|
+    |true        |'number_of_done_iterations_to_show' must be an integer value|
+
+
+  Scenario Outline: Cannot update the boolean of the param of "atom_enabled" of project with strange values
+    Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
+    And I set up the data:
+    """
+      {
+	    "atom_enabled": <Boolean>
+      }
+      """
+    When I send the request
+    Then I get a "400" status code as response
+    And I verify the general_problem of error is: "'atom_enabled' must be a non-string boolean true or false value"
+    Examples:
+    |Boolean|
+    | "true" |
+    | 1 |
+
+
+  Scenario Outline: Cannot update the boolean of the param of "enable_incoming_emails" of project with strange values
+    Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
+    And I set up the data:
+    """
+      {
+	    "enable_incoming_emails": <Boolean>
+      }
+      """
+    When I send the request
+    Then I get a "400" status code as response
+    And I verify the general_problem of error is: "'enable_incoming_emails' must be a non-string boolean true or false value"
+    Examples:
+    |Boolean|
+    | "true" |
+    | 1 |
+
+
+  Scenario Outline: Cannot update the parameter of "project_type" of project with strange values
+    Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
+    And I set up the data:
+    """
+      {
+	    "project_type": <parameter>
+      }
+      """
+    When I send the request
+    Then I get a "400" status code as response
+    And I verify the general_problem of error is: "'project_type' must be one of: demo, private, public, shared"
+    Examples:
+    |parameter|
+    |"privates" |
+    |"1" |
+    |true |
+
+
+  Scenario Outline: Cannot update the Week start day with Start_date in the project with wrong values
+    Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
+    And I set up the data:
+    """
+      {
+        "week_start_day":"<day>",
+        "start_date" : "<date>"
+      }
+      """
+    When I send the request
+    Then I get a "400" status code as response
+    And I verify the general_problem of error is: "<message>"
+    Examples:
+    |day|date|message|
+    |Sunday|2019-04-20 |4/20/2019 is a Saturday and Iterations in this project start on Sundays.|
+    |SUNDAY|21-04-2019 |'start_date' must be a date value represented as iso 8601 date          |
+
+
+  Scenario: Cannot set a "Time Zone" in a project with non-existent time zone
+    Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
+    And I set up the data:
+    """
+      {
+	     "time_zone": {
+             "olson_name": "Europe/La_Paz",
+             "offset": "-04:00"
+	     }
+      }
+      """
+    When I send the request
+    Then I get a "400" status code as response
