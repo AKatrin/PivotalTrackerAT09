@@ -1,4 +1,0 @@
-  {
-    "name":"I am a new Workspace",
-    "project_ids":[{new_project_ids}]
-  }

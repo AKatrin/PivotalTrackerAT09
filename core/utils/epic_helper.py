@@ -23,7 +23,7 @@ class EpicHelper:
     @staticmethod
     def delete_epic(response):
         '''
-        Delete project
+        Delete epic
         :param response: Json
         '''
         client = RequestManager()
@@ -32,6 +32,17 @@ class EpicHelper:
         client.set_endpoint('/epics/' + str(id_project))
         client.execute_request()
 
+    @staticmethod
+    def get_epic( id ):
+        '''
+        Get Epic
+        :param response: Json
+        '''
+        client = RequestManager()
+        client.set_method('GET')
+        client.set_endpoint('/epics/' + str(id))
+        response = client.execute_request()
+        return response.json()
 
     @staticmethod
     def long_string(length):

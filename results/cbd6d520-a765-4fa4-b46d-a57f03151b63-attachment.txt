@@ -1,7 +1,0 @@
-{
-"description":"",
-"label":{
-          "name":""
-        },
-"name":"epic"
-}

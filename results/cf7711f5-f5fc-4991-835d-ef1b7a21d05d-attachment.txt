@@ -1,5 +1,0 @@
-{
-  "email":"dooku@acceptance.com",
-  "initials":"CD",
-  "name":"Count Dooku"
-}

@@ -2,21 +2,14 @@ from behave import *
 from compare import *
 
 
-import jsonschema
-
-#from core.utils.epic_helper import EpicHelper
 from core.utils.epic_helper import EpicHelper
 from core.utils.json_helper import JsonHelper
-from core.utils.project_helper import *
 from core.utils.repository import Repository
 from core.utils.schema_helper import *
 from core.utils.story_helper import Story_Helper
 from core.utils.util import *
 from core.utils.project_helper import *
 from core.utils.schema_helper import *
-
-import jsonschema
-
 from core.utils.workspace_helper import WorkspaceHelper
 
 logger = SingletonLogger().get_logger()
@@ -179,6 +172,14 @@ def step_imp(context, request_response):
 def step_impl(context):
     logger.info("Compare the information of the json with a GET of the same project")
     json_actual = JsonHelper.get_json("project", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
+
+
+@step("I get the same epic json and compare with the modified json")
+def step_impl(context):
+    logger.info("Compare the information of the json with a GET of the same project")
+    json_actual = JsonHelper.get_json("epic", context.ids)
     compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
     expect({}).to_equal(compare)
 
