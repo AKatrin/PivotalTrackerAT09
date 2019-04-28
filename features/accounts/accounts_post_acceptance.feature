@@ -7,9 +7,9 @@ Feature: Create a membership
     And I set up the data
     """
     {
-      "email":"dooku@acceptance.com",
-      "initials":"CD",
-      "name":"Count Dooku"
+      "email":"{email}",
+      "initials":"{initials}",
+      "name":"{name}"
     }
     """
     When I send the request

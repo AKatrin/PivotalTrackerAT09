@@ -27,15 +27,7 @@ class Account_helper:
         client = RequestManager()
         client.set_method("POST")
         client.set_endpoint("/accounts/{account_id}/memberships".format(account_id=account_id))
-        client.set_body(
-            """
-            {
-                "email":"AT09@example.com",
-                "initials":"AT",
-                "name":"Automation Testing"
-            }
-            """
-        )
+        client.set_body(json.dumps(Account_helper.generate_body_membership()))
         client.execute_request()
 
     @staticmethod
@@ -92,3 +84,14 @@ class Account_helper:
         account = random.choice(account_list_other_user)
         id_account = account['id']
         return id_account
+
+    @staticmethod
+    def generate_body_membership():
+        """
+        Generate the body to create a membership with name and email random.
+        :return: the body od membership.
+        """
+        new_email = "AT09" + ''.join(random.choices(string.digits, k=4)) + "@example.com"
+        name = "Automation Testing" + ''.join(random.choices(string.digits, k=3))
+        body = {"email": new_email, "initials": "AT", "name": name}
+        return body

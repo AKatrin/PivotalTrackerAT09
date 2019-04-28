@@ -39,3 +39,24 @@ class WorkspaceHelper:
         client.set_body(json.dumps(body))
         response = client.execute_request()
         return response.json()
+
+    @staticmethod
+    def get_all_workspaces():
+        '''
+        Get all workspaces
+        :return: workspace list
+        '''
+        client = RequestManager()
+        client.set_method('GET')
+        client.set_endpoint('/my/workspaces')
+        response = client.execute_request()
+        return response.json()
+
+
+    def exist_workspaces(workspace_id):
+        list_workspaces = WorkspaceHelper.get_all_workspaces()
+        message = "false"
+        for workspace in list_workspaces:
+            if workspace.get("id") == workspace_id:
+                message = "true"
+        return message
