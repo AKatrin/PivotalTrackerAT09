@@ -146,13 +146,26 @@ def step_impl(context, message):
     else:
         expect(message).to_be_falsy()
 
-
 @step("The {workspace_id} be will found {answer}")
 def step_impl(context, workspace_id, answer):
-    """
-    :type context: behave.runner.Context
-    """
     logger.info("Sent Data should contain the same info")
     if workspace_id.find("id") > -1:
         id = context.ids["{" + workspace_id + "}"]
         expect(WorkspaceHelper.exist_workspaces(id)).to_equal(answer)
+
+@step("I Should see the problem: {message}")
+def step_impl(context, message):
+    logger.info("Validate the general problem message")
+    if message in context.response.json()["general_problem"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()
+
+
+@step('I Should see the requirement: {message}')
+def step_impl(context, message):
+    logger.info("Validate the requirement message")
+    if message in context.response.json()["requirement"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()
