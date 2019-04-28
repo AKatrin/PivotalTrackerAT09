@@ -71,6 +71,9 @@ def step_impl(context):
     elif "{min_velocity_averaged_over}" in context.text:
         context.text = context.text.replace("{min_velocity_averaged_over}",
                                             str(context.project['velocity_averaged_over']))
+    elif "{name_existent}" in context.text:
+        context.text = context.text.replace("{name_existent}", context.name)
+        context.text = context.text.replace("{account}", context.account)
     elif "{email}" in context.text and "{initials}" in context.text and "{name}" in context.text:
         context.text = context.text.replace("{email}", str(context.membership['email']))
         context.text = context.text.replace("{initials}", str(context.membership['initials']))
@@ -110,17 +113,25 @@ def step_imp(context):
 
 @given("I count all the projects which exist in a account")
 def step_impl(context):
-    context.length_project = len(Project_Helper.get_all_projects())
+    logger.info("The length of projects in the account is captured")
+    projects = Project_Helper.get_all_projects()
+    context.length_project = len(projects)
+    print(projects)
+    print("LENGHT:", context.length_project)
 
 
 @step("The length of projects is reduced by one")
 def step_impl(context):
-    actual = len(Project_Helper.get_all_projects())
+    logger.info("Check if projects was reduced by one")
+    project = Project_Helper.get_all_projects()
+    actual = len(project)
+    print(project)
     expect(context.length_project - 1).to_equal(actual)
 
 
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
+    logger.info("Compare the information of the json with a GET of the same project")
     json_actual = JsonHelper.get_json("project", context.ids)
     compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
     expect({}).to_equal(compare)
@@ -128,6 +139,7 @@ def step_impl(context):
 
 @step("Sent Data should be the same info of the respond")
 def step_impl(context):
+    logger.info("The data should be the same info of the respond")
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
     expect({}).to_equal(result)
 
@@ -136,6 +148,26 @@ def step_impl(context):
 def step_impl(context, name_id):
     logger.info("Id sent should be the same response's id")
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
+
+
+@step("I get a existent project")
+def step_impl(context):
+    logger.info("A ID project is gotten of a existent project")
+    project = Project_Helper.get_all_projects()[0]
+    context.name = project['name']
+    context.account = str(project['account_id'])
+
+
+@step("The project is not exist in the account")
+def step_impl(context):
+    logger.info("Check if the project was erased")
+    projects = Project_Helper.get_all_projects()
+    flag = False
+    for item in projects:
+        if item['id'] == context.project['id']:
+            flag = True
+            break
+    expect(flag).to_be_falsy()
 
 
 @step("I should see a messages error: {message}")
@@ -169,3 +201,9 @@ def step_impl(context, message):
         expect(message).to_be_truthy()
     else:
         expect(message).to_be_falsy()
+
+@step('I verify the general_problem of error is: "{message}"')
+def step_impl(context, message):
+    print(message)
+    print(context.response.json()["general_problem"])
+    expect(message).to_equal(context.response.json()["general_problem"])
