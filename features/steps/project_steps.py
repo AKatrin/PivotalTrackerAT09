@@ -16,6 +16,8 @@ from core.utils.schema_helper import *
 
 import jsonschema
 
+from core.utils.workspace_helper import WorkspaceHelper
+
 logger = SingletonLogger().get_logger()
 
 
@@ -31,7 +33,10 @@ def step_impl(context, method, endpoint):
 
 @step('I configure the "{field}" with the values "{values}"')
 def step_impl(context, field, values):
-    context.client.set_parameters({field: values})
+    if "story_id" in values:
+        context.client.set_parameters({field: context.ids.get("{story_id}")})
+    else:
+        context.client.set_parameters({field: values})
 
 
 @then(u'I get a "{status_code}" status code as response')
@@ -62,13 +67,28 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
-    print(context.response.url)
-
+    print( "\n" + context.response.url + "\n")
 
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
     context = EpicHelper.inject_values(context)
+    if "{epic_id}" in context.text:
+        context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
+    elif "{new_project_ids}" in context.text:
+        context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
+    elif "{update_project_ids}" in context.text:
+        context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
+    elif "{min_velocity_averaged_over}" in context.text:
+        context.text = context.text.replace("{min_velocity_averaged_over}",
+                                            str(context.project['velocity_averaged_over']))
+    elif "{name_existent}" in context.text:
+        context.text = context.text.replace("{name_existent}", context.name)
+        context.text = context.text.replace("{account}", context.account)
+    elif "{email}" in context.text and "{initials}" in context.text and "{name}" in context.text:
+        context.text = context.text.replace("{email}", str(context.membership['email']))
+        context.text = context.text.replace("{initials}", str(context.membership['initials']))
+        context.text = context.text.replace("{name}", str(context.membership['name']))
     context.body = json.loads(context.text)
     context.client.set_body(json.dumps(context.body))
 
@@ -104,12 +124,19 @@ def step_imp(context):
 
 @given("I count all the projects which exist in a account")
 def step_impl(context):
-    context.length_project = len(Project_Helper.get_all_projects())
+    logger.info("The length of projects in the account is captured")
+    projects = Project_Helper.get_all_projects()
+    context.length_project = len(projects)
+    print(projects)
+    print("LENGHT:", context.length_project)
 
 
 @step("The length of projects is reduced by one")
 def step_impl(context):
-    actual = len(Project_Helper.get_all_projects())
+    logger.info("Check if projects was reduced by one")
+    project = Project_Helper.get_all_projects()
+    actual = len(project)
+    print(project)
     expect(context.length_project - 1).to_equal(actual)
 
 
@@ -132,6 +159,7 @@ def step_imp(context, request_response):
 
 @step("I get the same json and compare with the modified json")
 def step_impl(context):
+    logger.info("Compare the information of the json with a GET of the same project")
     json_actual = JsonHelper.get_json("project", context.ids)
     compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
     expect({}).to_equal(compare)
@@ -139,6 +167,7 @@ def step_impl(context):
 
 @step("Sent Data should be the same info of the respond")
 def step_impl(context):
+    logger.info("The data should be the same info of the respond")
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
     expect({}).to_equal(result)
 
@@ -155,6 +184,26 @@ def step_impl(context, name_id):
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
 
 
+@step("I get a existent project")
+def step_impl(context):
+    logger.info("A ID project is gotten of a existent project")
+    project = Project_Helper.get_all_projects()[0]
+    context.name = project['name']
+    context.account = str(project['account_id'])
+
+
+@step("The project is not exist in the account")
+def step_impl(context):
+    logger.info("Check if the project was erased")
+    projects = Project_Helper.get_all_projects()
+    flag = False
+    for item in projects:
+        if item['id'] == context.project['id']:
+            flag = True
+            break
+    expect(flag).to_be_falsy()
+
+
 @step("I should see a messages error: {message}")
 def step_impl(context, message):
     logger.info("Validate the error message")
@@ -162,7 +211,6 @@ def step_impl(context, message):
         expect(message).to_be_truthy()
     else:
         expect(message).to_be_falsy()
-
 
 @step("I should see a message error: {invalid}")
 def step_impl(context, invalid):
@@ -180,3 +228,32 @@ def step_impl(context, requirement):
     text = context.response.json()["requirement"]
     if requirement in context.response.json()["requirement"]:
         expect(requirement).to_be_truthy()
+        
+@step("The {workspace_id} be will found {answer}")
+def step_impl(context, workspace_id, answer):
+    logger.info("Sent Data should contain the same info")
+    if workspace_id.find("id") > -1:
+        id = context.ids["{" + workspace_id + "}"]
+        expect(WorkspaceHelper.exist_workspaces(id)).to_equal(answer)
+
+@step("I Should see the problem: {message}")
+def step_impl(context, message):
+    logger.info("Validate the general problem message")
+    if message in context.response.json()["general_problem"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()
+
+@step('I Should see the requirement: {message}')
+def step_impl(context, message):
+    logger.info("Validate the requirement message")
+    if message in context.response.json()["requirement"]:
+        expect(message).to_be_truthy()
+    else:
+        expect(message).to_be_falsy()
+
+@step('I verify the general_problem of error is: "{message}"')
+def step_impl(context, message):
+    print(message)
+    print(context.response.json()["general_problem"])
+    expect(message).to_equal(context.response.json()["general_problem"])

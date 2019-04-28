@@ -1,14 +1,14 @@
 @smoke
 Feature: Smoke test of Create, Read, Update and Delete Projects
 
-  Scenario: Access a user's projects
+  Scenario: Read a user's projects
     Given I set up a "GET" request to "/projects" endpoint
     When I send the request
     Then I get a "200" status code as response
 
 
   @get_id_account
-  Scenario: Access a user's projects with the same account_id
+  Scenario: Read a user's projects with the same account_id
     Given I set up a "GET" request to "/projects?account_ids={account_id}" endpoint
     When I send the request
     Then I get a "200" status code as response
@@ -28,7 +28,7 @@ Feature: Smoke test of Create, Read, Update and Delete Projects
 
 
   @create_project @delete_project
-  Scenario: Access the content of a specific project
+  Scenario: Read the content of a specific project
     Given I set up a "GET" request to "/projects/{proj_id}" endpoint
     When I send the request
     Then I get a "200" status code as response

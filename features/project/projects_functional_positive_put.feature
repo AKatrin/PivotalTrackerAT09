@@ -1,5 +1,5 @@
 @positive @project
-Feature: Functional Test Positive Cases of Create, Read, Update and Delete Projects
+Feature: Functional Test Positive Cases of Update Projects
 
   Scenario Outline: : Update the name of project with extreme characters in name
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
@@ -44,7 +44,7 @@ Feature: Functional Test Positive Cases of Create, Read, Update and Delete Proje
     |Friday   |
     |Saturday |
 
-
+#
 
   Scenario: Update the "point scale" of project with 49 characters and 12 values
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
@@ -157,7 +157,7 @@ Feature: Functional Test Positive Cases of Create, Read, Update and Delete Proje
 
 
 
-    Scenario Outline: Update the integer field of the param of "iteration_length" of project
+  Scenario Outline: Update the integer field of the param of "iteration_length" of project
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
@@ -298,7 +298,7 @@ Feature: Functional Test Positive Cases of Create, Read, Update and Delete Proje
 
 
 
-    Scenario Outline: Update the Week start day with Start_date in the project
+  Scenario Outline: Update the Week start day with Start_date in the project
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
