@@ -150,14 +150,6 @@ def step_impl(context, name_id):
     expect(context.ids[name_id]).to_equal(context.response.json()["id"])
 
 
-@step("I verify the data of project json is not changed")
-def step_impl(context):
-    logger.info("I verify the data of project json is not changed")
-    json_actual = JsonHelper.get_json("project", context.ids)
-    compare = JsonHelper.compare_json_against_json(context.project, json_actual)
-    expect({}).to_equal(compare)
-
-
 @step("I get a existent project")
 def step_impl(context):
     logger.info("A ID project is gotten of a existent project")
@@ -196,3 +188,10 @@ def step_impl(context, workspace_id, answer):
     if workspace_id.find("id") > -1:
         id = context.ids["{" + workspace_id + "}"]
         expect(WorkspaceHelper.exist_workspaces(id)).to_equal(answer)
+
+
+@step('I verify the general_problem of error is: "{message}"')
+def step_impl(context, message):
+    print(message)
+    print(context.response.json()["general_problem"])
+    expect(message).to_equal(context.response.json()["general_problem"])

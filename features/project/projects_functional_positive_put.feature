@@ -157,7 +157,7 @@ Feature: Functional Test Positive Cases of Update Projects
 
 
 
-    Scenario Outline: Update the integer field of the param of "iteration_length" of project
+  Scenario Outline: Update the integer field of the param of "iteration_length" of project
     Given I set up a "PUT" request to "/projects/{proj_id}" endpoint
     And I set up the data:
     """
