@@ -10,6 +10,7 @@ from core.utils.json_helper import JsonHelper
 from core.utils.project_helper import *
 from core.utils.repository import Repository
 from core.utils.schema_helper import *
+from core.utils.story_helper import Story_Helper
 from core.utils.util import *
 from core.utils.project_helper import *
 from core.utils.schema_helper import *
@@ -89,6 +90,23 @@ def step_impl(context):
         context.text = context.text.replace("{email}", str(context.membership['email']))
         context.text = context.text.replace("{initials}", str(context.membership['initials']))
         context.text = context.text.replace("{name}", str(context.membership['name']))
+
+    elif "{story_before_id}" in context.text:
+        context.text = context.text.replace("{story_before_id}", str(context.ids["{story_before_id}"]))
+
+    elif "{story_after_id}" in context.text and "{proj_id}" in context.text:
+        context.text = context.text.replace("{story_after_id}", str(context.ids["{story_after_id}"]))
+        context.text = context.text.replace("{proj_id}", str(context.ids["{proj_id}"]))
+
+    elif "{id_old_stories}" in context.text:
+        context.text = context.text.replace("{id_old_stories}", str(context.ids["{id_old_stories}"]))
+
+    elif "{story_id}" in context.text:
+        context.text = context.text.replace("{story_id}", str(context.ids["{story_id}"]))
+
+    elif "{account_id}" in context.text:
+        context.text = context.text.replace("{account_id}", str(context.ids["{account_id}"]))
+
     context.body = json.loads(context.text)
     context.client.set_body(json.dumps(context.body))
 
@@ -257,3 +275,34 @@ def step_impl(context, message):
     print(message)
     print(context.response.json()["general_problem"])
     expect(message).to_equal(context.response.json()["general_problem"])
+
+
+@step("Sent Data should be the same info of the respond story")
+def step_impl(context):
+    logger.info("realizando la comparacion para story")
+    result = JsonHelper.compareProject(context.body, context.response.json())
+    expect("").to_equal(result)
+
+
+@step("Sent Data should be the same info of the respond story body")
+def step_impl(context):
+    result = JsonHelper.compareProject(context.body, context.response.json())
+    expect("").to_equal(result)
+
+
+@given("I count all the stories of a project which exist in a account")
+def step_impl(context):
+    context.length_stories_project = len(Story_Helper.get_all_stories(context.ids["{proj_id}"]))
+
+
+@step("The length of the stories of a project is reduced by one")
+def step_impl(context):
+    context.actual = Story_Helper.get_all_stories(context.ids["{proj_id}"])
+    expect(context.actual).to_equal(context.actual)
+
+
+@step("I get the same json and compare with the modified json story")
+def step_impl(context):
+    json_actual = JsonHelper.get_json("story", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
