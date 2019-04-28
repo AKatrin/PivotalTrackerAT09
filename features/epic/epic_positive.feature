@@ -2,7 +2,7 @@
 Feature: Positive test for Epic and Epics for Post and Put
 
   @create_project @delete_project
-  Scenario: Create a new Epic with long name
+  Scenario:Create a new Epic with long name
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
@@ -15,7 +15,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
-   And I get the same json and compare with the modified json
+    And I get the same epic json and compare with the modified json
 
 
   @create_project @delete_project
@@ -32,6 +32,8 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
+
 
   @create_project @delete_project
   Scenario: Create a new Epic with name and long description.
@@ -48,6 +50,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
 
 
   @create_project @delete_project
@@ -65,6 +68,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
 
 
   @create_project @delete_project
@@ -82,10 +86,11 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond for name
+    And I get the same epic json and compare with the modified json
 
 
   @create_project @delete_project
-  Scenario: Create a new Epic with long name, long description and long label.
+  Scenario: Create a new Epic with long description, long name and long label.
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
     And I set up the data
     """
@@ -103,6 +108,8 @@ Feature: Positive test for Epic and Epics for Post and Put
     And I verify the epic schema
     And Sent Data should be the same info of the respond for name
     And Sent Data should be the same info of the respond for description
+    And I get the same epic json and compare with the modified json
+
 
   @create_epic @delete_project
   Scenario: Create a new Epic with different label related to after Epic
@@ -121,6 +128,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And Sent Data should be the same info of the respond for name
 
+
   @create_epic @delete_project
   Scenario: Create a new Epic with the same name of another Epic related to after Epic
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
@@ -137,6 +145,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And Sent Data should be the same info of the respond for name
+
 
   @create_epic @delete_project
   Scenario: Create a new Epic with the special characters label name of another Epic related to after Epic
@@ -155,6 +164,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And Sent Data should be the same info of the respond for name
 
+
   @create_epic @delete_project
   Scenario: Create a new Epic with different label related to before Epic
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
@@ -171,6 +181,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And Sent Data should be the same info of the respond for name
+
 
   @create_epic @delete_project
   Scenario: Create a new Epic with the same name of another Epic related to before Epic
@@ -189,6 +200,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And Sent Data should be the same info of the respond for name
 
+
   @create_epic @delete_project
   Scenario: Create a new Epic with different label related to before Epic
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
@@ -205,6 +217,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And Sent Data should be the same info of the respond for name
+
 
   @create_project @delete_project
   Scenario: Create a new Epic with name, long comments
@@ -223,6 +236,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond for name
+    And I get the same epic json and compare with the modified json
 
 
   @create_epic  @delete_project
@@ -238,6 +252,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
 
 
   @create_epic  @delete_project
@@ -253,6 +268,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
 
 
   @create_epic  @delete_project
@@ -268,6 +284,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
 
 
   @create_epic  @delete_project
@@ -283,6 +300,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
 
 
   @create_epic  @delete_project
@@ -299,6 +317,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond for name
+    And I get the same epic json and compare with the modified json
 
 
   @create_epic  @delete_project
@@ -319,6 +338,7 @@ Feature: Positive test for Epic and Epics for Post and Put
     And I verify the epic schema
     And Sent Data should be the same info of the respond for description
     And Sent Data should be the same info of the respond for name
+    And I get the same epic json and compare with the modified json
 
 
  @create_epic  @delete_project
@@ -339,6 +359,8 @@ Feature: Positive test for Epic and Epics for Post and Put
     And I verify the epic schema
     And Sent Data should be the same info of the respond for description
     And Sent Data should be the same info of the respond for name
+    And I get the same epic json and compare with the modified json
+
 
 @create_epic  @delete_project
   Scenario: Update label with special characters label name and name Epic
@@ -358,3 +380,4 @@ Feature: Positive test for Epic and Epics for Post and Put
     And I verify the epic schema
     And Sent Data should be the same info of the respond for description
     And Sent Data should be the same info of the respond for name
+    And I get the same epic json and compare with the modified json

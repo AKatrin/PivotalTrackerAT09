@@ -331,8 +331,8 @@ Feature: Negative test for Epic and Epics for Post and Put
     """
     When I send the request
     Then I get a "400" status code as response
-    And I should see a message error: 'name' must be an extended_string
-    #Name can't be blank
+    And I should see a message error: Name can't be blank
+
 
   @create_epic  @delete_project
   Scenario: Update Epic boolean name

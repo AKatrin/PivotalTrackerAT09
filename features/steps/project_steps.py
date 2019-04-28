@@ -165,6 +165,14 @@ def step_impl(context):
     expect({}).to_equal(compare)
 
 
+@step("I get the same epic json and compare with the modified json")
+def step_impl(context):
+    logger.info("Compare the information of the json with a GET of the same project")
+    json_actual = JsonHelper.get_json("epic", context.ids)
+    compare = JsonHelper.compare_json_against_json(context.response.json(), json_actual)
+    expect({}).to_equal(compare)
+
+
 @step("Sent Data should be the same info of the respond")
 def step_impl(context):
     logger.info("The data should be the same info of the respond")
