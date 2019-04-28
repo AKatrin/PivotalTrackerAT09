@@ -1,7 +1,0 @@
-{
-"description":"Install tractor beam systems in all landing bays. Beam systems should report to central monitoring.",
-"label":{
-          "name":"tractor-beams"
-        },
-"name":"Tractor Beams"
-}

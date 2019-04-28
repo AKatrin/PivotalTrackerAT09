@@ -1,3 +1,0 @@
-  {
- "velocity_averaged_over": 1
-  }

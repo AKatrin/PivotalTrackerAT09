@@ -1,3 +1,0 @@
-  {
- "atom_enabled": true
-  }

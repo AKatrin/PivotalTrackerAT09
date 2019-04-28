@@ -35,11 +35,8 @@ class JsonHelper:
         obtain_json = ""
         if type_of_json == "project":
             obtain_json = Project_Helper.get_project(str(ids["{proj_id}"]))
-<<<<<<< HEAD
         elif type_of_json == "epic":
             obtain_json = EpicHelper.get_epic(str(ids["{epic_id}"]))
-        return obtain_json
-=======
         return obtain_json
 
     @staticmethod
@@ -70,4 +67,4 @@ class JsonHelper:
         else:
             answer = "The size of Labels of result are not the same as the body"
         return answer
->>>>>>> master
+

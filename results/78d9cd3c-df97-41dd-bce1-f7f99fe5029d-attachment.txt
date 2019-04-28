@@ -1,3 +1,0 @@
-{
-  "name" : "{long_name_epic}"
-}

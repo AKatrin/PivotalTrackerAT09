@@ -1,2 +1,0 @@
-  {"label_ids":[2008],
-  "name":"Exhaust ports are ray shielded 👹"}

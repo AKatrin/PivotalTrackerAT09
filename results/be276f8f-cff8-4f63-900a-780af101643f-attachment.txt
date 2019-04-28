@@ -1,3 +1,0 @@
-  {
-    "name": "This is an example of a name of project in pivotal"
-  }

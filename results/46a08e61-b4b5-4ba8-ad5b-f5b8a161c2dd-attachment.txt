@@ -1,7 +1,0 @@
-{
- "description":"{long}",
- "label":{
-          "name":"{long_label_name}"
-        },
- "name" : "{long_name_epic}"
-}
