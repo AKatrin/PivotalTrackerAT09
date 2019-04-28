@@ -1,8 +1,8 @@
 @positive @workspace
-  Feature: Positive test of "workspace" Create workspace
+  Feature: Positive test of "workspace". Create and Update a workspace.
 
     @create_project @delete_project @delete_workspace
-    Scenario Outline: Create a new workspace
+    Scenario Outline: Create a new workspace with valid name
       Given I set up a "POST" request to "/my/workspaces" endpoint
       And   I set up the data:
       """
@@ -28,7 +28,7 @@
       And   I set up the data:
       """
       {
-        "project_ids": [<project_id>]
+        "project_ids": [<project_ids>]
       }
       """
       When  I send the request
@@ -37,7 +37,7 @@
       And   Sent Data should be the same info of the respond
 
     Examples: Project ids
-      |project_id      |
+      |project_ids      |
       |2334401         |
       |2334401, 2334403|
 

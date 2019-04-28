@@ -66,6 +66,8 @@ def step_impl(context):
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
     elif "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
+        if "null" in context.text:
+            context.text = context.text.replace("null", "")
     elif "{update_project_ids}" in context.text:
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
     elif "{min_velocity_averaged_over}" in context.text:
@@ -143,6 +145,7 @@ def step_impl(context, message):
     logger.info("Validate the error message")
     if message in context.response.json()["error"]:
         expect(message).to_be_truthy()
+
     else:
         expect(message).to_be_falsy()
 
