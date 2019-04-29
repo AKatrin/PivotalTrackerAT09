@@ -155,7 +155,6 @@ def step_impl(context):
     logger.info("Check if projects was reduced by one")
     project = Project_Helper.get_all_projects()
     actual = len(project)
-    print(project)
     expect(context.length_project - 1).to_equal(actual)
 
 
@@ -192,7 +191,7 @@ def step_impl(context):
     expect({}).to_equal(compare)
 
 
-@step("Sent Data should be the same info of the respond")
+@step("Sent Data should be the same info of the response")
 def step_impl(context):
     logger.info("The data should be the same info of the respond")
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())
@@ -287,8 +286,7 @@ def step_impl(context, message):
 
 @step('I verify the general_problem of error is: "{message}"')
 def step_impl(context, message):
-    print(message)
-    print(context.response.json()["general_problem"])
+    logger.info("Verify the message of general problem with the expected")
     expect(message).to_equal(context.response.json()["general_problem"])
 
 
