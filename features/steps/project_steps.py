@@ -66,40 +66,41 @@ def step_impl(context):
 @step(u'I set up the data')
 def step_impl(context):
     logger.info("Add Data to request")
-    context = EpicHelper.inject_values(context)
     if "{epic_id}" in context.text:
         context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-    elif "{new_project_ids}" in context.text:
+    if "{long_name_epic}" in context.text:
+        context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
+    if "{long}" in context.text:
+        context.text = context.text.replace("{long}", EpicHelper.long_string(20000))
+    if "{more_long}" in context.text:
+        context.text = context.text.replace("{more_long}", EpicHelper.long_string(20001))
+    if "{long_label_name}" in context.text:
+        context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(255))
+    if "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
-    elif "{update_project_ids}" in context.text:
+    if "{update_project_ids}" in context.text:
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
-    elif "{min_velocity_averaged_over}" in context.text:
+    if "{min_velocity_averaged_over}" in context.text:
         context.text = context.text.replace("{min_velocity_averaged_over}",
                                             str(context.project['velocity_averaged_over']))
-    elif "{name_existent}" in context.text:
+    if "{name_existent}" in context.text:
         context.text = context.text.replace("{name_existent}", context.name)
         context.text = context.text.replace("{account}", context.account)
-    elif "{email}" in context.text and "{initials}" in context.text and "{name}" in context.text:
+    if "{email}" in context.text and "{initials}" in context.text and "{name}" in context.text:
         context.text = context.text.replace("{email}", str(context.membership['email']))
         context.text = context.text.replace("{initials}", str(context.membership['initials']))
         context.text = context.text.replace("{name}", str(context.membership['name']))
-
-    elif "{story_before_id}" in context.text:
+    if "{story_before_id}" in context.text:
         context.text = context.text.replace("{story_before_id}", str(context.ids["{story_before_id}"]))
-
-    elif "{story_after_id}" in context.text and "{proj_id}" in context.text:
+    if "{story_after_id}" in context.text and "{proj_id}" in context.text:
         context.text = context.text.replace("{story_after_id}", str(context.ids["{story_after_id}"]))
         context.text = context.text.replace("{proj_id}", str(context.ids["{proj_id}"]))
-
-    elif "{id_old_stories}" in context.text:
+    if "{id_old_stories}" in context.text:
         context.text = context.text.replace("{id_old_stories}", str(context.ids["{id_old_stories}"]))
-
-    elif "{story_id}" in context.text:
+    if "{story_id}" in context.text:
         context.text = context.text.replace("{story_id}", str(context.ids["{story_id}"]))
-
-    elif "{account_id}" in context.text:
+    if "{account_id}" in context.text:
         context.text = context.text.replace("{account_id}", str(context.ids["{account_id}"]))
-
     context.body = json.loads(context.text)
     context.client.set_body(json.dumps(context.body))
 
