@@ -86,38 +86,6 @@ Feature: Issues test for Epic and Epics for Post and Put
     Then I get a "400" status code as response
 
 
-   @create_epic @delete_project
-  Scenario: Create a new Epic with double quote in the name  related to after Epic
-    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-    And I set up the data
-    """
-    {
-      "after_id":{epic_id},
-      "label": {
-                  "name": "label"
-               },
-      "name":"Project " Epic"
-    }
-    """
-    When I send the request
-    Then I get a "200" status code as response
-
-
-  @create_epic @delete_project
-  Scenario: Create a new Epic with double quote in the name related to before Epic
-    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
-    And I set up the data
-    """
-    {
-      "before_id":{epic_id},
-      "label": {
-                  "name": "label"
-               },
-      "name":"Project" Epic"
-    }
-    """
-    When I send the request
-    Then I get a "200" status code as response
 
 
     @create_epic @delete_project
