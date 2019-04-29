@@ -34,6 +34,57 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     And Sent Data should be the same info of the respond
     And I get the same epic json and compare with the modified json
 
+  @create_epic  @delete_project
+  Scenario: Update label with special characters and doubles quotes label name Epic
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+     "description":"{long}",
+     "name" : "!#$\"%&/()=?¡¨*{}:;_<}{+[]"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And I verify the epic schema
+    And Sent Data should be the same info of the respond
+    And I get the same epic json and compare with the modified json
+
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with double quote name label related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "label": {
+                  "name": "ho\"a"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with double quote name label related to before Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "before_id":{epic_id},
+      "label": {
+                  "name": "ho\"a"
+               },
+      "name":"Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
 
   @create_project @delete_project
   Scenario: Create a new Epic with name and long description.
