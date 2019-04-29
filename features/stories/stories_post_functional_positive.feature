@@ -11,7 +11,7 @@ Feature: Functional test Positive cases of stories for create
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     Examples:
       | value_name |
       |X|
@@ -34,7 +34,7 @@ Feature: Functional test Positive cases of stories for create
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
       Examples:
         | value_current_state |
         |accepted|
@@ -58,7 +58,7 @@ Feature: Functional test Positive cases of stories for create
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
       Examples:
         | value_current_state |
         |unstarted|
@@ -77,7 +77,7 @@ Scenario Outline: Create a new stories by id of project with story_type Chore an
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
       Examples:
         | value_current_state |
         |accepted|
@@ -98,7 +98,7 @@ Scenario Outline: Create a new stories by id of project with story_type Chore an
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
       Examples:
         | value_current_state |
         |accepted|
@@ -117,7 +117,7 @@ Scenario Outline: Create a new stories by id of project with name, created_at
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     Examples:
       | value_create_at |
       |2015-01-01T00:00:00Z|
