@@ -13,7 +13,7 @@ Feature: Functional test Positive cases of stories of a project for update
     When I send the request
     Then I get a "200" status code as response
     And I verify the story schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json story
     Examples:
       | name |
@@ -34,7 +34,7 @@ Feature: Functional test Positive cases of stories of a project for update
     When I send the request
     Then I get a "200" status code as response
     And I verify the story schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json story
     Examples:
       | description |
@@ -56,7 +56,7 @@ Feature: Functional test Positive cases of stories of a project for update
     When I send the request
     Then I get a "200" status code as response
     And I verify the story schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
       Examples:
         | current_state |
         | "unstarted" |

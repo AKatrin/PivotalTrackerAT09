@@ -14,7 +14,7 @@
       When  I send the request
       Then  I get a "200" status code as response
       And   I verify the workspace schema
-      And   Sent Data should be the same info of the respond
+      And   Sent Data should be the same info of the response
 
     Examples: workspace names
     |name_workspace          |
@@ -34,7 +34,7 @@
       When  I send the request
       Then  I get a "200" status code as response
       And   Sent Data should contain the same info, id and '{workspace_id}'
-      And   Sent Data should be the same info of the respond
+      And   Sent Data should be the same info of the response
 
     Examples: Project ids
       |project_id      |

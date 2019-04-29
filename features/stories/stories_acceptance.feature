@@ -15,7 +15,7 @@ Feature: Acceptance tests for stories with create and read
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
 
   Scenario: Create a new stories by id of project changing two element
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint
@@ -29,7 +29,7 @@ Feature: Acceptance tests for stories with create and read
     When I send the request
     Then I get a "200" status code as response
     And I verify the stories schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
 
   Scenario: Create a new stories by id of project with labels
     Given I set up a "POST" request to "/projects/{proj_id}/stories" endpoint

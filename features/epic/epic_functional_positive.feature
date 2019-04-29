@@ -14,7 +14,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
@@ -31,7 +31,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
   @create_epic  @delete_project
@@ -47,7 +47,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
@@ -100,7 +100,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
@@ -118,7 +118,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     And I get the Epic Id created
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
@@ -337,7 +337,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
@@ -353,7 +353,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
@@ -369,7 +369,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
@@ -385,7 +385,7 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     When I send the request
     Then I get a "200" status code as response
     And I verify the epic schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same epic json and compare with the modified json
 
 
