@@ -1,5 +1,6 @@
 # Created by Areliez at 4/18/2019
-Feature: Create a account membership
+@account
+Feature: Smoke test to create an account membership
 
   @smoke @create_account
   Scenario: Create a membership for a account

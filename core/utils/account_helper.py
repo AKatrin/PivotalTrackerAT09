@@ -52,7 +52,7 @@ class Account_helper:
     @staticmethod
     def get_account_random():
         """
-        get a account random of account list.
+        Get a account random of account list.
         :return: a account
         """
         account_list = Account_helper.get_accounts()
@@ -95,3 +95,16 @@ class Account_helper:
         name = "Automation Testing" + ''.join(random.choices(string.digits, k=3))
         body = {"email": new_email, "initials": "AT", "name": name}
         return body
+
+    @staticmethod
+    def get_membership_id(account_id):
+        """
+        get the id of the first membership of an account.
+        :param account_id: for the account id
+        :return: the id of membership
+        """
+        client = RequestManager()
+        client.set_method("GET")
+        client.set_endpoint("/accounts/{account_id}/memberships".format(account_id=account_id))
+        client.set_body(json.dumps(Account_helper.generate_body_membership()))
+        return client.execute_request().json()[0]["id"]
