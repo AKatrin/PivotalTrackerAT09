@@ -86,8 +86,6 @@ Feature: Issues test for Epic and Epics for Post and Put
     Then I get a "400" status code as response
 
 
-
-
     @create_epic @delete_project
   Scenario: Update an Epic with the brackets label name
     Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
