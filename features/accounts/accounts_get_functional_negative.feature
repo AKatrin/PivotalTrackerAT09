@@ -1,5 +1,6 @@
-# Created by Admin at 4/24/2019
-Feature: Get account by id
+# Created by Areliez at 4/24/2019
+@functional_get_negative @account
+Feature: Functional test cases negative of read for account by id
 
   Scenario Outline: Get account by id invalid
     Given I set up a "GET" request to "/accounts/{<id>}" endpoint

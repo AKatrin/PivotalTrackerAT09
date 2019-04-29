@@ -1,5 +1,5 @@
 # Created by Areliez at 4/23/2019
-@acceptance
+@acceptance @account
 Feature: Get accounts
 
   @create_account
