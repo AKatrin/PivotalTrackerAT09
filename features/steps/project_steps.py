@@ -286,6 +286,7 @@ def step_impl(context, message):
 
 @step('I verify the general_problem of error is: "{message}"')
 def step_impl(context, message):
+    logger.info("Verify the message of general problem with the expected")
     expect(message).to_equal(context.response.json()["general_problem"])
 
 
