@@ -61,7 +61,8 @@ def step_impl(context):
 def step_impl(context):
     logger.info("Execute request")
     context.response = context.client.execute_request()
-    print( "\n" + context.response.url + "\n")
+    print("\n" + context.response.url + "\n")
+
 
 @step(u'I set up the data')
 def step_impl(context):
@@ -88,10 +89,14 @@ def step_impl(context):
     if "{name_existent}" in context.text:
         context.text = context.text.replace("{name_existent}", context.name)
         context.text = context.text.replace("{account}", context.account)
-    if "{email}" in context.text and "{initials}" in context.text and "{name}" in context.text:
-        context.text = context.text.replace("{email}", str(context.membership['email']))
-        context.text = context.text.replace("{initials}", str(context.membership['initials']))
-        context.text = context.text.replace("{name}", str(context.membership['name']))
+    if "{email}" in context.text:
+        context.text = context.text.replace("{email}", context.membership['email'])
+    if "{initials}" in context.text:
+        context.text = context.text.replace("{initials}", context.membership['initials'])
+    if "{name}" in context.text:
+        context.text = context.text.replace("{name}", context.membership['name'])
+    if "{person_id}" in context.text:
+        context.text = context.text.replace("{person_id}", str(context.ids["{person_id}"]))
     if "{story_before_id}" in context.text:
         context.text = context.text.replace("{story_before_id}", str(context.ids["{story_before_id}"]))
     if "{story_after_id}" in context.text and "{proj_id}" in context.text:
@@ -234,6 +239,7 @@ def step_impl(context, message):
     else:
         expect(message).to_be_falsy()
 
+
 @step("I should see a message error: {invalid}")
 def step_impl(context, invalid):
     logger.info("Validate the error message")
@@ -244,19 +250,22 @@ def step_impl(context, invalid):
     else:
         expect(invalid).to_be_falsy()
 
+
 @step("I should see a message: {requirement}")
 def step_impl(context, requirement):
     logger.info("Validate the error message")
     text = context.response.json()["requirement"]
     if requirement in context.response.json()["requirement"]:
         expect(requirement).to_be_truthy()
-        
+
+
 @step("The {workspace_id} be will found {answer}")
 def step_impl(context, workspace_id, answer):
     logger.info("Sent Data should contain the same info")
     if workspace_id.find("id") > -1:
         id = context.ids["{" + workspace_id + "}"]
         expect(WorkspaceHelper.exist_workspaces(id)).to_equal(answer)
+
 
 @step("I Should see the problem: {message}")
 def step_impl(context, message):
@@ -266,6 +275,7 @@ def step_impl(context, message):
     else:
         expect(message).to_be_falsy()
 
+
 @step('I Should see the requirement: {message}')
 def step_impl(context, message):
     logger.info("Validate the requirement message")
@@ -273,6 +283,7 @@ def step_impl(context, message):
         expect(message).to_be_truthy()
     else:
         expect(message).to_be_falsy()
+
 
 @step('I verify the general_problem of error is: "{message}"')
 def step_impl(context, message):
@@ -283,7 +294,7 @@ def step_impl(context, message):
 
 @step("Sent Data should be the same info of the respond story")
 def step_impl(context):
-    logger.info("realizando la comparacion para story")
+    logger.info("Do the comparison for story")
     result = JsonHelper.compareProject(context.body, context.response.json())
     expect("").to_equal(result)
 

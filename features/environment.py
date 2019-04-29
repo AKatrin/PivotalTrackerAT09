@@ -29,6 +29,17 @@ def before_scenario(context, scenario):
         logger.info("Create a membership and get the id account")
         context.ids["{id}"] = Account_helper.create_account()
         Account_helper.create_account_membership(context.ids["{id}"])
+    elif "get_id_first_account" in scenario.tags:
+        logger.info("Get the id of the first account")
+        context.ids["{id}"] = Account_helper.get_account_id()
+        context.ids["{person_id}"] = Account_helper.get_membership_id(context.ids["{id}"])
+    elif "get_second_account" in scenario.tags:
+        logger.info("Get the id of the second account")
+        context.ids["{id}"] = Account_helper.get_accounts()[1]["id"]
+        context.ids["{person_id}"] = Account_helper.get_membership_id(Account_helper.get_account_id())
+    elif "get_person_id" in scenario.tags:
+        logger.info("Get the person id of membership")
+        context.ids["{person_id}"] = Account_helper.get_membership_id(Account_helper.get_account_id())
     elif "get_id_account_of_other_user" in scenario.tags:
         logger.info("Get the id the a account of other user account")
         context.ids["{id}"] = Account_helper.get_account_of_other_user()
