@@ -78,6 +78,8 @@ def step_impl(context):
         context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(255))
     if "{new_project_ids}" in context.text:
         context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
+        if "null" in context.text:
+            context.text = context.text.replace("null", "")
     if "{update_project_ids}" in context.text:
         context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
     if "{min_velocity_averaged_over}" in context.text:

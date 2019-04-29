@@ -75,7 +75,13 @@ def after_scenario(context, scenario):
     if "delete_workspace" in scenario.tags:
         logger.info("Delete a Workspace")
         workspace = context.response.json()
-        id_workspace = context.ids.get("{workspace_id}") if type(workspace) is list else workspace["id"]
+        if type(workspace) is list:
+            id_workspace = context.ids.get("{workspace_id}")
+        else:
+            if workspace.get("id") is not None:
+                id_workspace = workspace.get("id")
+            else:
+                id_workspace = context.workspace.get("id")
         WorkspaceHelper.delete_workspace(id_workspace)
 
 
