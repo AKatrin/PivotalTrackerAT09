@@ -1,3 +1,0 @@
-  {
- "number_of_done_iterations_to_show": {min_velocity_averaged_over}
-  }

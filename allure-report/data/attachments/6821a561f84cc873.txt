@@ -1,4 +1,0 @@
-{
-  "before_id":{epic_id},
-  "name":"PR"
-}

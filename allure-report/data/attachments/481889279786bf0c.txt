@@ -1,3 +1,0 @@
-  {
- "bugs_and_chores_are_estimatable": true
-  }

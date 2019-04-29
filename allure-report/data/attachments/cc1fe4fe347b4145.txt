@@ -1,4 +1,0 @@
-  {
-    "week_start_day":"Saturday",
-    "start_date" : "2019-04-27"
-  }
