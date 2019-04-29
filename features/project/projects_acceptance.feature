@@ -28,7 +28,7 @@ Feature: Acceptance test of Create, Read, Update and Delete Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
 
 
   @create_project @delete_project
@@ -52,7 +52,7 @@ Feature: Acceptance test of Create, Read, Update and Delete Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
 
 
   @create_project

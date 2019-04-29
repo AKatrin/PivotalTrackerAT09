@@ -192,7 +192,7 @@ def step_impl(context):
     expect({}).to_equal(compare)
 
 
-@step("Sent Data should be the same info of the respond")
+@step("Sent Data should be the same info of the response")
 def step_impl(context):
     logger.info("The data should be the same info of the respond")
     result = JsonHelper.compare_data_against_json(context.body, context.response.json())

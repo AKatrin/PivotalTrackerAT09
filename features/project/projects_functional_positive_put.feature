@@ -12,7 +12,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |name|
@@ -32,7 +32,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |day|
@@ -57,7 +57,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
 
 
@@ -73,7 +73,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |Boolean|
@@ -93,7 +93,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |Boolean|
@@ -113,7 +113,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
 
 
@@ -129,7 +129,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |Boolean|
@@ -148,7 +148,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |Boolean|
@@ -168,7 +168,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |Iteration|
@@ -187,7 +187,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |number|
@@ -207,7 +207,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |number|
@@ -226,7 +226,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |number|
@@ -246,7 +246,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |Boolean|
@@ -266,7 +266,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |Boolean|
@@ -286,7 +286,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |parameter|
@@ -310,7 +310,7 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-    And Sent Data should be the same info of the respond
+    And Sent Data should be the same info of the response
     And I get the same json and compare with the modified json
     Examples:
     |day|date|
@@ -338,5 +338,4 @@ Feature: Functional Test Positive Cases of Update Projects
     When I send the request
     Then I get a "200" status code as response
     And I verify the project schema
-#    And Sent Data should be the same info of the respond
     And I get the same json and compare with the modified json
