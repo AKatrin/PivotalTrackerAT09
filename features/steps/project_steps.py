@@ -155,7 +155,6 @@ def step_impl(context):
     logger.info("Check if projects was reduced by one")
     project = Project_Helper.get_all_projects()
     actual = len(project)
-    print(project)
     expect(context.length_project - 1).to_equal(actual)
 
 
@@ -287,8 +286,6 @@ def step_impl(context, message):
 
 @step('I verify the general_problem of error is: "{message}"')
 def step_impl(context, message):
-    print(message)
-    print(context.response.json()["general_problem"])
     expect(message).to_equal(context.response.json()["general_problem"])
 
 

@@ -290,7 +290,6 @@ Feature: Functional Test Positive Cases of Update Projects
     And I get the same json and compare with the modified json
     Examples:
     |parameter|
-#    |demo|
     |private |
     |public |
     |shared |
