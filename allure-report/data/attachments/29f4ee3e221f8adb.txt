@@ -1,6 +1,0 @@
-{
-  "comments":[{
-                 "text": 123
-              }],
-  "name":"PR"
-}

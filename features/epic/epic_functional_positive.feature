@@ -270,6 +270,41 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     And Sent Data should be the same info of the respond for name
 
 
+  @create_epic @delete_project
+  Scenario: Create a new Epic with double quote in the name  related to after Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "after_id":{epic_id},
+      "label": {
+                  "name": "label"
+               },
+      "name":"Project \" Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+  @create_epic @delete_project
+  Scenario: Create a new Epic with double quote in the name related to before Epic
+    Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
+    And I set up the data
+    """
+    {
+      "before_id":{epic_id},
+      "label": {
+                  "name": "label"
+               },
+      "name":"Project\" Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
+    And Sent Data should be the same info of the respond for name
+
+
   @create_project @delete_project
   Scenario: Create a new Epic with name, long comments
     Given I set up a "POST" request to "/projects/{proj_id}/epics" endpoint
@@ -430,5 +465,23 @@ Feature: Functional Testing Positive  for Epic and Epics for Post and Put
     Then I get a "200" status code as response
     And I verify the epic schema
     And Sent Data should be the same info of the respond for description
+    And Sent Data should be the same info of the respond for name
+    And I get the same epic json and compare with the modified json
+
+
+  @create_epic @delete_project
+  Scenario: Update an Epic with the null label name
+    Given I set up a "PUT" request to "/projects/{proj_id}/epics/{epic_id}" endpoint
+    And I set up the data
+    """
+    {
+     "label": {
+                  "name": null
+               },
+      "name" : "Project Epic"
+    }
+    """
+    When I send the request
+    Then I get a "200" status code as response
     And Sent Data should be the same info of the respond for name
     And I get the same epic json and compare with the modified json
