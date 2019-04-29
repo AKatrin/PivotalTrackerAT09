@@ -1,0 +1,4 @@
+{
+  "name":"Workspace with big name.",
+  "project_ids":[{new_project_ids}]
+}

@@ -1,0 +1,7 @@
+{
+  "after_id":{epic_id},
+  "label": {
+              "name": "!#$%&/()=?¡¨*{}[];:_><"
+           },
+  "name":"Project Epic"
+}

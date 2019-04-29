@@ -1,0 +1,7 @@
+{
+"description":"{more_long}",
+"label":{
+          "name":"{long}"
+        },
+"name":"{long}"
+}

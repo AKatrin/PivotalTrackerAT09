@@ -1,0 +1,3 @@
+  {
+ "number_of_done_iterations_to_show": 1
+  }

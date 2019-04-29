@@ -1,0 +1,5 @@
+{
+  "email":"doo%u#e@dominio.dom",
+  "initials":"AT",
+  "name":"Automation Test"
+}

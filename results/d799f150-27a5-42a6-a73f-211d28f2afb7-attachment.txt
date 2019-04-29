@@ -1,0 +1,4 @@
+{
+"description":"x",
+"name":"/usr/local/tomcat/logs/CofaxTools.log"
+}

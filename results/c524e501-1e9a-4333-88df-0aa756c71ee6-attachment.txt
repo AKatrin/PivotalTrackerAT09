@@ -1,0 +1,7 @@
+{
+  "before_id":{epic_id},
+  "label": {
+              "name": "!#$%&/();:´+{}[]"
+           },
+  "name":"Project Epic"
+}

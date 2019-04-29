@@ -1,0 +1,3 @@
+  {
+ "point_scale": "word,0,1"
+  }

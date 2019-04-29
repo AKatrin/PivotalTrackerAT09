@@ -1,0 +1,6 @@
+{
+  "comments":[{
+                 "text":"Use this image on all external comments"
+              }],
+  "name":"PR"
+}
