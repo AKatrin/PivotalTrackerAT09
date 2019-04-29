@@ -47,26 +47,3 @@ class EpicHelper:
     @staticmethod
     def long_string(length):
         return "x" * length
-
-
-    @staticmethod
-    def inject_values(context):
-        if "{epic_id}" in context.text:
-            context.text = context.text.replace("{epic_id}", str(context.ids["{epic_id}"]))
-        if "{long_name_epic}" in context.text:
-            context.text = context.text.replace("{long_name_epic}", EpicHelper.long_string(5000))
-        if "{long}" in context.text:
-            context.text = context.text.replace("{long}", EpicHelper.long_string(20000))
-        if "{more_long}" in context.text:
-            context.text = context.text.replace("{more_long}", EpicHelper.long_string(20001))
-        if "{long_label_name}" in context.text:
-            context.text = context.text.replace("{long_label_name}", EpicHelper.long_string(255))
-        if "{new_project_ids}" in context.text:
-            context.text = context.text.replace("{new_project_ids}", str(context.ids.get("{proj_id}")))
-        if "{update_project_ids}" in context.text:
-            # print("contest in update:", context.projects[0].get("id"))
-            context.text = context.text.replace("{update_project_ids}", str(context.projects[0].get("id")))
-        if "{min_velocity_averaged_over}" in context.text:
-            context.text = context.text.replace("{min_velocity_averaged_over}",
-                                                str(context.project['velocity_averaged_over']))
-        return context
